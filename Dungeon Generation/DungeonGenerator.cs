@@ -2,7 +2,6 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
 
@@ -23,7 +22,6 @@ public partial class DungeonGenerator : Node3D {
     [ExportCategory("Assets Dependency")]
     [Export] private GridMap gridMap;
     [Export] private GridMap DungeonAesthetic;
-    [Export] private Resource dungeonMesh;
     [Export] private PackedScene playerController;
 
     [ExportCategory("Room properties")]
@@ -45,8 +43,7 @@ public partial class DungeonGenerator : Node3D {
     private int roomsMade;
     private Vector3I entrancePosition;
     private int currentFloor;
-
-    private Action FinishedGenerating;
+    private Vector3I playerEntrancePosition = Vector3I.Zero;
 
     public enum Tiles {
         Room,
@@ -125,7 +122,7 @@ public partial class DungeonGenerator : Node3D {
                 gridMap.SetCellItem(randomStartingPosition, TileDict[Tiles.Entrance]);
                 isEntrancePlaced = true;
                 entrancePosition = randomStartingPosition;
-
+                if (playerEntrancePosition == Vector3I.Zero) playerEntrancePosition = entrancePosition;
             }
 
         }
@@ -302,5 +299,11 @@ public partial class DungeonGenerator : Node3D {
     private void DecorateDungeon() {
         DungeonAesthetic = gridMap;
         //gridMap.Clear();
+    }
+
+
+    private void PlacePlayer() {
+        Node3D player = playerController.Instantiate<Node3D>();
+        player.Position = playerEntrancePosition;
     }
 }
