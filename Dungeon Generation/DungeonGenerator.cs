@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
+using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
 
@@ -20,6 +22,7 @@ public partial class DungeonGenerator : Node3D {
 
     [ExportCategory("Assets Dependency")]
     [Export] private GridMap gridMap;
+    [Export] private GridMap DungeonAesthetic;
     [Export] private Resource dungeonMesh;
     [Export] private PackedScene playerController;
 
@@ -42,6 +45,8 @@ public partial class DungeonGenerator : Node3D {
     private int roomsMade;
     private Vector3I entrancePosition;
     private int currentFloor;
+
+    private Action FinishedGenerating;
 
     public enum Tiles {
         Room,
@@ -82,7 +87,6 @@ public partial class DungeonGenerator : Node3D {
 
     private void GenerateDungeon() {
         VisualizeBorder();
-
         uint seed;
         if (customSeed is not null && customSeed.Length > 0) seed = customSeed.Hash();
         else seed = GD.Randi();
@@ -95,7 +99,7 @@ public partial class DungeonGenerator : Node3D {
             GenerateFloor(i);
         }
 
-
+        DecorateDungeon();
 
         GD.Print("Dungeon Meshi... Oh, Dungeon Meshi!");
     }
@@ -104,7 +108,7 @@ public partial class DungeonGenerator : Node3D {
         roomTiles.Clear();
         roomPositions = [];
         roomsMade = 0;
-        currentFloor = floor;
+        currentFloor = floor * 2;
 
         isEntrancePlaced = false;
         isExitPlaced = false;
@@ -196,6 +200,8 @@ public partial class DungeonGenerator : Node3D {
         }
         CreateHallways(hallwayGraph);
     }
+
+
     private void CreateHallways(AStar2D hallwayGraph) {
         Array<Vector3[]> hallways = [];
         foreach (int point in hallwayGraph.GetPointIds()) {
@@ -231,7 +237,9 @@ public partial class DungeonGenerator : Node3D {
 
         // block the pathfinding from walking into rooms
         foreach (Vector3I tile in gridMap.GetUsedCellsByItem(TileDict[Tiles.Room]) +
-        gridMap.GetUsedCellsByItem(TileDict[Tiles.Wall])) astar.SetPointSolid(new Vector2I(tile.X, tile.Z));
+        gridMap.GetUsedCellsByItem(TileDict[Tiles.Wall])) {
+            if (tile.Y == currentFloor) astar.SetPointSolid(new Vector2I(tile.X, tile.Z));
+        }
 
         foreach (Vector3[] hallway in hallways) {
             Vector2I posFrom = new Vector2I((int)hallway[0].X, (int)hallway[0].Z);
@@ -239,7 +247,7 @@ public partial class DungeonGenerator : Node3D {
             Vector2[] hall = astar.GetPointPath(posFrom, posTo);
 
             foreach (Vector2 i in hall) {
-                Vector3I position = new Vector3I((int)i.X, 0, (int)i.Y);
+                Vector3I position = new Vector3I((int)i.X, currentFloor, (int)i.Y);
                 if (gridMap.GetCellItem(position) < 0) {
                     gridMap.SetCellItem(position, TileDict[Tiles.Hallway]);
                 }
@@ -248,6 +256,7 @@ public partial class DungeonGenerator : Node3D {
 
 
     }
+
 
     private void MakeRoom(int attemptsLeft) {
         if (attemptsLeft < 1) return;
@@ -258,6 +267,7 @@ public partial class DungeonGenerator : Node3D {
         Vector3I startPos = new Vector3I();
         startPos.X = GD.RandRange(0, borderSize - width);
         startPos.Z = GD.RandRange(0, borderSize - height);
+        startPos.Y = currentFloor;
 
         // check for space availability
         for (int row = -roomMargin; row < height + roomMargin; row++) {
@@ -286,5 +296,11 @@ public partial class DungeonGenerator : Node3D {
         float avgZ = startPos.Z + (float)(height / 2);
         Vector3 roomCenter = new Vector3(avgX, 0, avgZ);
         roomPositions.Add(roomCenter);
+    }
+
+
+    private void DecorateDungeon() {
+        DungeonAesthetic = gridMap;
+        //gridMap.Clear();
     }
 }

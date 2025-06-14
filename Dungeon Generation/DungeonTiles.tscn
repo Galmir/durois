@@ -18,6 +18,26 @@ size = Vector3(1, 4, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
 mesh = SubResource("QuadMesh_qnreu")
 
+[node name="Hallway" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
+mesh = SubResource("QuadMesh_qnreu")
+
+[node name="Door" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
+mesh = SubResource("QuadMesh_qnreu")
+
+[node name="Border" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
+mesh = SubResource("QuadMesh_qnreu")
+
 [node name="wall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 mesh = SubResource("BoxMesh_pwcek")
+
+[node name="Entrance" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
+mesh = SubResource("QuadMesh_qnreu")
+
+[node name="Exit" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
+mesh = SubResource("QuadMesh_qnreu")
