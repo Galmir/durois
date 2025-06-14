@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm5vx0u0fiu8u"]
+
+[ext_resource type="Material" uid="uid://yve1dptccnl7" path="res://Dungeon Generation/Materials/FloorMaterial.tres" id="1_paxih"]
+[ext_resource type="Material" uid="uid://dvihbqfluuqxv" path="res://Dungeon Generation/Materials/WallMossyMaterial.tres" id="2_a6q2d"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qnreu"]
+material = ExtResource("1_paxih")
+orientation = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_pwcek"]
+lightmap_size_hint = Vector2i(14, 51)
+material = ExtResource("2_a6q2d")
+size = Vector3(1, 4, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
+mesh = SubResource("QuadMesh_qnreu")
+
+[node name="wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_pwcek")
