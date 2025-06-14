@@ -1,12 +1,21 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dvihbqfluuqxv"]
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://dvihbqfluuqxv"]
 
 [ext_resource type="Texture2D" uid="uid://dhk7rpuqtnxbt" path="res://Dungeon Generation/Materials/mossy_brick_1k/textures/mossy_brick_diff_1k.png" id="1_8gjbs"]
-[ext_resource type="Texture2D" uid="uid://cthtkewcqivrr" path="res://Dungeon Generation/Materials/mossy_brick_1k/textures/mossy_brick_nor_dx_1k.png" id="2_rfd4v"]
-[ext_resource type="Texture2D" uid="uid://3yi2mgsv0qym" path="res://Dungeon Generation/Materials/mossy_brick_1k/textures/mossy_brick_rough_1k.png" id="3_eq4ih"]
+[ext_resource type="Texture2D" uid="uid://b6dt112by07vy" path="res://Dungeon Generation/Materials/mossy_brick_1k/textures/mossy_brick_arm_1k.png" id="2_csxb5"]
+[ext_resource type="Texture2D" uid="uid://yeocsb1biaoh" path="res://Dungeon Generation/Materials/mossy_brick_1k/textures/mossy_brick_disp_1k.png" id="3_b64jx"]
+[ext_resource type="Texture2D" uid="uid://cfdemy07tfdbm" path="res://Dungeon Generation/Materials/mossy_brick_1k/textures/mossy_brick_nor_gl_1k.png" id="4_3v7xg"]
 
 [resource]
 albedo_texture = ExtResource("1_8gjbs")
-roughness_texture = ExtResource("3_eq4ih")
+metallic = 1.0
+metallic_texture = ExtResource("2_csxb5")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_csxb5")
+roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("2_rfd4v")
-uv1_scale = Vector3(4, 4, 4)
+normal_texture = ExtResource("4_3v7xg")
+ao_enabled = true
+ao_texture = ExtResource("2_csxb5")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_b64jx")
+uv1_scale = Vector3(3, 3, 3)

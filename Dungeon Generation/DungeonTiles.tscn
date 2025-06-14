@@ -8,9 +8,9 @@ material = ExtResource("1_paxih")
 orientation = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_pwcek"]
-lightmap_size_hint = Vector2i(14, 51)
+lightmap_size_hint = Vector2i(14, 21)
 material = ExtResource("2_a6q2d")
-size = Vector3(1, 4, 1)
+add_uv2 = true
 
 [node name="Node3D" type="Node3D"]
 
@@ -31,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15185, 0, 0)
 mesh = SubResource("QuadMesh_qnreu")
 
 [node name="wall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.54081, 2, 4.2017)
 mesh = SubResource("BoxMesh_pwcek")
 
 [node name="Entrance" type="MeshInstance3D" parent="."]
