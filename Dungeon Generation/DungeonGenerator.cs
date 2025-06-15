@@ -71,34 +71,9 @@ public partial class DungeonGenerator : Node3D {
     }
 
 
-    public void VisualizeBorder() {
-        gridMap.Clear();
-        for (int i = -1; i < borderSize + 1; i++) {
-            gridMap.SetCellItem(new Vector3I(i, 0, -1), TileDict[Tiles.Border]);
-            gridMap.SetCellItem(new Vector3I(i, 0, borderSize), TileDict[Tiles.Border]);
-            gridMap.SetCellItem(new Vector3I(borderSize, 0, i), TileDict[Tiles.Border]);
-            gridMap.SetCellItem(new Vector3I(-1, 0, i), TileDict[Tiles.Border]);
-        }
-
-    }
-    public void PutWalls(int floor) {
-        for (int i = 0; i < borderSize; i++) {
-            for (int j = 0; j < borderSize; j++) {
-
-                bool hasNeighbor =
-                (gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) != TileDict[Tiles.Wall]) ||
-                (gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) != TileDict[Tiles.Wall]) ||
-                (gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) != TileDict[Tiles.Wall]) ||
-                (gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) != TileDict[Tiles.Wall]);
-
-                for (i = 0; i < floorHeight; i++)
-                    if (gridMap.GetCellItem(new Vector3I(i, floor + i, j)) < 0 && hasNeighbor) gridMap.SetCellItem(new Vector3I(i, floor + i, j), TileDict[Tiles.Wall]);
-            }
-        }
-    }
-
     private void GenerateDungeon() {
-        VisualizeBorder();
+        GD.Print("generate dungeon");
+        gridMap.Clear();
         uint seed;
         if (customSeed is not null && customSeed.Length > 0) seed = customSeed.Hash();
         else seed = GD.Randi();
@@ -107,14 +82,15 @@ public partial class DungeonGenerator : Node3D {
         GD.Seed(seed);
         GD.Print("generating dungeon from seed: " + seed);
 
-        for (int i = 0; i < floors; i++) {
-            GenerateFloor(i);
+        for (int floor = 0; floor < floors; floor++) {
+            GenerateFloor(floor);
         }
 
         GD.Print("Dungeon Meshi... Oh, Dungeon Meshi!");
     }
 
     private void GenerateFloor(int floor) {
+        GD.Print("generate floor");
         roomTiles.Clear();
         roomPositions = [];
         roomsMade = 0;
@@ -123,12 +99,12 @@ public partial class DungeonGenerator : Node3D {
         isEntrancePlaced = false;
         isExitPlaced = false;
         for (int i = 0; i < roomsNumber; i++) {
+            GD.Print("Floor " + floor + ": making room " + i + "/" + roomsNumber);
             MakeRoom(roomRecursionAttempts);
             roomsMade++;
         }
 
-        //Place Entrance
-
+        playerPlaced = false;
         while (!isEntrancePlaced) {
             Vector3I randomStartingPosition = (Vector3I)roomTiles.PickRandom().PickRandom();
             if (gridMap.GetCellItem(randomStartingPosition) == TileDict[Tiles.Room]) {
@@ -136,13 +112,15 @@ public partial class DungeonGenerator : Node3D {
                 isEntrancePlaced = true;
                 entrancePosition = randomStartingPosition;
                 if (!playerPlaced) {
-                    playerScene.Position = entrancePosition;
+                    playerScene.Position = roomPositions[0];
+                    ;
                     playerPlaced = true;
                 }
             }
 
         }
 
+        isExitPlaced = false;
         while (!isExitPlaced) {
             Vector3I randomStartingPosition = (Vector3I)roomTiles.PickRandom().PickRandom();
             if (gridMap.GetCellItem(randomStartingPosition) == TileDict[Tiles.Room] &&
@@ -152,7 +130,6 @@ public partial class DungeonGenerator : Node3D {
             }
 
         }
-
 
         // Connect them together
         Array<Vector2> map2D = [];   // converted gridmap in 2D
@@ -212,10 +189,12 @@ public partial class DungeonGenerator : Node3D {
             }
         }
         CreateHallways(hallwayGraph);
+        PutWalls(currentFloor);
     }
 
 
     private void CreateHallways(AStar2D hallwayGraph) {
+        GD.Print("create hallways");
         Array<Vector3[]> hallways = [];
         foreach (int point in hallwayGraph.GetPointIds()) {
             foreach (int connection in hallwayGraph.GetPointConnections(point)) {
@@ -265,7 +244,6 @@ public partial class DungeonGenerator : Node3D {
                 }
             }
         }
-        PutWalls(currentFloor);
     }
 
 
@@ -304,7 +282,38 @@ public partial class DungeonGenerator : Node3D {
 
         float avgX = startPos.X + (float)(width / 2);
         float avgZ = startPos.Z + (float)(height / 2);
-        Vector3 roomCenter = new Vector3(avgX, 0, avgZ);
+        Vector3 roomCenter = new Vector3(avgX, currentFloor, avgZ);
         roomPositions.Add(roomCenter);
+    }
+
+
+    public void VisualizeBorder() {
+        GD.Print("visualize border");
+        gridMap.Clear();
+        for (int i = -1; i < borderSize + 1; i++) {
+            gridMap.SetCellItem(new Vector3I(i, 0, -1), TileDict[Tiles.Border]);
+            gridMap.SetCellItem(new Vector3I(i, 0, borderSize), TileDict[Tiles.Border]);
+            gridMap.SetCellItem(new Vector3I(borderSize, 0, i), TileDict[Tiles.Border]);
+            gridMap.SetCellItem(new Vector3I(-1, 0, i), TileDict[Tiles.Border]);
+        }
+
+    }
+    public void PutWalls(int floor) {
+        GD.Print("put walls");
+        for (int i = -1; i < borderSize + 1; i++) {
+            for (int j = -1; j < borderSize + 1; j++) {
+
+                bool hasNeighbor =
+                (gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) != TileDict[Tiles.Wall]) ||
+                (gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) != TileDict[Tiles.Wall]) ||
+                (gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) != TileDict[Tiles.Wall]) ||
+                (gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) != TileDict[Tiles.Wall]);
+
+
+                if (gridMap.GetCellItem(new Vector3I(i, floor, j)) < 0 && hasNeighbor) {
+                    for (int w = 0; w < floorHeight; w++) gridMap.SetCellItem(new Vector3I(i, floor + w, j), TileDict[Tiles.Wall]);
+                }
+            }
+        }
     }
 }
