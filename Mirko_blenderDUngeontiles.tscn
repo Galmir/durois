@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dffqonp6jrc1s"]
+
+[ext_resource type="PackedScene" uid="uid://cylotctdtxux7" path="res://Dungeon Generation/Dungeon.glb" id="1_8wiae"]
+[ext_resource type="Material" uid="uid://yve1dptccnl7" path="res://Dungeon Generation/Materials/FloorMaterial.tres" id="2_b2s67"]
+[ext_resource type="Material" uid="uid://dvihbqfluuqxv" path="res://Dungeon Generation/Materials/WallMossyMaterial.tres" id="3_rnfb6"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Dungeon" parent="." instance=ExtResource("1_8wiae")]
+
+[node name="Floor" parent="Dungeon" index="0"]
+material_override = ExtResource("2_b2s67")
+
+[node name="Ceiling" parent="Dungeon" index="1"]
+material_override = ExtResource("2_b2s67")
+
+[node name="Wall_W" parent="Dungeon" index="2"]
+material_override = ExtResource("3_rnfb6")
+
+[node name="Wall_S" parent="Dungeon" index="3"]
+material_override = ExtResource("3_rnfb6")
+surface_material_override/0 = ExtResource("3_rnfb6")
+
+[node name="Wall_E" parent="Dungeon" index="4"]
+material_override = ExtResource("3_rnfb6")
+
+[node name="Wall_N" parent="Dungeon" index="5"]
+material_override = ExtResource("3_rnfb6")
+
+[editable path="Dungeon"]

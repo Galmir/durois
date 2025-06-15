@@ -21,20 +21,24 @@ public partial class DungeonGenerator : Node3D {
 
     [ExportCategory("Assets Dependency")]
     [Export] private GridMap gridMap;
+    [Export] private GridMap monstersAndLootMap;
     [Export] private CharacterBody3D playerScene;
 
-    [ExportCategory("Room properties")]
+    [ExportCategory("Dungeon")]
     [Export] private string customSeed;
     [Export] private uint debugSeed = 0;
     [Export] private int borderSize = 50;
     [Export] private int floors = 1;
     [Export] private int floorHeight = 2;
     [Export] private int roomsNumber = 15;
+
+    [ExportCategory("Room")]
     [Export] private int roomMargin = 1;
     [Export] private int roomRecursionAttempts = 15;
     [Export] private int minRoomSize = 5;
     [Export] private int maxRoomSize = 10;
-    [Export] private float roomSurvivalChance = 25f; // chance to not remove a room from the minimum spanning tree
+    [Export] private float roomSurvivalChance = 25f;
+    [Export] private int maxMonstersPerRoom = 1; // chance to not remove a room from the minimum spanning tree
 
     private Array<Array<Vector3>> roomTiles = [];
     private Array<Vector3> roomPositions;
@@ -74,6 +78,7 @@ public partial class DungeonGenerator : Node3D {
     private void GenerateDungeon() {
         GD.Print("generate dungeon");
         gridMap.Clear();
+        monstersAndLootMap.Clear();
         uint seed;
         if (customSeed is not null && customSeed.Length > 0) seed = customSeed.Hash();
         else seed = GD.Randi();
@@ -278,6 +283,12 @@ public partial class DungeonGenerator : Node3D {
                 room.Add(pos);
             }
         }
+        int maxMonstersInThisRoom = maxMonstersPerRoom <= room.Count() ? maxMonstersPerRoom : room.Count();
+        int monstersToPlace = GD.RandRange(0, maxMonstersInThisRoom);
+        for (int monster = 0; monster < monstersToPlace; monster++) {
+            monstersAndLootMap.SetCellItem((Vector3I)room.PickRandom(), 4);
+        }
+
         roomTiles.Add(room);
 
         float avgX = startPos.X + (float)(width / 2);
