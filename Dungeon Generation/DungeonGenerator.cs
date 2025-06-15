@@ -23,6 +23,7 @@ public partial class DungeonGenerator : Node3D {
     [Export] private GridMap gridMap;
     [Export] private GridMap monstersAndLootMap;
     [Export] private CharacterBody3D playerScene;
+    [Export] private Node3D dungeonCell;
 
     [ExportCategory("Dungeon")]
     [Export] private string customSeed;
@@ -90,6 +91,8 @@ public partial class DungeonGenerator : Node3D {
         for (int floor = 0; floor < floors; floor++) {
             GenerateFloor(floor);
         }
+
+
 
         GD.Print("Dungeon Meshi... Oh, Dungeon Meshi!");
     }
@@ -194,7 +197,7 @@ public partial class DungeonGenerator : Node3D {
             }
         }
         CreateHallways(hallwayGraph);
-        PutWalls(currentFloor);
+        //PutWalls(currentFloor);
     }
 
 
