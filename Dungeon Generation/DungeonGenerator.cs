@@ -23,7 +23,7 @@ public partial class DungeonGenerator : Node3D {
     [Export] private GridMap gridMap;
     [Export] private GridMap monstersAndLootMap;
     [Export] private CharacterBody3D playerScene;
-    [Export] private Node3D dungeonCell;
+    [Export] private PackedScene dungeonCell;
 
     [ExportCategory("Dungeon")]
     [Export] private string customSeed;
@@ -198,6 +198,7 @@ public partial class DungeonGenerator : Node3D {
         }
         CreateHallways(hallwayGraph);
         //PutWalls(currentFloor);
+        makeRealDungeon();
     }
 
 
@@ -312,6 +313,8 @@ public partial class DungeonGenerator : Node3D {
         }
 
     }
+
+
     public void PutWalls(int floor) {
         GD.Print("put walls");
         for (int i = -1; i < borderSize + 1; i++) {
@@ -329,5 +332,21 @@ public partial class DungeonGenerator : Node3D {
                 }
             }
         }
+    }
+
+
+    public void makeRealDungeon() {
+        Array<Vector3I> cellsToConvert = gridMap.GetUsedCells();
+        GD.Print("used cells amount = " + cellsToConvert.Count());
+        foreach (Vector3I cellPosition in cellsToConvert) {
+            DungeonCell newCell = dungeonCell.Instantiate<DungeonCell>();
+            AddChild(newCell);
+            newCell.GlobalPosition = cellPosition;
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Left) > 0) newCell.RemoveWall(DungeonCell.Directions.West);
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Right) > 0) newCell.RemoveWall(DungeonCell.Directions.East);
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Forward) > 0) newCell.RemoveWall(DungeonCell.Directions.North);
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Back) > 0) newCell.RemoveWall(DungeonCell.Directions.South);
+        }
+        gridMap.Clear();
     }
 }

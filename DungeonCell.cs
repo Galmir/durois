@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MirkoBlenderDUngeontiles : Node3D {
+public partial class DungeonCell : Node3D {
     [Export] MeshInstance3D wallN;
     [Export] MeshInstance3D wallW;
     [Export] MeshInstance3D wallS;
