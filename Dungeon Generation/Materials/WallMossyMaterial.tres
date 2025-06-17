@@ -18,4 +18,4 @@ ao_enabled = true
 ao_texture = ExtResource("2_csxb5")
 heightmap_enabled = true
 heightmap_texture = ExtResource("3_b64jx")
-uv1_scale = Vector3(3, 3, 3)
+uv1_scale = Vector3(6, 12, 0)
