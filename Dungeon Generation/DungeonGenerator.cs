@@ -175,7 +175,7 @@ public partial class DungeonGenerator : Node3D {
                 }
             }
 
-            int[] connection = possibleConnections.PickRandom(); // how can this be empty?
+            int[] connection = possibleConnections.PickRandom();
             foreach (int[] pc in possibleConnections) {
                 if (map2D[pc[0]].DistanceSquaredTo(map2D[pc[1]]) < map2D[connection[0]].DistanceSquaredTo(map2D[connection[1]])) {
                     connection = pc;
