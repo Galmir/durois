@@ -46,6 +46,7 @@ background_mode = 1
 
 [node name="DungeonGenerator" type="Node3D" node_paths=PackedStringArray("gridMap", "monstersAndLootMap", "playerScene")]
 script = ExtResource("1_667dc")
+_start = true
 gridMap = NodePath("DungeonLayer")
 monstersAndLootMap = NodePath("MonsterLayer")
 playerScene = NodePath("ProtoController")
@@ -69,7 +70,6 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="ProtoController" parent="." instance=ExtResource("3_2ij2s")]
 unique_name_in_owner = true
-has_gravity = false
 can_jump = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ProtoController"]
@@ -94,5 +94,4 @@ script = ExtResource("5_qd61d")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_2il45")
-autoplay = true
 parameters/looping = true

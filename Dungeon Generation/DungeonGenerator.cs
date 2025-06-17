@@ -163,7 +163,7 @@ public partial class DungeonGenerator : Node3D {
 
         // connect the rooms logically
         Array<int> visitedPoints = [];
-        visitedPoints.Add(GD.RandRange(0, roomPositions.Count()));
+        visitedPoints.Add(GD.RandRange(0, roomPositions.Count() - 1));
         while (visitedPoints.Count() != mstGraph.GetPointCount()) {
             Array<int[]> possibleConnections = [];
             foreach (int vp in visitedPoints) {
