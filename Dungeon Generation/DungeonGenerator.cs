@@ -5,7 +5,6 @@ using System.Linq;
 using Vector2 = Godot.Vector2;
 using Vector3 = Godot.Vector3;
 
-[Tool]
 public partial class DungeonGenerator : Node3D {
 
     public bool start;
@@ -23,7 +22,7 @@ public partial class DungeonGenerator : Node3D {
     [Export] private GridMap gridMap;
     [Export] private GridMap monstersAndLootMap;
     [Export] private CharacterBody3D playerScene;
-    [Export] private PackedScene dungeonCell;
+    private PackedScene dungeonCell = GD.Load<PackedScene>("uid://dffqonp6jrc1s");
 
     [ExportCategory("Dungeon")]
     [Export] private string customSeed;
@@ -40,6 +39,7 @@ public partial class DungeonGenerator : Node3D {
     [Export] private int maxRoomSize = 10;
     [Export] private float roomSurvivalChance = 25f;
     [Export] private int maxMonstersPerRoom = 1; // chance to not remove a room from the minimum spanning tree
+    [Export] private int chanceToKeepTorches = 25;
 
     private Array<Array<Vector3>> roomTiles = [];
     private Array<Vector3> roomPositions;
@@ -92,7 +92,7 @@ public partial class DungeonGenerator : Node3D {
             GenerateFloor(floor);
         }
 
-
+        makeRealDungeon();
 
         GD.Print("Dungeon Meshi... Oh, Dungeon Meshi!");
     }
@@ -175,7 +175,7 @@ public partial class DungeonGenerator : Node3D {
                 }
             }
 
-            int[] connection = possibleConnections.PickRandom();
+            int[] connection = possibleConnections.PickRandom(); // how can this be empty?
             foreach (int[] pc in possibleConnections) {
                 if (map2D[pc[0]].DistanceSquaredTo(map2D[pc[1]]) < map2D[connection[0]].DistanceSquaredTo(map2D[connection[1]])) {
                     connection = pc;
@@ -197,8 +197,6 @@ public partial class DungeonGenerator : Node3D {
             }
         }
         CreateHallways(hallwayGraph);
-        //PutWalls(currentFloor);
-        makeRealDungeon();
     }
 
 
@@ -337,16 +335,17 @@ public partial class DungeonGenerator : Node3D {
 
     public void makeRealDungeon() {
         Array<Vector3I> cellsToConvert = gridMap.GetUsedCells();
-        GD.Print("used cells amount = " + cellsToConvert.Count());
+        Vector3I gridOffset = new Vector3I(6, 12, 6);
         foreach (Vector3I cellPosition in cellsToConvert) {
             DungeonCell newCell = dungeonCell.Instantiate<DungeonCell>();
             AddChild(newCell);
-            newCell.GlobalPosition = cellPosition;
-            if (gridMap.GetCellItem(cellPosition + Vector3I.Left) > 0) newCell.RemoveWall(DungeonCell.Directions.West);
-            if (gridMap.GetCellItem(cellPosition + Vector3I.Right) > 0) newCell.RemoveWall(DungeonCell.Directions.East);
-            if (gridMap.GetCellItem(cellPosition + Vector3I.Forward) > 0) newCell.RemoveWall(DungeonCell.Directions.North);
-            if (gridMap.GetCellItem(cellPosition + Vector3I.Back) > 0) newCell.RemoveWall(DungeonCell.Directions.South);
+            newCell.GlobalPosition = cellPosition * gridOffset;
+            if (gridMap.GetCellItem(cellPosition) == TileDict[Tiles.Entrance]) playerScene.Position = cellPosition * gridOffset;
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Left) >= 0) newCell.RemoveWall(DungeonCell.Directions.West);
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Right) >= 0) newCell.RemoveWall(DungeonCell.Directions.East);
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Forward) >= 0) newCell.RemoveWall(DungeonCell.Directions.North);
+            if (gridMap.GetCellItem(cellPosition + Vector3I.Back) >= 0) newCell.RemoveWall(DungeonCell.Directions.South);
+            newCell.KeepTorches(chanceToKeepTorches);
         }
-        gridMap.Clear();
     }
 }

@@ -1,17 +1,21 @@
 using Godot;
-using System;
 
-public partial class DungeonCell : Node3D {
+public partial class DungeonCell : Area3D {
     [Export] MeshInstance3D wallN;
     [Export] MeshInstance3D wallW;
     [Export] MeshInstance3D wallS;
     [Export] MeshInstance3D wallE;
+    [Export] MeshInstance3D MiniMapTile;
 
     public enum Directions {
         North,
         South,
         West,
         East
+    }
+
+    public override void _Ready() {
+        AreaEntered += RevealMinimap;
     }
 
     public void RemoveWall(Directions dir) {
@@ -29,5 +33,35 @@ public partial class DungeonCell : Node3D {
                 wallE.QueueFree();
                 break;
         }
+    }
+
+    public void KeepTorches(int chanceToKeepTorches) {
+        for (int i = 0; i < 4; i++) {
+            int chance = GD.RandRange(1, 100);
+            if (chance > chanceToKeepTorches) {
+                switch (i) {
+                    case 0:
+                        if (wallN is not null) wallN.GetChild(0).QueueFree();
+                        break;
+
+                    case 1:
+                        if (wallS is not null) wallS.GetChild(0).QueueFree();
+                        break;
+
+                    case 2:
+                        if (wallW is not null) wallW.GetChild(0).QueueFree();
+                        break;
+
+                    case 3:
+                        if (wallE is not null) wallE.GetChild(0).QueueFree();
+                        break;
+                }
+            }
+        }
+    }
+
+    public void RevealMinimap(Area3D area) {
+        MiniMapTile.Visible = true;
+        GD.Print("entered collision");
     }
 }

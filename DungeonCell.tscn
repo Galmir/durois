@@ -1,12 +1,13 @@
-[gd_scene load_steps=22 format=4 uid="uid://dffqonp6jrc1s"]
+[gd_scene load_steps=26 format=4 uid="uid://dffqonp6jrc1s"]
 
-[ext_resource type="Script" path="res://MirkoBlenderDUngeontiles.cs" id="1_3px3n"]
+[ext_resource type="Script" uid="uid://2smc2dmvs4bf" path="res://DungeonCell.cs" id="1_ex4em"]
 [ext_resource type="Texture2D" uid="uid://xud0c1aitbg" path="res://Dungeon Generation/Dungeon_worn_tile_floor_diff_1k.png" id="2_0c6o2"]
 [ext_resource type="Texture2D" uid="uid://bey1qdk8xgu8t" path="res://Dungeon Generation/Dungeon_worn_tile_floor_arm_1k.png" id="3_xpxkt"]
 [ext_resource type="Texture2D" uid="uid://c6nkgewhyokyb" path="res://Dungeon Generation/Dungeon_worn_tile_floor_nor_gl_1k.png" id="4_hf07d"]
 [ext_resource type="Texture2D" uid="uid://duml8t0xqutwl" path="res://Dungeon Generation/Dungeon_stone_brick_wall_001_diff_1k.png" id="5_ofa1l"]
 [ext_resource type="Texture2D" uid="uid://urias54t01va" path="res://Dungeon Generation/Dungeon_stone_brick_wall_001_arm_1k.png" id="6_ir2tp"]
 [ext_resource type="Texture2D" uid="uid://d1gg2ycn33st5" path="res://Dungeon Generation/Dungeon_stone_brick_wall_001_nor_gl_1k.png" id="7_dm6xp"]
+[ext_resource type="PackedScene" uid="uid://3vwjlx6f6jhc" path="res://torch.tscn" id="8_g506w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1h28"]
 resource_name = "Floor"
@@ -52,6 +53,38 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nvr13")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b18ik"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "Floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAP//AAD//wAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e842b"]
+resource_name = "Dungeon_Plane_006"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("BgD4//j/BgD4//j/BgAGAA=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_h1h28"),
+"name": "Floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAAAAD/v///AAD///+/AAAAAAAA/7////9/////f////3/+//9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_b18ik")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y04yw"]
 resource_name = "Wall"
@@ -100,38 +133,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3pgs1")
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_b18ik"]
-_surfaces = [{
-"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
-"format": 34896613377,
-"index_count": 6,
-"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
-"name": "Floor",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAP//AAD//wAAAAAAAAAAAAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_e842b"]
-resource_name = "Dungeon_Plane_006"
-_surfaces = [{
-"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
-"attribute_data": PackedByteArray("BgD4//j/BgD4//j/BgAGAA=="),
-"format": 34896613399,
-"index_count": 6,
-"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
-"material": SubResource("StandardMaterial3D_h1h28"),
-"name": "Floor",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray("AAAAAP///7///wAAAAD/v///AAD///+/AAAAAAAA/7////9/////f////3/+//9/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_b18ik")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_c7ueo"]
 _surfaces = [{
@@ -235,23 +236,30 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_eb5qy")
 
-[node name="DungeonCell" type="Node3D" node_paths=PackedStringArray("wallN", "wallW", "wallS", "wallE")]
-script = ExtResource("1_3px3n")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g506w"]
+shading_mode = 0
+albedo_color = Color(0.742307, 0.557455, 0.311913, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_g506w"]
+material = SubResource("StandardMaterial3D_g506w")
+size = Vector2(6, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g506w"]
+size = Vector3(6, 2, 6)
+
+[node name="DungeonCell" type="Area3D" node_paths=PackedStringArray("wallN", "wallW", "wallS", "wallE", "MiniMapTile")]
+collision_layer = 2
+script = ExtResource("1_ex4em")
 wallN = NodePath("Wall_N")
 wallW = NodePath("Wall_W")
 wallS = NodePath("Wall_S")
 wallE = NodePath("Wall_E")
+MiniMapTile = NodePath("MinimapTile")
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("ArrayMesh_tvf8y")
-skeleton = NodePath("")
-
-[node name="Wall_N" type="MeshInstance3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-mesh = SubResource("ArrayMesh_3mefw")
 skeleton = NodePath("")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
@@ -260,20 +268,48 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("ArrayMesh_e842b")
 skeleton = NodePath("")
 
+[node name="Wall_N" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("ArrayMesh_3mefw")
+skeleton = NodePath("")
+
+[node name="Torch" parent="Wall_N" instance=ExtResource("8_g506w")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, 0.56297, -1.05374)
+
 [node name="Wall_W" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0, 0, 3, 0, 3, 0, -3, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_asjv7")
 skeleton = NodePath("")
 
+[node name="Torch" parent="Wall_W" instance=ExtResource("8_g506w")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -0.00883563, 0.56297, -1.06747)
+
 [node name="Wall_S" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-3, 0, -9.77524e-07, 0, 3, 0, 9.77524e-07, 0, -3, 0, 0, 0)
+transform = Transform3D(-3, 0, -1.16824e-06, 0, 3, 0, 1.16824e-06, 0, -3, 0, 0, 0)
 mesh = SubResource("ArrayMesh_fjl3c")
 skeleton = NodePath("")
+
+[node name="Torch" parent="Wall_S" instance=ExtResource("8_g506w")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 4.7599e-07, 0.56297, -1.0503)
 
 [node name="Wall_E" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1.60933e-06, 0, -3, 0, 3, 0, 3, 0, 1.60933e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_8gyq0")
 skeleton = NodePath("")
+
+[node name="Torch2" parent="Wall_E" instance=ExtResource("8_g506w")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0.0088362, 0.56297, -1.05888)
+
+[node name="MinimapTile" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+layers = 524288
+mesh = SubResource("QuadMesh_g506w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_g506w")

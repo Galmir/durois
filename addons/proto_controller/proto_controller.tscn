@@ -14,6 +14,7 @@ radius = 0.4
 height = 1.8
 
 [node name="ProtoController" type="CharacterBody3D"]
+collision_mask = 2
 script = ExtResource("1_ucva2")
 input_left = "Left"
 input_right = "Right"
@@ -34,7 +35,8 @@ shape = SubResource("CapsuleShape3D_iof21")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40841, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.173439, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.173439, 0.905933)
+cull_mask = 31775
 near = 0.004
 
 [node name="Torchlight" type="OmniLight3D" parent="."]
