@@ -70,3 +70,4 @@ stream = ExtResource("3_w3qnr")
 volume_db = -4.156
 unit_size = 5.0
 autoplay = true
+max_distance = 5.0

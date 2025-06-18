@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkutbsxl4k3n1"]
+
+[ext_resource type="PackedScene" uid="uid://cnp46bxhs5wct" path="res://Player/player_controller.tscn" id="1_uhqqe"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_6adnx"]
+size = Vector2(10, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_6adnx")
+
+[node name="PlayerController" parent="." instance=ExtResource("1_uhqqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881906, 0)

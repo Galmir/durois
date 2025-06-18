@@ -15,6 +15,7 @@ height = 1.8
 
 [node name="ProtoController" type="CharacterBody3D"]
 collision_mask = 2
+platform_wall_layers = 2
 script = ExtResource("1_ucva2")
 input_left = "Left"
 input_right = "Right"

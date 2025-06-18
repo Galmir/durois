@@ -22,6 +22,8 @@ public partial class DungeonGenerator : Node3D {
     [Export] private GridMap gridMap;
     [Export] private GridMap monstersAndLootMap;
     [Export] private CharacterBody3D playerScene;
+    [Export] AudioStream BGM;
+
     private PackedScene dungeonCell = GD.Load<PackedScene>("uid://dffqonp6jrc1s");
 
     [ExportCategory("Dungeon")]
@@ -50,29 +52,12 @@ public partial class DungeonGenerator : Node3D {
     private Vector3I entrancePosition;
     private int currentFloor;
 
-    public enum Tiles {
-        Room,
-        Hallway,
-        Door,
-        Border,
-        Wall,
-        Entrance,
-        Exit
-    }
 
-    public Dictionary<Tiles, int> TileDict = new Dictionary<Tiles, int>() {
-        {Tiles.Room, 0},
-        { Tiles.Hallway, 1},
-        { Tiles.Door, 2},
-        { Tiles.Border, 3},
-        { Tiles.Wall, 4},
-        { Tiles.Entrance, 5},
-        { Tiles.Exit, 6}
-    };
 
 
     public override void _Ready() {
         GenerateDungeon();
+        GetTree().CreateTimer(1).Timeout += () => AudioManager.Instance.Play(AudioType.Music, BGM);
     }
 
 
@@ -115,8 +100,8 @@ public partial class DungeonGenerator : Node3D {
         playerPlaced = false;
         while (!isEntrancePlaced) {
             Vector3I randomStartingPosition = (Vector3I)roomTiles.PickRandom().PickRandom();
-            if (gridMap.GetCellItem(randomStartingPosition) == TileDict[Tiles.Room]) {
-                gridMap.SetCellItem(randomStartingPosition, TileDict[Tiles.Entrance]);
+            if (gridMap.GetCellItem(randomStartingPosition) == Rules.Instance.TileDict[Rules.Tiles.Floor]) {
+                gridMap.SetCellItem(randomStartingPosition, Rules.Instance.TileDict[Rules.Tiles.Entrance]);
                 isEntrancePlaced = true;
                 entrancePosition = randomStartingPosition;
                 if (!playerPlaced) {
@@ -131,9 +116,9 @@ public partial class DungeonGenerator : Node3D {
         isExitPlaced = false;
         while (!isExitPlaced) {
             Vector3I randomStartingPosition = (Vector3I)roomTiles.PickRandom().PickRandom();
-            if (gridMap.GetCellItem(randomStartingPosition) == TileDict[Tiles.Room] &&
+            if (gridMap.GetCellItem(randomStartingPosition) == Rules.Instance.TileDict[Rules.Tiles.Floor] &&
             entrancePosition.DistanceSquaredTo(randomStartingPosition) / 10 > (int)borderSize / 2) {
-                gridMap.SetCellItem(randomStartingPosition, TileDict[Tiles.Exit]);
+                gridMap.SetCellItem(randomStartingPosition, Rules.Instance.TileDict[Rules.Tiles.Exit]);
                 isExitPlaced = true;
             }
 
@@ -222,8 +207,8 @@ public partial class DungeonGenerator : Node3D {
 
                     Vector3[] hallway = [tileFrom, tileTo];
                     hallways.Add(hallway);
-                    gridMap.SetCellItem((Vector3I)tileFrom, TileDict[Tiles.Door]);
-                    gridMap.SetCellItem((Vector3I)tileTo, TileDict[Tiles.Door]);
+                    gridMap.SetCellItem((Vector3I)tileFrom, Rules.Instance.TileDict[Rules.Tiles.Door]);
+                    gridMap.SetCellItem((Vector3I)tileTo, Rules.Instance.TileDict[Rules.Tiles.Door]);
                 }
             }
         }
@@ -235,7 +220,7 @@ public partial class DungeonGenerator : Node3D {
         astar.DefaultEstimateHeuristic = AStarGrid2D.Heuristic.Manhattan;
 
         // block the pathfinding from walking into rooms
-        foreach (Vector3I tile in gridMap.GetUsedCellsByItem(TileDict[Tiles.Room])) {
+        foreach (Vector3I tile in gridMap.GetUsedCellsByItem(Rules.Instance.TileDict[Rules.Tiles.Floor])) {
             if (tile.Y == currentFloor) astar.SetPointSolid(new Vector2I(tile.X, tile.Z));
         }
 
@@ -247,7 +232,7 @@ public partial class DungeonGenerator : Node3D {
             foreach (Vector2 i in hall) {
                 Vector3I position = new Vector3I((int)i.X, currentFloor, (int)i.Y);
                 if (gridMap.GetCellItem(position) < 0) {
-                    gridMap.SetCellItem(position, TileDict[Tiles.Hallway]);
+                    gridMap.SetCellItem(position, Rules.Instance.TileDict[Rules.Tiles.Hallway]);
                 }
             }
         }
@@ -269,7 +254,7 @@ public partial class DungeonGenerator : Node3D {
         for (int row = -roomMargin; row < height + roomMargin; row++) {
             for (int col = -roomMargin; col < width + roomMargin; col++) {
                 Vector3I pos = startPos + new Vector3I(col, 0, row);
-                if (gridMap.GetCellItem(pos) == TileDict[Tiles.Room]) {
+                if (gridMap.GetCellItem(pos) == Rules.Instance.TileDict[Rules.Tiles.Floor]) {
                     MakeRoom(attemptsLeft - 1);
                     return;
                 }
@@ -281,7 +266,7 @@ public partial class DungeonGenerator : Node3D {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 Vector3I pos = startPos + new Vector3I(col, 0, row);
-                gridMap.SetCellItem(pos, TileDict[Tiles.Room]);
+                gridMap.SetCellItem(pos, Rules.Instance.TileDict[Rules.Tiles.Floor]);
                 room.Add(pos);
             }
         }
@@ -304,10 +289,10 @@ public partial class DungeonGenerator : Node3D {
         GD.Print("visualize border");
         gridMap.Clear();
         for (int i = -1; i < borderSize + 1; i++) {
-            gridMap.SetCellItem(new Vector3I(i, 0, -1), TileDict[Tiles.Border]);
-            gridMap.SetCellItem(new Vector3I(i, 0, borderSize), TileDict[Tiles.Border]);
-            gridMap.SetCellItem(new Vector3I(borderSize, 0, i), TileDict[Tiles.Border]);
-            gridMap.SetCellItem(new Vector3I(-1, 0, i), TileDict[Tiles.Border]);
+            gridMap.SetCellItem(new Vector3I(i, 0, -1), Rules.Instance.TileDict[Rules.Tiles.Border]);
+            gridMap.SetCellItem(new Vector3I(i, 0, borderSize), Rules.Instance.TileDict[Rules.Tiles.Border]);
+            gridMap.SetCellItem(new Vector3I(borderSize, 0, i), Rules.Instance.TileDict[Rules.Tiles.Border]);
+            gridMap.SetCellItem(new Vector3I(-1, 0, i), Rules.Instance.TileDict[Rules.Tiles.Border]);
         }
 
     }
@@ -319,14 +304,14 @@ public partial class DungeonGenerator : Node3D {
             for (int j = -1; j < borderSize + 1; j++) {
 
                 bool hasNeighbor =
-                (gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) != TileDict[Tiles.Wall]) ||
-                (gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) != TileDict[Tiles.Wall]) ||
-                (gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) != TileDict[Tiles.Wall]) ||
-                (gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) != TileDict[Tiles.Wall]);
+                (gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j - 1)) != Rules.Instance.TileDict[Rules.Tiles.Wall]) ||
+                (gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i - 1, floor, j)) != Rules.Instance.TileDict[Rules.Tiles.Wall]) ||
+                (gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) >= 0 && gridMap.GetCellItem(new Vector3I(i + 1, floor, j)) != Rules.Instance.TileDict[Rules.Tiles.Wall]) ||
+                (gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) >= 0 && gridMap.GetCellItem(new Vector3I(i, floor, j + 1)) != Rules.Instance.TileDict[Rules.Tiles.Wall]);
 
 
                 if (gridMap.GetCellItem(new Vector3I(i, floor, j)) < 0 && hasNeighbor) {
-                    for (int w = 0; w < floorHeight; w++) gridMap.SetCellItem(new Vector3I(i, floor + w, j), TileDict[Tiles.Wall]);
+                    for (int w = 0; w < floorHeight; w++) gridMap.SetCellItem(new Vector3I(i, floor + w, j), Rules.Instance.TileDict[Rules.Tiles.Wall]);
                 }
             }
         }
@@ -340,7 +325,7 @@ public partial class DungeonGenerator : Node3D {
             DungeonCell newCell = dungeonCell.Instantiate<DungeonCell>();
             AddChild(newCell);
             newCell.GlobalPosition = cellPosition * gridOffset;
-            if (gridMap.GetCellItem(cellPosition) == TileDict[Tiles.Entrance]) playerScene.Position = cellPosition * gridOffset;
+            if (gridMap.GetCellItem(cellPosition) == Rules.Instance.TileDict[Rules.Tiles.Entrance]) playerScene.Position = cellPosition * gridOffset + Vector3I.Up;
             if (gridMap.GetCellItem(cellPosition + Vector3I.Left) >= 0) newCell.RemoveWall(DungeonCell.Directions.West);
             if (gridMap.GetCellItem(cellPosition + Vector3I.Right) >= 0) newCell.RemoveWall(DungeonCell.Directions.East);
             if (gridMap.GetCellItem(cellPosition + Vector3I.Forward) >= 0) newCell.RemoveWall(DungeonCell.Directions.North);

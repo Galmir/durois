@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxmufnr6iputp"]
+[gd_scene load_steps=11 format=3 uid="uid://dxmufnr6iputp"]
 
 [ext_resource type="Script" uid="uid://wxsiqvuaolv6" path="res://Dungeon Generation/DungeonGenerator.cs" id="1_667dc"]
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="3_2ij2s"]
 [ext_resource type="MeshLibrary" uid="uid://bqcm3lp1qorbr" path="res://Dungeon Generation/Tilesets/DungeonTileset.tres" id="3_2il45"]
 [ext_resource type="MeshLibrary" uid="uid://d6q28l0mcj8j" path="res://Dungeon Generation/Kenney/KenneyTileset.tres" id="3_ps43n"]
 [ext_resource type="AudioStream" uid="uid://duqx50vtxfurw" path="res://Audio/dungeon_ambient_1.ogg" id="5_2il45"]
 [ext_resource type="Script" uid="uid://c7fldsnlavvq2" path="res://MiniMapCamera.cs" id="5_qd61d"]
+[ext_resource type="PackedScene" uid="uid://cnp46bxhs5wct" path="res://Player/player_controller.tscn" id="7_s13ln"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ps43n"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -33,23 +33,15 @@ volumetric_fog_albedo = Color(0, 0, 0, 1)
 volumetric_fog_emission = Color(4.66267e-08, 0, 0.0894063, 1)
 volumetric_fog_emission_energy = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qd61d"]
-shading_mode = 0
-albedo_color = Color(0.197085, 0.156534, 0.066784, 1)
-
-[sub_resource type="PrismMesh" id="PrismMesh_s13ln"]
-material = SubResource("StandardMaterial3D_qd61d")
-size = Vector3(1, 1, 0.14)
-
 [sub_resource type="Environment" id="Environment_s13ln"]
 background_mode = 1
 
 [node name="DungeonGenerator" type="Node3D" node_paths=PackedStringArray("gridMap", "monstersAndLootMap", "playerScene")]
 script = ExtResource("1_667dc")
-_start = true
 gridMap = NodePath("DungeonLayer")
 monstersAndLootMap = NodePath("MonsterLayer")
-playerScene = NodePath("ProtoController")
+playerScene = NodePath("PlayerController")
+BGM = ExtResource("5_2il45")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qd61d")
@@ -68,15 +60,6 @@ cell_center_y = false
 bake_navigation = true
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="ProtoController" parent="." instance=ExtResource("3_2ij2s")]
-unique_name_in_owner = true
-can_jump = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ProtoController"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-layers = 524288
-mesh = SubResource("PrismMesh_s13ln")
-
 [node name="Minimap" type="SubViewportContainer" parent="."]
 offset_right = 360.0
 offset_bottom = 360.0
@@ -86,12 +69,11 @@ handle_input_locally = false
 size = Vector2i(360, 360)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="Minimap/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Minimap/SubViewport" node_paths=PackedStringArray("playerScene")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.94, 0)
 cull_mask = 524288
 environment = SubResource("Environment_s13ln")
 script = ExtResource("5_qd61d")
+playerScene = NodePath("../../../PlayerController")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_2il45")
-parameters/looping = true
+[node name="PlayerController" parent="." instance=ExtResource("7_s13ln")]

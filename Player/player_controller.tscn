@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnp46bxhs5wct"]
+
+[ext_resource type="Script" uid="uid://cdes068lq8dfa" path="res://Player/PlayerController.cs" id="1_biqn8"]
+[ext_resource type="Script" uid="uid://ddl8vwdm52ils" path="res://Player/CamRoot.cs" id="2_a1q1g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_biqn8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a1q1g"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a1q1g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qd61d"]
+shading_mode = 0
+albedo_color = Color(0.197085, 0.156534, 0.066784, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_a1q1g"]
+material = SubResource("StandardMaterial3D_qd61d")
+size = Vector3(1, 1, 0.14)
+
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
+collision_layer = 2
+script = ExtResource("1_biqn8")
+camera = NodePath("CamRoot/Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_biqn8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_a1q1g")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.220484, 0, 0, 0, 0.400162, 0, 0, 0, 1, 0, 0.41748, -0.860728)
+mesh = SubResource("BoxMesh_a1q1g")
+
+[node name="CamRoot" type="Node3D" parent="."]
+script = ExtResource("2_a1q1g")
+
+[node name="Camera3D" type="Camera3D" parent="CamRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54103, 7.40063)
+fov = 37.8493
+
+[node name="MinimapIcon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.768117, 0)
+layers = 524288
+mesh = SubResource("PrismMesh_a1q1g")

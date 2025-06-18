@@ -39,22 +39,29 @@ _subresources={
 "physics/shape_type": 1
 },
 "PATH:Floor": {
-"generate/physics": true
+"generate/physics": true,
+"mesh_instance/layers": 2,
+"physics/layer": 2,
+"physics/shape_type": 1
 },
 "PATH:Wall_E": {
 "generate/physics": true,
+"physics/layer": 2,
 "physics/shape_type": 1
 },
 "PATH:Wall_N": {
 "generate/physics": true,
+"physics/layer": 2,
 "physics/shape_type": 1
 },
 "PATH:Wall_S": {
 "generate/physics": true,
+"physics/layer": 2,
 "physics/shape_type": 1
 },
 "PATH:Wall_W": {
 "generate/physics": true,
+"physics/layer": 2,
 "physics/shape_type": 1
 }
 }
