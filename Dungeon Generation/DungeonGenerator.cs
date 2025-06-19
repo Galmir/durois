@@ -78,7 +78,6 @@ public partial class DungeonGenerator : Node3D {
         }
 
         makeRealDungeon();
-
         GD.Print("Dungeon Meshi... Oh, Dungeon Meshi!");
     }
 
@@ -321,11 +320,13 @@ public partial class DungeonGenerator : Node3D {
     public void makeRealDungeon() {
         Array<Vector3I> cellsToConvert = gridMap.GetUsedCells();
         Vector3I gridOffset = new Vector3I(6, 12, 6);
+        Vector3 heightOffset = new(1, 2, 1);
+
         foreach (Vector3I cellPosition in cellsToConvert) {
             DungeonCell newCell = dungeonCell.Instantiate<DungeonCell>();
             AddChild(newCell);
             newCell.GlobalPosition = cellPosition * gridOffset;
-            if (gridMap.GetCellItem(cellPosition) == Rules.Instance.TileDict[Rules.Tiles.Entrance]) playerScene.Position = cellPosition * gridOffset + Vector3I.Up;
+            if (gridMap.GetCellItem(cellPosition) == Rules.Instance.TileDict[Rules.Tiles.Entrance]) playerScene.GlobalPosition = newCell.GlobalPosition + Vector3.Up;
             if (gridMap.GetCellItem(cellPosition + Vector3I.Left) >= 0) newCell.RemoveWall(DungeonCell.Directions.West);
             if (gridMap.GetCellItem(cellPosition + Vector3I.Right) >= 0) newCell.RemoveWall(DungeonCell.Directions.East);
             if (gridMap.GetCellItem(cellPosition + Vector3I.Forward) >= 0) newCell.RemoveWall(DungeonCell.Directions.North);
