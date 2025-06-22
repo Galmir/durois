@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://cnp46bxhs5wct" path="res://Player/player_controller.tscn" id="1_uhqqe"]
 [ext_resource type="Texture2D" uid="uid://bdw2j5kejiegc" path="res://Player/textures/grids/Dark/texture_01.png" id="3_sasra"]
-[ext_resource type="Script" uid="uid://2smc2dmvs4bf" path="res://Dungeon Cell/DungeonCell.cs" id="3_vr1i5"]
+[ext_resource type="Script" uid="uid://2smc2dmvs4bf" path="res://Dungeon Generation/Dungeon Cell/DungeonCell.cs" id="3_vr1i5"]
 [ext_resource type="Texture2D" uid="uid://xud0c1aitbg" path="res://Dungeon Generation/Materials/WornTileFLoor/Dungeon_worn_tile_floor_diff_1k.png" id="4_rpuu0"]
 [ext_resource type="Texture2D" uid="uid://bey1qdk8xgu8t" path="res://Dungeon Generation/Materials/WornTileFLoor/Dungeon_worn_tile_floor_arm_1k.png" id="5_oo8pe"]
 [ext_resource type="Texture2D" uid="uid://c6nkgewhyokyb" path="res://Dungeon Generation/Materials/WornTileFLoor/Dungeon_worn_tile_floor_nor_gl_1k.png" id="6_4gito"]
 [ext_resource type="Texture2D" uid="uid://duml8t0xqutwl" path="res://Dungeon Generation/Materials/StoneBrickWall/Dungeon_stone_brick_wall_001_diff_1k.png" id="7_fbuy2"]
 [ext_resource type="Texture2D" uid="uid://urias54t01va" path="res://Dungeon Generation/Materials/StoneBrickWall/Dungeon_stone_brick_wall_001_arm_1k.png" id="8_0k8yu"]
 [ext_resource type="Texture2D" uid="uid://d1gg2ycn33st5" path="res://Dungeon Generation/Materials/StoneBrickWall/Dungeon_stone_brick_wall_001_nor_gl_1k.png" id="9_hiucn"]
-[ext_resource type="PackedScene" uid="uid://3vwjlx6f6jhc" path="res://Dungeon Cell/torch.tscn" id="10_k6its"]
+[ext_resource type="PackedScene" uid="uid://3vwjlx6f6jhc" path="res://Dungeon Generation/Dungeon Cell/torch.tscn" id="10_k6its"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ia1lp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)

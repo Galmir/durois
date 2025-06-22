@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1cnyuykhaigm"]
+
+[ext_resource type="Script" uid="uid://boft1hs8yk6rx" path="res://Game Systems/Inventory and Crafting/UI/ItemObtainedUi.cs" id="1_m6u5a"]
+[ext_resource type="Theme" uid="uid://b220khua4svym" path="res://UI/MainTheme.tres" id="3_t73jo"]
+[ext_resource type="Texture2D" uid="uid://up1kuestcwn5" path="res://Assets/Placeholders/itemIcons/iron bar.png" id="4_1liw4"]
+
+[node name="ItemObtained" type="PanelContainer" node_paths=PackedStringArray("colorBG", "ingredientIcon", "ingredientNameLabel", "amountLabel", "timeToLeave")]
+custom_minimum_size = Vector2(250, 30)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("1_m6u5a")
+colorBG = NodePath("ColorBG")
+ingredientIcon = NodePath("ColorBG/IngredientRow/IngredientIcon")
+ingredientNameLabel = NodePath("ColorBG/IngredientRow/IngredientNameLabel")
+amountLabel = NodePath("ColorBG/IngredientRow/IngredientAmountLabel")
+timeToLeave = NodePath("TimeToLeave")
+
+[node name="ColorBG" type="ColorRect" parent="."]
+layout_mode = 2
+
+[node name="IngredientRow" type="HBoxContainer" parent="ColorBG"]
+layout_mode = 2
+offset_top = 9.0
+offset_right = 250.0
+offset_bottom = 25.0
+size_flags_vertical = 4
+theme = ExtResource("3_t73jo")
+
+[node name="IngredientIcon" type="TextureRect" parent="ColorBG/IngredientRow"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_1liw4")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="IngredientNameLabel" type="Label" parent="ColorBG/IngredientRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Iron Ingot"
+
+[node name="IngredientAmountLabel" type="Label" parent="ColorBG/IngredientRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x1"
+
+[node name="TimeToLeave" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true

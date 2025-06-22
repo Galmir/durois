@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxghtolbrm3aj"]
+
+[ext_resource type="Script" uid="uid://x2uknvcjhv0l" path="res://Game Systems/Quests/QuestManager.cs" id="1_rq7yu"]
+[ext_resource type="Script" uid="uid://c8ek3dvyse7cw" path="res://Game Systems/Quests/Quest.cs" id="2_aj05m"]
+[ext_resource type="Script" uid="uid://dgvxv05mwa607" path="res://Game Systems/Quests/KillEnemyQuestStep.cs" id="3_kwta3"]
+
+[node name="QuestManager" type="Node"]
+script = ExtResource("1_rq7yu")
+
+[node name="UndiscoveredQuests" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Kill5Mushrooms" type="Node" parent="UndiscoveredQuests"]
+script = ExtResource("2_aj05m")
+QuestName = "Kill 5 Porcini of Doom"
+Description = "The village is being terrorized by these fiendish creatures, please help!"
+
+[node name="Step1" type="Node" parent="UndiscoveredQuests/Kill5Mushrooms"]
+script = ExtResource("3_kwta3")
+
+[node name="DiscoveredQuests" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="CompletedQuests" type="Node" parent="."]
+unique_name_in_owner = true

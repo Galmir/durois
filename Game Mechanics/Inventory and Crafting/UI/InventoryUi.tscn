@@ -1,0 +1,167 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2krkiom1qr6g"]
+
+[ext_resource type="Theme" uid="uid://b220khua4svym" path="res://UI/MainTheme.tres" id="1_7ms62"]
+[ext_resource type="Script" uid="uid://db2lx17vbvove" path="res://Game Systems/Inventory and Crafting/UI/InventoryUI.cs" id="1_l4f4n"]
+[ext_resource type="Texture2D" uid="uid://bkv3tsydmqhsm" path="res://Assets/Placeholders/itemIcons/copper disk.png" id="3_1ujpa"]
+[ext_resource type="PackedScene" uid="uid://d3adli571njcv" path="res://Game Systems/Inventory and Crafting/UI/InventorySlotUIButton.tscn" id="3_wv2h7"]
+[ext_resource type="Texture2D" uid="uid://ict1jt3it7gv" path="res://Assets/Placeholders/itemIcons/iron axe.png" id="4_24scf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wv2h7"]
+bg_color = Color(0.184314, 0.298039, 0.423529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7r7df"]
+bg_color = Color(0.184314, 0.298039, 0.423529, 1)
+
+[node name="InventoryUI" type="HBoxContainer"]
+custom_minimum_size = Vector2(1080, 720)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -160.0
+offset_right = 457.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7ms62")
+script = ExtResource("1_l4f4n")
+InvSlotUIScene = ExtResource("3_wv2h7")
+
+[node name="ItemPanel" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="AllFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "All
+"
+
+[node name="WeaponFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Weapons"
+
+[node name="ArmorFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Armor"
+
+[node name="GemsFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Gems"
+
+[node name="ConsumablesFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Consumables"
+
+[node name="KeyItemsFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Key Items"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_wv2h7")
+
+[node name="InventoryGrid" type="GridContainer" parent="ItemPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+columns = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ItemPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="GoldAmountLabel" type="Label" parent="ItemPanel/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "9999"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ItemPanel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("3_1ujpa")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ItemDetailsPanel" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemDetailsPanel"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ItemDetailsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_7r7df")
+
+[node name="MarginContainer" type="MarginContainer" parent="ItemDetailsPanel/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemNameLabel" type="Label" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "weapon name"
+horizontal_alignment = 1
+
+[node name="ItemIconTexture" type="TextureRect" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_24scf")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="ItemDescriptiontLabel" type="RichTextLabel" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "a fancy description of an  [color=#FF0000]item[/color] filled with [shake rate=20.0 level=5 connected=1]DETERMINATION[/shake]"
+scroll_active = false
+
+[node name="UseButton" type="Button" parent="ItemDetailsPanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Use"
+
+[node name="CraftButton" type="Button" parent="ItemDetailsPanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Craft"
+
+[node name="EquipButton" type="Button" parent="ItemDetailsPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Equip"
+
+[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/AllFilterButton" to="." method="_on_all_filter_button_pressed"]
+[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/WeaponFilterButton" to="." method="_on_weapon_filter_button_pressed"]
+[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/ArmorFilterButton" to="." method="_on_ingredients_filter_button_pressed"]
+[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/GemsFilterButton" to="." method="_on_consumables_filter_button_pressed"]
+[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/ConsumablesFilterButton" to="." method="_on_consumables_filter_button_pressed"]
+[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/KeyItemsFilterButton" to="." method="_on_consumables_filter_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bitmakagex1s2"]
+[gd_scene load_steps=20 format=3 uid="uid://bitmakagex1s2"]
 
 [ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_bffuq"]
 [ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_h1wpj"]
@@ -31,13 +31,32 @@ fill_to = Vector2(0, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52lxg"]
 texture = SubResource("GradientTexture2D_52lxg")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bffuq"]
+bg_color = Color(0, 0, 0, 0.25098)
+
+[sub_resource type="Gradient" id="Gradient_bffuq"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.538462, 1)
+colors = PackedColorArray(0.41132, 0.712213, 0.999999, 1, 1, 1, 1, 1, 0.41132, 0.712213, 0.999999, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rvugc"]
+gradient = SubResource("Gradient_bffuq")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pnb10"]
+texture = SubResource("GradientTexture2D_rvugc")
+
 [node name="SystemMessageUI" type="PanelContainer"]
 material = SubResource("ShaderMaterial_pnb10")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -261.0
-offset_bottom = -308.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -303.5
+offset_right = 370.0
+offset_bottom = 303.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -61,35 +80,40 @@ theme_override_constants/margin_bottom = 70
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 5
 alignment = 1
 
 [node name="TitleLayout" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = -2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 texture = ExtResource("3_2xelh")
-stretch_mode = 2
+expand_mode = 5
+stretch_mode = 4
 
 [node name="Title" type="PanelContainer" parent="MarginContainer/VBoxContainer/TitleLayout"]
 material = SubResource("ShaderMaterial_rvugc")
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_52lxg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TitleLayout/Title"]
 layout_mode = 2
+theme_override_constants/separation = -1
 alignment = 1
 
 [node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleLayout/Title/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("4_o0okn")
-stretch_mode = 2
+expand_mode = 5
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TitleLayout/Title/VBoxContainer"]
 layout_mode = 2
@@ -101,163 +125,206 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("7_2wa0v")
-stretch_mode = 2
+expand_mode = 5
+stretch_mode = 4
 
 [node name="TextureRect4" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 texture = ExtResource("8_bffuq")
-stretch_mode = 2
+expand_mode = 5
+stretch_mode = 5
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="LevelLayout" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LevelJobLayout" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="LevelJobLayout" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LevelLayout"]
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = -8
+alignment = 1
 
-[node name="LevelNumberLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/LevelJobLayout"]
-layout_mode = 2
-text = "51"
-label_settings = ExtResource("10_bffuq")
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/LevelJobLayout"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/LevelLayout/LevelJobLayout"]
 layout_mode = 2
 text = "Level"
-label_settings = ExtResource("5_n6d4a")
+horizontal_alignment = 1
+vertical_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="LevelNumberLabel" type="Label" parent="MarginContainer/VBoxContainer/LevelLayout/LevelJobLayout"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "51"
+label_settings = ExtResource("10_bffuq")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/LevelLayout/LevelJobLayout"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/outline_size = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bffuq")
+theme_override_styles/fill = SubResource("StyleBoxTexture_pnb10")
+step = 1.0
+value = 50.0
+rounded = true
+show_percentage = false
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsLayout" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="StatBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="StatBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox"]
+[node name="StatRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow"]
 layout_mode = 2
 text = "Strength:"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow"]
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow"]
 layout_mode = 2
 text = "3"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="StatRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox"]
+[node name="StatRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow2"]
 layout_mode = 2
-text = "Strength:"
+text = "Dexterity:"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow2"]
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow2"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow2"]
 layout_mode = 2
 text = "3"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="StatRow3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox"]
+[node name="StatRow3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow3"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow3"]
 layout_mode = 2
-text = "Strength:"
+text = "Constitution:"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow3"]
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow3"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow3"]
 layout_mode = 2
 text = "3"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="StatRow4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox"]
+[node name="StatRow4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow4"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow4"]
 layout_mode = 2
-text = "Strength:"
+text = "Intelligence:"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow4"]
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow4"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow4"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow4"]
 layout_mode = 2
 text = "3"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="StatRow5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox"]
+[node name="StatRow5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow5"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow5"]
 layout_mode = 2
-text = "Strength:"
+text = "Wisdom:"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow5"]
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow5"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow5"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow5"]
 layout_mode = 2
 text = "3"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="StatRow6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox"]
+[node name="StatRow6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow6"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow6"]
 layout_mode = 2
-text = "Strength:"
+text = "Charisma:"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow6"]
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow6"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/StatBox/StatRow6"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow6"]
 layout_mode = 2
 text = "3"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Container" type="VSeparator" parent="MarginContainer/VBoxContainer/StatsLayout"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="InfoBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="InfoBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/InfoBox"]
+[node name="StatRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/InfoBox/StatRow"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow"]
+layout_mode = 2
+text = "Class:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow"]
+layout_mode = 2
+text = "Necromancer"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="StatRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow2"]
 layout_mode = 2
 text = "Title:"
 label_settings = ExtResource("5_n6d4a")
 
-[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/HBoxContainer/InfoBox/StatRow"]
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/InfoBox/StatRow"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow2"]
 layout_mode = 2
 text = "[Goblin Slayer]"
 label_settings = ExtResource("5_n6d4a")

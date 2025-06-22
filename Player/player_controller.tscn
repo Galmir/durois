@@ -1,7 +1,8 @@
 [gd_scene load_steps=19 format=4 uid="uid://cnp46bxhs5wct"]
 
 [ext_resource type="Script" uid="uid://cdes068lq8dfa" path="res://Player/PlayerController.cs" id="1_biqn8"]
-[ext_resource type="PackedScene" uid="uid://bitmakagex1s2" path="res://UI/system_message_ui.tscn" id="2_a1q1g"]
+[ext_resource type="Script" uid="uid://bpqfoplk286o0" path="res://Finite State Machine/FSM.cs" id="3_hur7u"]
+[ext_resource type="Script" uid="uid://bub7gfn817cff" path="res://Player/Idle.cs" id="4_fdr7o"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a1q1g"]
 height = 1.8
@@ -3446,9 +3447,6 @@ _data = {
 &"walking": SubResource("Animation_3ej3o")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_a1q1g"]
-viewport_path = NodePath("CameraMount/SpringArm3D/Camera3D/UIMount/Sprite3D/SubViewport")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qd61d"]
 shading_mode = 0
 albedo_color = Color(0.197085, 0.156534, 0.066784, 1)
@@ -3457,15 +3455,14 @@ albedo_color = Color(0.197085, 0.156534, 0.066784, 1)
 material = SubResource("StandardMaterial3D_qd61d")
 size = Vector3(1, 1, 0.14)
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("cameraMount", "UIMount", "animator", "visualAnchor")]
-collision_mask = 2
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("cameraMount", "UIMount", "animator", "visualAnchor", "FSM")]
+collision_mask = 6
 script = ExtResource("1_biqn8")
 cameraMount = NodePath("CameraMount")
-UIMount = NodePath("CameraMount/SpringArm3D/Camera3D/UIMount")
+UIMount = NodePath("")
 animator = NodePath("Visuals/mixamo_base/AnimationPlayer")
 visualAnchor = NodePath("Visuals")
-walkingSpeed = 3.5
-runningSpeed = 7.0
+FSM = NodePath("FSM")
 hasGravity = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -3965,33 +3962,16 @@ transform = Transform3D(1, 0, 0, 0, 0.999984, 0.0056374, 0, -0.0056374, 0.999984
 cull_mask = 524287
 fov = 37.8493
 
-[node name="UIMount" type="Node3D" parent="CameraMount/SpringArm3D/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.999984, -0.0056374, 0, 0.0056374, 0.999984, 0, -4.05312e-06, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="CameraMount/SpringArm3D/Camera3D/UIMount"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
-double_sided = false
-texture = SubResource("ViewportTexture_a1q1g")
-region_enabled = true
-region_rect = Rect2(0, 0, 1920, 1080)
-
-[node name="SubViewport" type="SubViewport" parent="CameraMount/SpringArm3D/Camera3D/UIMount/Sprite3D"]
-transparent_bg = true
-size = Vector2i(1920, 1080)
-size_2d_override_stretch = true
-
-[node name="SystemMessageUI" parent="CameraMount/SpringArm3D/Camera3D/UIMount/Sprite3D/SubViewport" instance=ExtResource("2_a1q1g")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -829.5
-offset_top = -386.0
-offset_right = 829.5
-offset_bottom = 386.0
-
 [node name="MinimapIcon" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.3282, 0, 0, 0, -1.20112e-07, 0.999999, 0, -2.74785, -4.37114e-08, 0, -0.0924823, 0)
 layers = 524288
 mesh = SubResource("PrismMesh_a1q1g")
+
+[node name="FSM" type="Node" parent="."]
+script = ExtResource("3_hur7u")
+
+[node name="Idle" type="Node" parent="FSM"]
+script = ExtResource("4_fdr7o")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.824613, 2.15207, -0.390067)

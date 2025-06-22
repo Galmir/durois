@@ -1,33 +1,17 @@
 using Godot;
 
-public partial class PlayerController : CharacterBody3D {
+public partial class PlayerController : EntityController {
     [ExportCategory("AssetDependencies")]
     [Export] private Node3D cameraMount;
-    [Export] private Node3D UIMount;
-    [Export] private AnimationPlayer animator;
-    [Export] private Node3D visualAnchor;
 
-    [ExportCategory("Movement Settings")]
-    [Export] private float walkingSpeed = 2;
-    [Export] private float runningSpeed = 5;
-    [Export] private int FallAcceleration { get; set; } = 75;
-    [Export] private bool hasGravity = false;
 
     [ExportCategory("Camera Settings")]
     [Export] private float LookAroundSpeed = 0.01f;
     [Export] private float mouseSensitivityH = 0.1f;
     [Export] private float mouseSensitivityV = 0.1f;
 
-    private Vector3 _targetVelocity = Vector3.Zero;
-    private float speed;
-    private string moveAnimation;
-    private bool isRunning = false;
-    private bool isLocked = false;
-    private Tween tween;
-
     public override void _Ready() {
         Input.MouseMode = Input.MouseModeEnum.Captured;
-        UIMount.Visible = false;
     }
 
     public override void _Input(InputEvent @event) {
@@ -48,23 +32,6 @@ public partial class PlayerController : CharacterBody3D {
             isLocked = true;
         }
 
-        if (Input.IsActionJustPressed("toggle_character_sheet")) {
-
-            if (UIMount.Visible == true) {
-                visualAnchor.Visible = true;
-
-                tween = CreateTween();
-                tween.TweenProperty(UIMount, "rotation", new Vector3(Mathf.DegToRad(90), 0, 0), 0.2).SetEase(Tween.EaseType.Out);
-                tween.TweenProperty(UIMount, "visible", false, 0.2);
-            }
-            else {
-                UIMount.Visible = true;
-
-                Tween tween = CreateTween();
-                tween.TweenProperty(UIMount, "rotation", new Vector3(0, 0, 0), 0.2).SetEase(Tween.EaseType.Out);
-                tween.TweenProperty(visualAnchor, "visible", false, 0.2);
-            }
-        }
 
         if (!IsOnFloor() && hasGravity) _targetVelocity.Y -= FallAcceleration * (float)delta;
 

@@ -1,8 +1,8 @@
 shader_type canvas_item;
 
-uniform float divide = 0.065;      
-uniform float blur = 0.385;        
-uniform float fade_width = 0.995;  
+uniform float divide = 0.065;
+uniform float blur = 0.385;
+uniform float fade_width = 0.995;
 
 void fragment() {
     float left_fade_edge = fade_width;

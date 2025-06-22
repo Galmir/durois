@@ -1,0 +1,163 @@
+[gd_scene load_steps=7 format=3 uid="uid://bt0jryjgb03ub"]
+
+[ext_resource type="Theme" uid="uid://b220khua4svym" path="res://UI/MainTheme.tres" id="1_6ymqh"]
+[ext_resource type="Script" uid="uid://c4uj20vxt43qv" path="res://Game Systems/Inventory and Crafting/UI/MerchantShopUi.cs" id="2_56aas"]
+[ext_resource type="Texture2D" uid="uid://bkv3tsydmqhsm" path="res://Assets/Placeholders/itemIcons/copper disk.png" id="3_3ime7"]
+[ext_resource type="PackedScene" uid="uid://cabfgsct1yvec" path="res://Game Systems/Inventory and Crafting/UI/ShopItemSlotUI.tscn" id="3_cdvx6"]
+[ext_resource type="Resource" uid="uid://xt400otw7t1w" path="res://Game Systems/Inventory and Crafting/TEST_SHOP_INV.tres" id="4_cdvx6"]
+[ext_resource type="Resource" uid="uid://cr7nogtueu8aj" path="res://Game Systems/Inventory and Crafting/TEST_PLAYER_INV.tres" id="5_fmhov"]
+
+[node name="MerchantShopUI" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -300.0
+offset_right = 313.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6ymqh")
+script = ExtResource("2_56aas")
+shopSlotUIscene = ExtResource("3_cdvx6")
+merchantInventory = ExtResource("4_cdvx6")
+PlayerInventory = ExtResource("5_fmhov")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Shop" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MerchantsInventory" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Shop"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MerchantNameLabel" type="Label" parent="MarginContainer/VBoxContainer/Shop/MerchantsInventory"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Potion Seller"
+horizontal_alignment = 1
+
+[node name="Scrolltainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Shop/MerchantsInventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MerchantInventoryGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/Shop/MerchantsInventory/Scrolltainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Shop/MerchantsInventory"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="MerchantGoldLabel" type="Label" parent="MarginContainer/VBoxContainer/Shop/MerchantsInventory/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "9999"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Shop/MerchantsInventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_3ime7")
+stretch_mode = 5
+
+[node name="TradingInventory" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Shop"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Trading" type="Label" parent="MarginContainer/VBoxContainer/Shop/TradingInventory"]
+layout_mode = 2
+text = "Trading"
+horizontal_alignment = 1
+
+[node name="Scrolltainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Shop/TradingInventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TradingInventoryGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/Shop/TradingInventory/Scrolltainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Shop/TradingInventory"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="TradingGoldLabel" type="Label" parent="MarginContainer/VBoxContainer/Shop/TradingInventory/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "9999"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Shop/TradingInventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_3ime7")
+stretch_mode = 5
+
+[node name="PlayerInventory" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerInventoryLabel" type="Label" parent="MarginContainer/VBoxContainer/Shop/PlayerInventory"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Your Items"
+horizontal_alignment = 1
+
+[node name="Scrolltainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Shop/PlayerInventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerInventoryGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/Shop/PlayerInventory/Scrolltainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Shop/PlayerInventory"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PlayerGoldLabel" type="Label" parent="MarginContainer/VBoxContainer/Shop/PlayerInventory/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "9999"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Shop/PlayerInventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_3ime7")
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AcceptButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Accept Offer"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit"
