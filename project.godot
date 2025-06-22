@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DuRoIs"
-run/main_scene="uid://dxmufnr6iputp"
+run/main_scene="uid://8l32gd5y1107"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -34,6 +34,8 @@ project/assembly_name="DuRoIs"
 [file_customization]
 
 folder_colors={
+"res://Assets/": "red",
+"res://Dungeon Generation/": "purple",
 "res://Game Mechanics/": "yellow",
 "res://UI/": "green"
 }

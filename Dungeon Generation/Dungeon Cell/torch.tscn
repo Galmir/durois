@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://3vwjlx6f6jhc"]
 
-[ext_resource type="Material" uid="uid://bqpod1plcuayt" path="res://Dungeon Generation/Materials/MetalTorch.tres" id="1_pa17o"]
-[ext_resource type="Material" uid="uid://d2l3ocb1g82nn" path="res://Dungeon Generation/Materials/LightEmission.tres" id="2_s1444"]
+[ext_resource type="Material" uid="uid://bqpod1plcuayt" path="res://Materials/MetalTorch.tres" id="1_pa17o"]
+[ext_resource type="Material" uid="uid://d2l3ocb1g82nn" path="res://Materials/LightEmission.tres" id="2_s1444"]
 [ext_resource type="AudioStream" uid="uid://cgtjnjky1ipai" path="res://Audio/fire.wav" id="3_w3qnr"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5w7kb"]
