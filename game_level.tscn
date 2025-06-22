@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://8l32gd5y1107"]
+
+[ext_resource type="PackedScene" uid="uid://dxmufnr6iputp" path="res://Dungeon Generation/dungeon_generator.tscn" id="1_df5pp"]
+[ext_resource type="Script" uid="uid://b3i50hh67ce12" path="res://LevelManager.cs" id="1_qsd0w"]
+[ext_resource type="PackedScene" uid="uid://7uqkmprr5qji" path="res://Minimap/Minimap.tscn" id="2_ibsu8"]
+[ext_resource type="AudioStream" uid="uid://b5li4wtkubtws" path="res://Audio/Music/ExplorationDemo.ogg" id="2_qsd0w"]
+
+[node name="GameLevel" type="Node3D" node_paths=PackedStringArray("dunGen")]
+script = ExtResource("1_qsd0w")
+BGM = ExtResource("2_qsd0w")
+dunGen = NodePath("DungeonGenerator")
+
+[node name="DungeonGenerator" parent="." instance=ExtResource("1_df5pp")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Minimap" parent="HUD" instance=ExtResource("2_ibsu8")]

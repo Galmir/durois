@@ -1,0 +1,330 @@
+[gd_scene load_steps=20 format=3 uid="uid://bitmakagex1s2"]
+
+[ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_bffuq"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_h1wpj"]
+[ext_resource type="Texture2D" uid="uid://wjx6425ooa8i" path="res://UI/Assets/ninePatchCorners.png" id="2_dv1kj"]
+[ext_resource type="Texture2D" uid="uid://cx8tvx748j1g" path="res://UI/Assets/uiTitleCrestTopHalf.png" id="3_2xelh"]
+[ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/TitleGradient.tres" id="3_52lxg"]
+[ext_resource type="Shader" uid="uid://bnywtlqr4e126" path="res://Shaders/UITransparency.gdshader" id="4_2wa0v"]
+[ext_resource type="Texture2D" uid="uid://cuuylbglmuoqw" path="res://UI/Assets/uiTitleCrestBottomHalf.png" id="4_o0okn"]
+[ext_resource type="LabelSettings" uid="uid://dfmyov8bcmrgh" path="res://UI/paragraphLabelSetting.tres" id="5_n6d4a"]
+[ext_resource type="Texture2D" uid="uid://bpj8wweehckx5" path="res://UI/Assets/uiTitleFrameTopHalf.png" id="7_2wa0v"]
+[ext_resource type="Texture2D" uid="uid://d0ggjydcknbrl" path="res://UI/Assets/uiTitleFrameBottomHalf.png" id="8_bffuq"]
+[ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/TitleLabelSetting.tres" id="10_bffuq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
+shader = ExtResource("1_bffuq")
+shader_parameter/mouse_position = Vector2(1.855, 1.765)
+shader_parameter/wave_color = Color(0, 0.180392, 0.745098, 1)
+shader_parameter/wave_transparency = 0.505
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rvugc"]
+shader = ExtResource("4_2wa0v")
+shader_parameter/divide = -0.105
+shader_parameter/blur = 0.55
+shader_parameter/fade_width = 0.92
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_52lxg"]
+gradient = ExtResource("3_52lxg")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52lxg"]
+texture = SubResource("GradientTexture2D_52lxg")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bffuq"]
+bg_color = Color(0, 0, 0, 0.25098)
+
+[sub_resource type="Gradient" id="Gradient_bffuq"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.538462, 1)
+colors = PackedColorArray(0.41132, 0.712213, 0.999999, 1, 1, 1, 1, 1, 0.41132, 0.712213, 0.999999, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rvugc"]
+gradient = SubResource("Gradient_bffuq")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pnb10"]
+texture = SubResource("GradientTexture2D_rvugc")
+
+[node name="SystemMessageUI" type="PanelContainer"]
+material = SubResource("ShaderMaterial_pnb10")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -303.5
+offset_right = 370.0
+offset_bottom = 303.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_h1wpj")
+
+[node name="CornerFrame" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_dv1kj")
+patch_margin_left = 150
+patch_margin_top = 150
+patch_margin_right = 150
+patch_margin_bottom = 150
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="TitleLayout" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("3_2xelh")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Title" type="PanelContainer" parent="MarginContainer/VBoxContainer/TitleLayout"]
+material = SubResource("ShaderMaterial_rvugc")
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_52lxg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TitleLayout/Title"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_o0okn")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+text = "STATUS"
+label_settings = ExtResource("10_bffuq")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("7_2wa0v")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+texture = ExtResource("8_bffuq")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="LevelLayout" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LevelJobLayout" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LevelLayout"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = -8
+alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/LevelLayout/LevelJobLayout"]
+layout_mode = 2
+text = "Level"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="LevelNumberLabel" type="Label" parent="MarginContainer/VBoxContainer/LevelLayout/LevelJobLayout"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "51"
+label_settings = ExtResource("10_bffuq")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/LevelLayout/LevelJobLayout"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/outline_size = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bffuq")
+theme_override_styles/fill = SubResource("StyleBoxTexture_pnb10")
+step = 1.0
+value = 50.0
+rounded = true
+show_percentage = false
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsLayout" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="StatBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow"]
+layout_mode = 2
+text = "Strength:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow"]
+layout_mode = 2
+text = "3"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="StatRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow2"]
+layout_mode = 2
+text = "Dexterity:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow2"]
+layout_mode = 2
+text = "3"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="StatRow3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow3"]
+layout_mode = 2
+text = "Constitution:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow3"]
+layout_mode = 2
+text = "3"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="StatRow4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow4"]
+layout_mode = 2
+text = "Intelligence:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow4"]
+layout_mode = 2
+text = "3"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="StatRow5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow5"]
+layout_mode = 2
+text = "Wisdom:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow5"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow5"]
+layout_mode = 2
+text = "3"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="StatRow6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow6"]
+layout_mode = 2
+text = "Charisma:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow6"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/StatBox/StatRow6"]
+layout_mode = 2
+text = "3"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="VSeparator" parent="MarginContainer/VBoxContainer/StatsLayout"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="InfoBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow"]
+layout_mode = 2
+text = "Class:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow"]
+layout_mode = 2
+text = "Necromancer"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="StatRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow2"]
+layout_mode = 2
+text = "Title:"
+label_settings = ExtResource("5_n6d4a")
+
+[node name="Container" type="Container" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/StatsLayout/InfoBox/StatRow2"]
+layout_mode = 2
+text = "[Goblin Slayer]"
+label_settings = ExtResource("5_n6d4a")

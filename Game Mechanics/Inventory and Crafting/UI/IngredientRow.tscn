@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyxuhidcsjojg"]
+
+[ext_resource type="Script" uid="uid://7ks5vggtvc7n" path="res://Game Systems/Inventory and Crafting/UI/IngredientRowUI.cs" id="1_04de8"]
+[ext_resource type="Theme" uid="uid://b220khua4svym" path="res://UI/MainTheme.tres" id="1_c6vk1"]
+[ext_resource type="Texture2D" uid="uid://up1kuestcwn5" path="res://Assets/Placeholders/itemIcons/iron bar.png" id="1_y523h"]
+[ext_resource type="StyleBox" uid="uid://d4gjodghpqjpy" path="res://UI/light_blue_panel.tres" id="2_u3u1l"]
+
+[node name="IngredientRowPanel" type="PanelContainer" node_paths=PackedStringArray("ingredientIcon", "ingredientNameLabel", "amountLabel")]
+offset_left = 268.0
+offset_right = 276.0
+offset_bottom = 16.0
+theme_override_styles/panel = ExtResource("2_u3u1l")
+script = ExtResource("1_04de8")
+ingredientIcon = NodePath("IngredientRow/IngredientIcon")
+ingredientNameLabel = NodePath("IngredientRow/IngredientNameLabel")
+amountLabel = NodePath("IngredientRow/IngredientAmountLabel")
+
+[node name="IngredientRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_c6vk1")
+
+[node name="IngredientIcon" type="TextureRect" parent="IngredientRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_y523h")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="IngredientNameLabel" type="Label" parent="IngredientRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Iron Ingot"
+
+[node name="IngredientAmountLabel" type="Label" parent="IngredientRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+text = "1 / 1"

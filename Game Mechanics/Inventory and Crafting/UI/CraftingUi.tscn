@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://cj3utsg07oysb"]
+
+[ext_resource type="Theme" uid="uid://b220khua4svym" path="res://UI/MainTheme.tres" id="1_k7ri1"]
+[ext_resource type="Texture2D" uid="uid://ict1jt3it7gv" path="res://Assets/Placeholders/itemIcons/iron axe.png" id="2_k7ri1"]
+[ext_resource type="Script" uid="uid://cdmuo1rp5qmdd" path="res://Game Systems/Inventory and Crafting/UI/CraftingUI.cs" id="2_t2sbq"]
+[ext_resource type="PackedScene" uid="uid://cenh3pgkafiip" path="res://Game Systems/Inventory and Crafting/UI/RecipeRowButton.tscn" id="3_nd466"]
+[ext_resource type="PackedScene" uid="uid://cyxuhidcsjojg" path="res://Game Systems/Inventory and Crafting/UI/IngredientRow.tscn" id="4_t2sbq"]
+[ext_resource type="StyleBox" uid="uid://c1f2pntnyruam" path="res://UI/BasicPanelStyle.tres" id="6_vdj56"]
+
+[node name="CraftingUI" type="PanelContainer"]
+custom_minimum_size = Vector2(1080, 700)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -349.0
+offset_right = 540.0
+offset_bottom = 351.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_k7ri1")
+script = ExtResource("2_t2sbq")
+ingredientRow = ExtResource("4_t2sbq")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="MainAreaContainer" type="HBoxContainer" parent="Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecipeListScrollContainer" type="ScrollContainer" parent="Margin/VBoxContainer/MainAreaContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="RecipeListVbox" type="VBoxContainer" parent="Margin/VBoxContainer/MainAreaContainer/RecipeListScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RecipeRowButton" parent="Margin/VBoxContainer/MainAreaContainer/RecipeListScrollContainer/RecipeListVbox" instance=ExtResource("3_nd466")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/MainAreaContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RecipeNameLabel" type="Label" parent="Margin/VBoxContainer/MainAreaContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "recipe name"
+horizontal_alignment = 1
+
+[node name="RecipeIconImage" type="TextureRect" parent="Margin/VBoxContainer/MainAreaContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_k7ri1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RecipeDescription" type="RichTextLabel" parent="Margin/VBoxContainer/MainAreaContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "a long description of the recipe"
+fit_content = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Margin/VBoxContainer/MainAreaContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("6_vdj56")
+
+[node name="IngredientList" type="VBoxContainer" parent="Margin/VBoxContainer/MainAreaContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="IngredientRow" parent="Margin/VBoxContainer/MainAreaContainer/VBoxContainer/PanelContainer/IngredientList" instance=ExtResource("4_t2sbq")]
+layout_mode = 2
+
+[node name="CraftItemButton" type="Button" parent="Margin/VBoxContainer/MainAreaContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Craft"

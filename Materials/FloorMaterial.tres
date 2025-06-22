@@ -1,0 +1,33 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://yve1dptccnl7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uqc7s"]
+load_path = "res://.godot/imported/monastery_stone_floor_diff_1k.png-0ef5c4e9038284b76f515c3fced2110a.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nggy7"]
+load_path = "res://.godot/imported/monastery_stone_floor_arm_1k.png-e669ed400c3396f0025a7d67d7975813.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c2nj4"]
+load_path = "res://.godot/imported/monastery_stone_floor_disp_1k.png-20ef92a5095f2638ccbd856bcb17c365.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4mf3v"]
+load_path = "res://.godot/imported/monastery_stone_floor_nor_gl_1k.png-d3fa24b6a4e044d3dcc011df03a0997a.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lsyt7"]
+load_path = "res://.godot/imported/monastery_stone_floor_rough_1k.png-960cdd57ad5c69f4e5997eb5d385d0cf.s3tc.ctex"
+
+[resource]
+albedo_texture = SubResource("CompressedTexture2D_uqc7s")
+metallic = 1.0
+metallic_texture = SubResource("CompressedTexture2D_nggy7")
+metallic_texture_channel = 2
+roughness_texture = SubResource("CompressedTexture2D_nggy7")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_4mf3v")
+ao_enabled = true
+ao_texture = SubResource("CompressedTexture2D_nggy7")
+heightmap_enabled = true
+heightmap_texture = SubResource("CompressedTexture2D_c2nj4")
+subsurf_scatter_enabled = true
+subsurf_scatter_texture = SubResource("CompressedTexture2D_lsyt7")
+uv1_scale = Vector3(0.3, 0.3, 0.3)

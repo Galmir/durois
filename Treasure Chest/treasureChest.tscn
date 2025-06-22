@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://qx270dvsirlu"]
+
+[ext_resource type="PackedScene" uid="uid://ov80elg0gfqd" path="res://Treasure Chest/TreaureChest.glb" id="1_wkhtl"]
+[ext_resource type="Material" uid="uid://bqpod1plcuayt" path="res://Materials/MetalTorch.tres" id="2_3iof2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x2d1t"]
+
+[node name="Node3D" type="StaticBody3D"]
+
+[node name="TreaureChest" parent="." instance=ExtResource("1_wkhtl")]
+
+[node name="Cube" parent="TreaureChest" index="0"]
+material_overlay = ExtResource("2_3iof2")
+
+[node name="Cube_001" parent="TreaureChest" index="1"]
+surface_material_override/0 = ExtResource("2_3iof2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+shape = SubResource("BoxShape3D_x2d1t")
+
+[editable path="TreaureChest"]
