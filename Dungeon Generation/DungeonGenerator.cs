@@ -43,6 +43,8 @@ public partial class DungeonGenerator : Node3D {
     private Vector3I entrancePosition;
     private int currentFloor;
 
+    public Action<PlayerController> PlayerPlaced;
+
 
     public void GenerateDungeon() {
         gridMap.Clear();
@@ -326,6 +328,8 @@ public partial class DungeonGenerator : Node3D {
                 playerInstance = playerScene.Instantiate<PlayerController>();
                 AddChild(playerInstance);
                 playerInstance.GlobalPosition = newCell.GlobalPosition + Vector3.Up;
+                enemiesAndLootMap.SetCellItem(cellPosition, Rules.Instance.TileDict[Rules.Tiles.Entrance]);
+                PlayerPlaced?.Invoke(playerInstance);
             }
 
             if (gridMap.GetCellItem(cellPosition + Vector3I.Left) >= 0) newCell.RemoveWall(DungeonCell.Directions.West);

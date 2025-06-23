@@ -3455,13 +3455,12 @@ albedo_color = Color(0.197085, 0.156534, 0.066784, 1)
 material = SubResource("StandardMaterial3D_qd61d")
 size = Vector3(1, 1, 0.14)
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("cameraMount", "animator", "visualAnchor", "FSM")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("cameraMount", "animator", "visualAnchor") groups=["Player"]]
 collision_mask = 6
 script = ExtResource("1_biqn8")
 cameraMount = NodePath("CameraMount")
 animator = NodePath("Visuals/mixamo_base/AnimationPlayer")
 visualAnchor = NodePath("Visuals")
-FSM = NodePath("FSM")
 hasGravity = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

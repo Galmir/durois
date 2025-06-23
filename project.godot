@@ -40,6 +40,11 @@ folder_colors={
 "res://UI/": "green"
 }
 
+[global_group]
+
+Player=""
+Enemy=""
+
 [input]
 
 move_forward={

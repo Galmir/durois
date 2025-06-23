@@ -4,7 +4,6 @@ public partial class EntityController : CharacterBody3D {
     [ExportCategory("AssetDependencies")]
     [Export] public AnimationPlayer animator;
     [Export] public Node3D visualAnchor;
-    [Export] public Node FSM;
 
     [ExportCategory("Movement Settings")]
     [Export] public float walkingSpeed = 2;
