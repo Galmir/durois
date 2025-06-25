@@ -4,3 +4,4 @@
 
 [node name="DungeonGenerator" type="Node3D"]
 script = ExtResource("1_667dc")
+roomMargin = 2

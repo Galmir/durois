@@ -17,6 +17,13 @@ public partial class Rules : Node {
         Loot
     }
 
+    public enum CardinalDirections {
+        N,
+        S,
+        W,
+        E
+    }
+
     public Dictionary<Tiles, int> TileDict = new Dictionary<Tiles, int>() {
         {Tiles.Floor, 0},
         { Tiles.Hallway, 1},

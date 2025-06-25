@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://5xpeio5jr73l"]
+
+[ext_resource type="Script" uid="uid://bkj8cxj1jpgql" path="res://Player/Interaction/InteractRay.cs" id="1_1wkas"]
+
+[node name="RayCast3D" type="RayCast3D" node_paths=PackedStringArray("prompt")]
+target_position = Vector3(0, 0, -4)
+collision_mask = 10
+script = ExtResource("1_1wkas")
+prompt = NodePath("CanvasLayer/Label")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 60.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "awdwadwadwa
+[E]"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

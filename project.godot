@@ -88,4 +88,5 @@ toggle_character_sheet={
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Stone"
 3d_physics/layer_3="Enemies"
+3d_physics/layer_4="Doors"
 3d_physics/layer_20="Minimap"

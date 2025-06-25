@@ -248,12 +248,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_eb5qy")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g506w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0hiv"]
 shading_mode = 0
 albedo_color = Color(0.742307, 0.557455, 0.311913, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_g506w"]
-material = SubResource("StandardMaterial3D_g506w")
+material = SubResource("StandardMaterial3D_q0hiv")
 size = Vector2(6, 6)
 
 [node name="DungeonCell" type="Node3D" node_paths=PackedStringArray("wallN", "wallW", "wallS", "wallE", "MiniMapTile")]
