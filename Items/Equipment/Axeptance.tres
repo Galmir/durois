@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://brpw780jrxlao"]
+
+[ext_resource type="Script" uid="uid://dvus5u4fbbcox" path="res://Game Mechanics/Inventory and Crafting/Scripts/WeaponItem.cs" id="1_5ubil"]
+[ext_resource type="Texture2D" uid="uid://capbdej8iqtt5" path="res://Game Mechanics/Inventory and Crafting/itemPlaceholder.png" id="1_tp63d"]
+[ext_resource type="Script" uid="uid://u0oesdofemoe" path="res://Game Mechanics/Combat and Stats/DamageData.cs" id="2_dpc51"]
+
+[sub_resource type="Resource" id="Resource_ky0vs"]
+script = ExtResource("2_dpc51")
+DamageType = 0
+Amount = 10.0
+Variance = 20.0
+AilmentType = 0
+AilmentAmount = 10
+metadata/_custom_type_script = "uid://u0oesdofemoe"
+
+[resource]
+script = ExtResource("1_5ubil")
+WeaponDamage = Array[Object]([SubResource("Resource_ky0vs")])
+AttackSpeedMultiplier = 1.0
+sockets = 0
+SocketedGems = null
+GearStats = null
+BonusHealth = 0
+BonusHealthRegen = 0.0
+Name = "Axeptance"
+LoreDescription = "Once upon a time, murd."
+Icon = ExtResource("1_tp63d")
+GoldValue = 10
+IsStackable = false
+FilterTags = Array[int]([3])
+ItemRarity = 2
+metadata/_custom_type_script = "uid://dvus5u4fbbcox"

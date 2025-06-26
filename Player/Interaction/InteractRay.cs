@@ -11,7 +11,9 @@ public partial class InteractRay : RayCast3D {
             var collider = GetCollider();
             if (collider is Interactable) {
                 Interactable iCollider = (Interactable)collider;
-                prompt.Text = "" + iCollider.promptMessage;
+                prompt.Text = iCollider.promptMessage + " [E]";
+
+                if (Input.IsActionJustPressed("interact")) iCollider.Interact((Node3D)Owner);
             }
         }
     }

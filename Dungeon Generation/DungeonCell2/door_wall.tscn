@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cvn4ttlltr4s7" path="res://Dungeon Generation/DungeonCell2/DungeonCell2_medieval_wood_diff_1k.png" id="3_qrvrs"]
 [ext_resource type="Script" uid="uid://bbgoac6kt1u1d" path="res://Dungeon Generation/DungeonCell2/DoorWall.cs" id="3_susmm"]
 [ext_resource type="Texture2D" uid="uid://cgktuxn5yimaa" path="res://Dungeon Generation/DungeonCell2/DungeonCell2_medieval_wood_bump_1k.png" id="4_368ce"]
-[ext_resource type="Script" uid="uid://ca3dup77mhjqv" path="res://Player/Interaction/Interactable.cs" id="4_s6cm3"]
+[ext_resource type="Script" uid="uid://8jahwap1nruv" path="res://Dungeon Generation/DungeonCell2/DoorInteract.cs" id="4_s6cm3"]
 [ext_resource type="Texture2D" uid="uid://cp1epksjxkuts" path="res://Dungeon Generation/DungeonCell2/DungeonCell2_rust_coarse_01_diff_1k.png" id="5_h5tfm"]
 [ext_resource type="Texture2D" uid="uid://t5bwu30qukk6" path="res://Dungeon Generation/DungeonCell2/DungeonCell2_rust_coarse_01_nor_gl_1k.png" id="6_6pshj"]
 [ext_resource type="Texture2D" uid="uid://detvctg26jjmr" path="res://Dungeon Generation/DungeonCell2/DungeonCell2_medieval_wood_bump_1k_14.png" id="7_mjsws"]
@@ -233,16 +233,16 @@ promptMessage = "Open Door"
 shape = SubResource("ConvexPolygonShape3D_nu8jj")
 
 [node name="DoorLeft" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.96388, 1.50996e-07, -6.60024e-15, 0, -4.37114e-08, -1, -1.45542e-07, -1, 4.37114e-08, -1.90197, 0, -3)
+transform = Transform3D(-1, 1.50996e-07, -6.60024e-15, 0, -4.37114e-08, -1, -1.50996e-07, -1, 4.37114e-08, -1.94424, 0, -3)
 mesh = SubResource("ArrayMesh_l3m78")
 skeleton = NodePath("")
 
 [node name="DoorRight" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.96388, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.90225, 0, -3)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.93616, 0, -3)
 mesh = SubResource("ArrayMesh_fiw58")
 skeleton = NodePath("")
 
 [node name="MinimapTile" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.457107, -0.457107, -3.09086e-08, 0, -2.82571e-08, 1, -0.457107, -0.457107, -3.09086e-08, 0, -0.100096, -2.89538)
+transform = Transform3D(0.457107, -0.457107, -3.09086e-08, 0, -2.82571e-08, 1, -0.457107, -0.457107, -3.09086e-08, 0, -1.63992, -2.89538)
 layers = 524288
 mesh = SubResource("QuadMesh_s6cm3")

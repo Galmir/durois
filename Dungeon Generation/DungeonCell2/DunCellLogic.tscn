@@ -300,12 +300,16 @@ columnNW = NodePath("ColumnNW")
 columnSE = NodePath("ColumnSE")
 columnSW = NodePath("ColumnSW")
 doorWall = NodePath("DoorWall")
+chanceToKeepTorches = 10
 
 [node name="WallN" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.05, 3, 0)
 layers = 2
 mesh = SubResource("ArrayMesh_l5fn6")
 skeleton = NodePath("")
+
+[node name="Torch" parent="WallN" instance=ExtResource("8_nd7lm")]
+transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.3411e-07, -3.04904, 2.38419e-07)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallN"]
 collision_layer = 2
@@ -314,14 +318,14 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallN/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_g5r2w")
 
-[node name="Torch" parent="WallN" instance=ExtResource("8_nd7lm")]
-transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.33451e-07, -3.04904, 2.38419e-07)
-
 [node name="WallS" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, 0, 0, -1, -8.74228e-08, -1, 0, 0, 3, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, 0, 0, -1, -8.74228e-08, -1, 0, 0, 3, -0.05)
 layers = 2
 mesh = SubResource("ArrayMesh_l5fn6")
 skeleton = NodePath("")
+
+[node name="Torch" parent="WallS" instance=ExtResource("8_nd7lm")]
+transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.33451e-07, -3.05299, 2.38419e-07)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallS"]
 collision_layer = 2
@@ -330,14 +334,14 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallS/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_nd7lm")
 
-[node name="Torch" parent="WallS" instance=ExtResource("8_nd7lm")]
-transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.33451e-07, -3.05299, 2.38419e-07)
-
 [node name="WallW" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 3, 0)
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0.05, 3, 0)
 layers = 2
 mesh = SubResource("ArrayMesh_l5fn6")
 skeleton = NodePath("")
+
+[node name="Torch" parent="WallW" instance=ExtResource("8_nd7lm")]
+transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.33451e-07, -3.05299, 2.38419e-07)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallW"]
 collision_layer = 2
@@ -346,14 +350,14 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallW/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ckldn")
 
-[node name="Torch" parent="WallW" instance=ExtResource("8_nd7lm")]
-transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.33451e-07, -3.05299, 2.38419e-07)
-
 [node name="WallE" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 0, 0, -1, 1, -4.37114e-08, 0, 0, 3, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 0, 0, -1, 1, -4.37114e-08, 0, 0, 3, 0.05)
 layers = 2
 mesh = SubResource("ArrayMesh_l5fn6")
 skeleton = NodePath("")
+
+[node name="Torch" parent="WallE" instance=ExtResource("8_nd7lm")]
+transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.3411e-07, -3.05299, 2.38419e-07)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallE"]
 collision_layer = 2
@@ -361,9 +365,6 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallE/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_xvuml")
-
-[node name="Torch" parent="WallE" instance=ExtResource("8_nd7lm")]
-transform = Transform3D(-1, 1.04989e-07, 4.00264e-08, -7.88438e-08, -0.401868, -0.915698, -8.00528e-08, -0.915698, 0.401868, 1.33451e-07, -3.05299, 2.38419e-07)
 
 [node name="ColumnNE" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -434,7 +435,6 @@ shape = SubResource("ConvexPolygonShape3D_c1rlt")
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -5.6426e-07, 0, 5.6426e-07, -1, 0, 0, 0, 1, 0, 12, 0)
-visible = false
 mesh = SubResource("ArrayMesh_nsvt4")
 skeleton = NodePath("")
 

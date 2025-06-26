@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bkj8cxj1jpgql" path="res://Player/Interaction/InteractRay.cs" id="1_1wkas"]
 
-[node name="RayCast3D" type="RayCast3D" node_paths=PackedStringArray("prompt")]
+[node name="InteractRay" type="RayCast3D" node_paths=PackedStringArray("prompt")]
 target_position = Vector3(0, 0, -4)
 collision_mask = 10
 script = ExtResource("1_1wkas")

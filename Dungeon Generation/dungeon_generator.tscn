@@ -4,4 +4,6 @@
 
 [node name="DungeonGenerator" type="Node3D"]
 script = ExtResource("1_667dc")
+customSeed = "3851001905"
+debugSeed = 3851001905
 roomMargin = 2
