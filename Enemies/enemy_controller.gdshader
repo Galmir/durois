@@ -35,7 +35,7 @@ void fragment() {
 	vec4 n3 = texture(_NoiseTex, vec2(SCREEN_UV.x* (_Scale * 2.0) + speedx, SCREEN_UV.y * (_Scale * 2.0) + speedy));
 	// combined
 	float combinedNoise = (n.r * n2.r * 2.0) * n3.r * 2.0;
-	
+
 	float rims = pow(saturate(dot(VIEW, NORMAL)), _RimPower2); // calculate inverted rim based on view and normal
 	vec4 rim = vec4(rims);
 	rim -= combinedNoise; // subtract noise texture
@@ -44,9 +44,9 @@ void fragment() {
 	vec4 extraRim = (saturate((_Edge + rim.a) * _Opacity) - texturedRim) * _Brightness;// extra edge, subtracting the textured rim
 	vec4 result = (_ColorAura * texturedRim) + (_ColorRim * extraRim);// combine both with colors
 	float fade = saturate((VERTEX.y + _OffsetFade) * 2.0);
-	
+
 	result *= fade;
-	
+
 	EMISSION = vec3(result.r, result.g, result.b);
 	ALPHA = result.a;
 }

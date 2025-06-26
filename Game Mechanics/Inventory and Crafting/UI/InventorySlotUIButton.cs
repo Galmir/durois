@@ -4,14 +4,12 @@ using Godot;
 public partial class InventorySlotUIButton : Button {
 
     private InventorySlot _slotToShow;
-
-    [Export]
     public InventorySlot SlotToShow {
         get { return _slotToShow; }
         set {
             _slotToShow = value;
             Amount.Visible = false;
-            this.Icon = _slotToShow.Item.Icon;
+            itemIcon.Texture = _slotToShow.Item.Icon;
             Amount.Text = _slotToShow.Amount.ToString();
             if (_slotToShow.Item.IsStackable) {
                 Amount.Visible = true;
@@ -20,6 +18,8 @@ public partial class InventorySlotUIButton : Button {
     }
 
     [Export] public Label Amount;
+    [Export] private PanelContainer rarityBG;
+    [Export] private TextureRect itemIcon;
 
     [Signal]
     public delegate void ItemSelectedEventHandler(InventoryItem item);

@@ -7,26 +7,29 @@ public partial class Rules : Node {
 
     public enum Tiles {
         Floor,
-        Hallway,
         Door,
-        Border,
-        Wall,
+        Hallway,
         Entrance,
         Exit,
         Enemy,
         Loot
     }
 
+    public enum CardinalDirections {
+        N,
+        S,
+        W,
+        E
+    }
+
     public Dictionary<Tiles, int> TileDict = new Dictionary<Tiles, int>() {
         {Tiles.Floor, 0},
-        { Tiles.Hallway, 1},
-        { Tiles.Door, 2},
-        { Tiles.Border, 3},
-        { Tiles.Wall, 4},
-        { Tiles.Entrance, 5},
-        { Tiles.Exit, 6},
-        { Tiles.Enemy, 7},
-        { Tiles.Loot, 8}
+        { Tiles.Door, 1},
+        { Tiles.Hallway, 2},
+        { Tiles.Entrance, 3},
+        { Tiles.Exit, 4},
+        { Tiles.Enemy, 5},
+        { Tiles.Loot, 6}
     };
 
     public enum DamageTypes {
@@ -58,19 +61,19 @@ public partial class Rules : Node {
     }
 
     public enum ItemRarities {
-        COMMON,
-        UNCOMMON,
-        RARE,
-        EPIC,
-        LEGENDARY
+        Common,
+        Uncommon,
+        Rare,
+        Epic,
+        legendary
     }
 
     public static Dictionary<ItemRarities, Color> RarityColors = new Dictionary<ItemRarities, Color>{
-        {ItemRarities.COMMON,GameConstants.RarityCommonColor },
-        {ItemRarities.UNCOMMON,GameConstants.RarityUncommonColor },
-        {ItemRarities.RARE,GameConstants.RarityRareColor },
-        {ItemRarities.EPIC,GameConstants.RarityEpicColor },
-        {ItemRarities.LEGENDARY,GameConstants.RarityLegendaryColor }
+        {ItemRarities.Common,GameConstants.RarityCommonColor },
+        {ItemRarities.Uncommon,GameConstants.RarityUncommonColor },
+        {ItemRarities.Rare,GameConstants.RarityRareColor },
+        {ItemRarities.Epic,GameConstants.RarityEpicColor },
+        {ItemRarities.legendary,GameConstants.RarityLegendaryColor }
     };
 
     public enum Attributes {

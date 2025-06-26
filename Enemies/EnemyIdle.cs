@@ -1,21 +1,11 @@
 using Godot;
 
-public partial class EnemyIdle : State {
+public partial class EnemyIdle : StateAI {
     private Area3D detectionArea;
     private bool _enemyEntered = false;
 
 
-    private bool enemyEntered {
-        get {
-            return _enemyEntered;
-        }
-        set {
-            _enemyEntered = value;
-        }
-    }
-
     public override void _Ready() {
-        enemyEntered = false;
         base._Ready();
         detectionArea = GetNode<Area3D>("%DetectionArea");
         detectionArea.BodyEntered += SetTarget;
@@ -25,6 +15,9 @@ public partial class EnemyIdle : State {
     public override void Enter() {
         base.Enter();
         animPlayer.Play("idle");
+        parentEntity._targetVelocity = Vector3.Zero;
+        parentEntity.speed = 0;
+        foreach (Node3D body in detectionArea.GetOverlappingBodies()) SetTarget(body);
     }
 
 
@@ -33,11 +26,8 @@ public partial class EnemyIdle : State {
     }
 
 
-    public override void HandleInput(InputEvent @event) {
-    }
-
     public void SetTarget(Node3D target) {
-        if (target is CharacterBody3D) {
+        if (target.IsInGroup("Player")) {
             parentEntity.targetEntity = (CharacterBody3D)target;
             parentFSM.ChangeState("Follow");
         }

@@ -1,8 +1,11 @@
-[gd_scene load_steps=19 format=4 uid="uid://cnp46bxhs5wct"]
+[gd_scene load_steps=22 format=4 uid="uid://cnp46bxhs5wct"]
 
 [ext_resource type="Script" uid="uid://cdes068lq8dfa" path="res://Player/PlayerController.cs" id="1_biqn8"]
+[ext_resource type="PackedScene" uid="uid://5xpeio5jr73l" path="res://Player/Interaction/InteractRay.tscn" id="2_hur7u"]
 [ext_resource type="Script" uid="uid://bpqfoplk286o0" path="res://Finite State Machine/FSM.cs" id="3_hur7u"]
 [ext_resource type="Script" uid="uid://bub7gfn817cff" path="res://Player/Idle.cs" id="4_fdr7o"]
+[ext_resource type="Texture2D" uid="uid://c43utsytx4nmp" path="res://Player/Interaction/crosshair.png" id="4_hur7u"]
+[ext_resource type="Script" uid="uid://d2lutds00yup" path="res://Player/HealthComponent.cs" id="6_ab3ww"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a1q1g"]
 height = 1.8
@@ -3455,13 +3458,12 @@ albedo_color = Color(0.197085, 0.156534, 0.066784, 1)
 material = SubResource("StandardMaterial3D_qd61d")
 size = Vector3(1, 1, 0.14)
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("cameraMount", "animator", "visualAnchor", "FSM")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("cameraMount", "animator", "visualAnchor") groups=["Player"]]
 collision_mask = 6
 script = ExtResource("1_biqn8")
 cameraMount = NodePath("CameraMount")
 animator = NodePath("Visuals/mixamo_base/AnimationPlayer")
 visualAnchor = NodePath("Visuals")
-FSM = NodePath("FSM")
 hasGravity = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -3961,6 +3963,8 @@ transform = Transform3D(1, 0, 0, 0, 0.999984, 0.0056374, 0, -0.0056374, 0.999984
 cull_mask = 524287
 fov = 37.8493
 
+[node name="InteractRay" parent="CameraMount" instance=ExtResource("2_hur7u")]
+
 [node name="MinimapIcon" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.3282, 0, 0, 0, -1.20112e-07, 0.999999, 0, -2.74785, -4.37114e-08, 0, -0.0924823, 0)
 layers = 524288
@@ -3974,3 +3978,24 @@ script = ExtResource("4_fdr7o")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.824613, 2.15207, -0.390067)
+light_color = Color(0.72549, 0.670588, 0, 1)
+omni_range = 16.276
+
+[node name="Aiming" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Aiming"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -44.0
+offset_right = 45.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hur7u")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("6_ab3ww")

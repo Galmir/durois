@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3adli571njcv"]
+[gd_scene load_steps=11 format=3 uid="uid://d3adli571njcv"]
 
-[ext_resource type="Theme" uid="uid://b220khua4svym" path="res://UI/MainTheme.tres" id="1_6ror8"]
-[ext_resource type="Texture2D" uid="uid://ict1jt3it7gv" path="res://Assets/Placeholders/itemIcons/iron axe.png" id="2_phq73"]
-[ext_resource type="Script" uid="uid://dtia8v1dk1uxd" path="res://Game Systems/Inventory and Crafting/UI/InventorySlotUIButton.cs" id="3_mtah1"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_msxtn"]
+[ext_resource type="Texture2D" uid="uid://capbdej8iqtt5" path="res://Game Mechanics/Inventory and Crafting/itemPlaceholder.png" id="2_0cbrl"]
+[ext_resource type="StyleBox" uid="uid://ctfyq3g3cxid4" path="res://UI/RarityCommonBG.tres" id="3_ar6jg"]
+[ext_resource type="Script" uid="uid://dtia8v1dk1uxd" path="res://Game Mechanics/Inventory and Crafting/UI/InventorySlotUIButton.cs" id="3_mtah1"]
+[ext_resource type="LabelSettings" uid="uid://bhy3m7yfstlp6" path="res://UI/itemCounterLabelSetting.tres" id="4_rxrn7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upe5r"]
 bg_color = Color(0.194349, 0.194349, 0.194349, 1)
@@ -14,8 +16,19 @@ border_color = Color(7.70092e-07, 0.430153, 0.436122, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6orpj"]
 bg_color = Color(0.099986, 0.099986, 0.099986, 1)
 
-[node name="InventorySlotUIButton" type="Button"]
-custom_minimum_size = Vector2(50, 50)
+[sub_resource type="Gradient" id="Gradient_stiq4"]
+colors = PackedColorArray(0.144063, 0.144063, 0.144063, 1, 0.758192, 0.758192, 0.758192, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0cbrl"]
+gradient = SubResource("Gradient_stiq4")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_msxtn"]
+texture = SubResource("GradientTexture2D_0cbrl")
+
+[node name="InventorySlotUIButton" type="Button" node_paths=PackedStringArray("Amount")]
+custom_minimum_size = Vector2(64, 64)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -27,28 +40,47 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_6ror8")
+theme = ExtResource("1_msxtn")
 theme_override_styles/focus = SubResource("StyleBoxFlat_upe5r")
 theme_override_styles/hover = SubResource("StyleBoxFlat_upe5r")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6orpj")
-icon = ExtResource("2_phq73")
 icon_alignment = 1
 script = ExtResource("3_mtah1")
+Amount = NodePath("PanelContainer/MarginContainer/RarityBG/ItemAmountLabel")
 
-[node name="ItemAmountLabel" type="Label" parent="."]
-unique_name_in_owner = true
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -38.0
-offset_top = -23.0
-offset_right = -5.0
-grow_horizontal = 0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_msxtn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RarityBG" type="PanelContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ar6jg")
+
+[node name="ItemAmountLabel" type="Label" parent="PanelContainer/MarginContainer/RarityBG"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 text = "99"
+label_settings = ExtResource("4_rxrn7")
 horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/RarityBG"]
+layout_mode = 2
+texture = ExtResource("2_0cbrl")
+expand_mode = 1
+stretch_mode = 5
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
