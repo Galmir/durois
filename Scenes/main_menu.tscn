@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://sotng74kf113"]
+
+[ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_48xlc"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="2_1ehe0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
+shader = ExtResource("1_48xlc")
+shader_parameter/mouse_position = Vector2(1.855, 1.765)
+shader_parameter/wave_color = Color(0, 0.180392, 0.745098, 1)
+shader_parameter/wave_transparency = 0.505
+
+[node name="MainMenu" type="PanelContainer"]
+material = SubResource("ShaderMaterial_pnb10")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_1ehe0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "New Game"
+
+[node name="Load Game" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Load Game"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
