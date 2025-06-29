@@ -1,15 +1,17 @@
 using Godot;
 
 public partial class InventoryUI : Control {
-    [Export] public PackedScene InvSlotUIScene;
-    private GridContainer inventoryGrid;
-    private Label itemName;
-    private TextureRect itemIcon;
-    private RichTextLabel itemDescription;
-    private Label goldAmountLabel;
-    private Button weaponFilterButton;
-    private Button equipButton;
+    [ExportCategory("Assets dependency")]
+    [Export] private GridContainer inventoryGrid;
+    [Export] private Label itemName;
+    [Export] private TextureRect itemIcon;
+    [Export] private RichTextLabel itemDescription;
+    [Export] private Label goldAmountLabel;
+    [Export] private Button weaponFilterButton;
+    [Export] private Button equipButton;
+
     private InventoryItem selectedItem;
+    private PackedScene InvSlotUIScene = GD.Load<PackedScene>("uid://d3adli571njcv");
 
 
     public override void _Ready() {

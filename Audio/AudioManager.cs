@@ -9,12 +9,20 @@ public enum AudioType {
 public partial class AudioManager : Node {
     private float audioRange = 0.2f;
     private List<AudioStreamPlayer> children = [];
-    public static AudioManager Instance;
+
+    private static AudioManager _instance;
+    public static AudioManager Instance => _instance;
 
     public override void _Ready() {
-        Instance?.QueueFree();
-        Instance = this;
+        if (_instance != null) {
+            _instance.QueueFree(); // The Singletone is already loaded, kill this instance
+        }
+        _instance = this;
     }
+
+
+
+
 
     public void Play(AudioType audioType, AudioStream audio = null, bool single = false, bool randomPitch = false) {
         if (children.Count == 0) CreateChild(audioType);
