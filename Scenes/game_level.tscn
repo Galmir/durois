@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://8l32gd5y1107"]
+[gd_scene load_steps=20 format=3 uid="uid://8l32gd5y1107"]
 
 [ext_resource type="Script" uid="uid://b3i50hh67ce12" path="res://Scenes/LevelManager.cs" id="1_u7uub"]
 [ext_resource type="AudioStream" uid="uid://bwcfd12gybw0y" path="res://Audio/Music/ExplorationLoop2406.ogg" id="2_6mi8o"]
 [ext_resource type="PackedScene" uid="uid://dxmufnr6iputp" path="res://Dungeon Generation/dungeon_generator.tscn" id="3_mql7d"]
 [ext_resource type="PackedScene" uid="uid://7uqkmprr5qji" path="res://Minimap/Minimap.tscn" id="4_5x8s8"]
+[ext_resource type="Script" uid="uid://d4jshybwfvwnm" path="res://Scenes/HUD.cs" id="4_mql7d"]
 [ext_resource type="Texture2D" uid="uid://capbdej8iqtt5" path="res://Game Mechanics/Inventory and Crafting/itemPlaceholder.png" id="5_6mi8o"]
+[ext_resource type="Texture2D" uid="uid://dxja3c31dahsn" path="res://UI/HealthBarGradient.tres" id="6_w0fld"]
+[ext_resource type="PackedScene" uid="uid://d2krkiom1qr6g" path="res://Game Mechanics/Inventory and Crafting/UI/InventoryUi.tscn" id="7_5x8s8"]
+[ext_resource type="PackedScene" uid="uid://bitmakagex1s2" path="res://UI/system_message_ui.tscn" id="8_g3g87"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qsd0w"]
 sky_top_color = Color(1, 0.8, 0, 1)
@@ -24,18 +28,49 @@ ssr_enabled = true
 ssao_enabled = true
 glow_enabled = true
 
-[node name="GameLevel" type="Node3D" node_paths=PackedStringArray("dunGen", "minimap")]
+[sub_resource type="Gradient" id="Gradient_w0fld"]
+offsets = PackedFloat32Array(0, 0.461538, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.172833, 0.172833, 0.172833, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e38tf"]
+gradient = SubResource("Gradient_w0fld")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mxr21"]
+texture = SubResource("GradientTexture2D_e38tf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e38tf"]
+texture = ExtResource("6_w0fld")
+
+[sub_resource type="Gradient" id="Gradient_g3g87"]
+offsets = PackedFloat32Array(0, 0.524038, 1)
+colors = PackedColorArray(0, 0.247059, 0.129412, 1, 0, 0.414123, 0.231407, 1, 3.73013e-07, 0.246971, 0.128254, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g3g87"]
+gradient = SubResource("Gradient_g3g87")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w0fld"]
+texture = SubResource("GradientTexture2D_g3g87")
+
+[node name="GameLevel" type="Node3D" node_paths=PackedStringArray("dunGen", "minimap", "inventoryCanvas", "charSheetCanvas")]
 script = ExtResource("1_u7uub")
 BGM = ExtResource("2_6mi8o")
 dunGen = NodePath("DungeonGenerator")
 minimap = NodePath("HUD/Minimap")
+inventoryCanvas = NodePath("InventoryHUD")
+charSheetCanvas = NodePath("CharacterSheetHUD")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_efyo6")
 
 [node name="DungeonGenerator" parent="." instance=ExtResource("3_mql7d")]
+customSeed = "dungeon meshi"
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("playerhealthBar", "playerStaminaBar")]
+script = ExtResource("4_mql7d")
+playerhealthBar = NodePath("VBoxContainer/PlayerHealth")
+playerStaminaBar = NodePath("VBoxContainer/PlayerStamina")
 
 [node name="Minimap" parent="HUD" instance=ExtResource("4_5x8s8")]
 
@@ -51,11 +86,23 @@ offset_right = 150.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD/VBoxContainer"]
+[node name="PlayerHealth" type="ProgressBar" parent="HUD/VBoxContainer"]
 custom_minimum_size = Vector2(300, 10)
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxTexture_mxr21")
+theme_override_styles/fill = SubResource("StyleBoxTexture_e38tf")
 step = 0.1
 value = 75.0
+show_percentage = false
+
+[node name="PlayerStamina" type="ProgressBar" parent="HUD/VBoxContainer"]
+custom_minimum_size = Vector2(300, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxTexture_mxr21")
+theme_override_styles/fill = SubResource("StyleBoxTexture_w0fld")
+step = 0.1
+value = 75.0
+show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer"]
 layout_mode = 2
@@ -79,3 +126,13 @@ texture = ExtResource("5_6mi8o")
 [node name="TextureRect5" type="TextureRect" parent="HUD/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("5_6mi8o")
+
+[node name="InventoryHUD" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="InventoryUI" parent="InventoryHUD" instance=ExtResource("7_5x8s8")]
+
+[node name="CharacterSheetHUD" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="SystemMessageUI" parent="CharacterSheetHUD" instance=ExtResource("8_g3g87")]

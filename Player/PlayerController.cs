@@ -3,6 +3,8 @@ using Godot;
 public partial class PlayerController : EntityController {
     [ExportCategory("AssetDependencies")]
     [Export] private Node3D cameraMount;
+    [Export] private StaminaComponent stamina;
+    [Export] private int runningCost = 5;
 
 
     [ExportCategory("Camera Settings")]
@@ -35,17 +37,24 @@ public partial class PlayerController : EntityController {
 
         if (!IsOnFloor() && hasGravity) _targetVelocity.Y -= FallAcceleration * (float)delta;
 
-        if (Input.IsActionJustPressed("toggle_run")) isRunning = true;
-        if (Input.IsActionJustReleased("toggle_run")) isRunning = false;
+        if (Input.IsActionJustPressed("toggle_run")) {
+            isRunning = true;
+            stamina.isSpendingStamina = true;
+        }
+        if (Input.IsActionJustReleased("toggle_run")) {
+            isRunning = false;
+            stamina.isSpendingStamina = false;
+        }
 
 
         Vector2 inputVector = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
         Vector3 direction = (Transform.Basis * new Vector3(inputVector.X, 0, inputVector.Y)).Normalized();
         if (!isLocked) {
             if (direction != Vector3.Zero) {
-                if (isRunning) {
+                if (isRunning && !stamina.isFatigued) {
                     speed = runningSpeed;
                     moveAnimation = "running";
+                    stamina.Damage(runningCost * (float)delta);
                 }
                 else {
                     speed = walkingSpeed;

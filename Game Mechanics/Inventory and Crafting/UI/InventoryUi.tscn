@@ -1,140 +1,223 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2krkiom1qr6g"]
+[gd_scene load_steps=17 format=3 uid="uid://d2krkiom1qr6g"]
 
-[ext_resource type="Theme" uid="uid://b220khua4svym" path="res://UI/MainTheme.tres" id="1_7ms62"]
-[ext_resource type="Script" uid="uid://db2lx17vbvove" path="res://Game Systems/Inventory and Crafting/UI/InventoryUI.cs" id="1_l4f4n"]
-[ext_resource type="Texture2D" uid="uid://bkv3tsydmqhsm" path="res://Assets/Placeholders/itemIcons/copper disk.png" id="3_1ujpa"]
-[ext_resource type="PackedScene" uid="uid://d3adli571njcv" path="res://Game Systems/Inventory and Crafting/UI/InventorySlotUIButton.tscn" id="3_wv2h7"]
-[ext_resource type="Texture2D" uid="uid://ict1jt3it7gv" path="res://Assets/Placeholders/itemIcons/iron axe.png" id="4_24scf"]
+[ext_resource type="Script" uid="uid://db2lx17vbvove" path="res://Game Mechanics/Inventory and Crafting/UI/InventoryUI.cs" id="1_l4f4n"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_nhqqc"]
+[ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_u7rjj"]
+[ext_resource type="Texture2D" uid="uid://wjx6425ooa8i" path="res://UI/Assets/ninePatchCorners.png" id="4_ftfqo"]
+[ext_resource type="Texture2D" uid="uid://cx8tvx748j1g" path="res://UI/Assets/uiTitleCrestTopHalf.png" id="5_ukxpa"]
+[ext_resource type="Shader" uid="uid://bnywtlqr4e126" path="res://Shaders/UITransparency.gdshader" id="6_x1bpg"]
+[ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/TitleGradient.tres" id="7_mq5vq"]
+[ext_resource type="Texture2D" uid="uid://cuuylbglmuoqw" path="res://UI/Assets/uiTitleCrestBottomHalf.png" id="8_c170n"]
+[ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/TitleLabelSetting.tres" id="9_08o3d"]
+[ext_resource type="Texture2D" uid="uid://bpj8wweehckx5" path="res://UI/Assets/uiTitleFrameTopHalf.png" id="10_mrmhr"]
+[ext_resource type="Texture2D" uid="uid://d0ggjydcknbrl" path="res://UI/Assets/uiTitleFrameBottomHalf.png" id="11_oxykl"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wv2h7"]
-bg_color = Color(0.184314, 0.298039, 0.423529, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
+shader = ExtResource("1_u7rjj")
+shader_parameter/mouse_position = Vector2(1.855, 1.765)
+shader_parameter/wave_color = Color(0, 0.180392, 0.745098, 1)
+shader_parameter/wave_transparency = 0.505
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rvugc"]
+shader = ExtResource("6_x1bpg")
+shader_parameter/divide = -0.105
+shader_parameter/blur = 0.55
+shader_parameter/fade_width = 0.92
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_52lxg"]
+gradient = ExtResource("7_mq5vq")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52lxg"]
+texture = SubResource("GradientTexture2D_52lxg")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7r7df"]
 bg_color = Color(0.184314, 0.298039, 0.423529, 1)
 
-[node name="InventoryUI" type="HBoxContainer"]
-custom_minimum_size = Vector2(1080, 720)
+[node name="InventoryUI" type="PanelContainer" node_paths=PackedStringArray("inventoryGrid", "itemName", "itemIcon", "itemDescription", "goldAmountLabel")]
+material = SubResource("ShaderMaterial_pnb10")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -376.0
-offset_top = -160.0
-offset_right = 457.0
-offset_bottom = 160.0
+offset_left = -540.0
+offset_top = -360.0
+offset_right = 540.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_7ms62")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_nhqqc")
 script = ExtResource("1_l4f4n")
-InvSlotUIScene = ExtResource("3_wv2h7")
+inventoryGrid = NodePath("MarginContainer/MainLayout/ScrollInventory/InventoryGrid")
+itemName = NodePath("MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ItemNameLabel")
+itemIcon = NodePath("MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ItemIconTexture")
+itemDescription = NodePath("MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ItemDescriptiontLabel")
+goldAmountLabel = NodePath("MarginContainer/MainLayout/GoldAmountLabel")
 
-[node name="ItemPanel" type="PanelContainer" parent="."]
+[node name="CornerFrame" type="NinePatchRect" parent="."]
 layout_mode = 2
-size_flags_horizontal = 6
+texture = ExtResource("4_ftfqo")
+patch_margin_left = 150
+patch_margin_top = 150
+patch_margin_right = 150
+patch_margin_bottom = 150
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ItemPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TitleLayout" type="VBoxContainer" parent="MarginContainer/MainLayout"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("5_ukxpa")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Title" type="PanelContainer" parent="MarginContainer/MainLayout/TitleLayout"]
+material = SubResource("ShaderMaterial_rvugc")
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_52lxg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/TitleLayout/Title"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("8_c170n")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/MainLayout/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+text = "INVENTORY"
+label_settings = ExtResource("9_08o3d")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("10_mrmhr")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+texture = ExtResource("11_oxykl")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="FilterButtons" type="HBoxContainer" parent="MarginContainer/MainLayout"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ItemPanel/VBoxContainer"]
-layout_mode = 2
-
-[node name="AllFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+[node name="AllFilterButton" type="Button" parent="MarginContainer/MainLayout/FilterButtons"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "All
 "
 
-[node name="WeaponFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+[node name="WeaponFilterButton" type="Button" parent="MarginContainer/MainLayout/FilterButtons"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Weapons"
 
-[node name="ArmorFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+[node name="ArmorFilterButton" type="Button" parent="MarginContainer/MainLayout/FilterButtons"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Armor"
 
-[node name="GemsFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+[node name="GemsFilterButton" type="Button" parent="MarginContainer/MainLayout/FilterButtons"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Gems"
 
-[node name="ConsumablesFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+[node name="ConsumablesFilterButton" type="Button" parent="MarginContainer/MainLayout/FilterButtons"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Consumables"
 
-[node name="KeyItemsFilterButton" type="Button" parent="ItemPanel/VBoxContainer/HBoxContainer"]
+[node name="KeyItemsFilterButton" type="Button" parent="MarginContainer/MainLayout/FilterButtons"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Key Items"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ItemPanel/VBoxContainer"]
+[node name="ScrollInventory" type="ScrollContainer" parent="MarginContainer/MainLayout"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_wv2h7")
 
-[node name="InventoryGrid" type="GridContainer" parent="ItemPanel/VBoxContainer/ScrollContainer"]
+[node name="InventoryGrid" type="GridContainer" parent="MarginContainer/MainLayout/ScrollInventory"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 6
+columns = 15
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ItemPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="GoldAmountLabel" type="Label" parent="ItemPanel/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "9999"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="ItemPanel/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = ExtResource("3_1ujpa")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="ItemDetailsPanel" type="PanelContainer" parent="."]
+[node name="ItemDetailsPanel" type="PanelContainer" parent="MarginContainer/MainLayout"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ItemDetailsPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ItemDetailsPanel"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="ItemDetailsPanel/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_7r7df")
 
-[node name="MarginContainer" type="MarginContainer" parent="ItemDetailsPanel/VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="ItemNameLabel" type="Label" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "weapon name"
 horizontal_alignment = 1
 
-[node name="ItemIconTexture" type="TextureRect" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ItemIconTexture" type="TextureRect" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("4_24scf")
 expand_mode = 3
 stretch_mode = 3
 
-[node name="ItemDescriptiontLabel" type="RichTextLabel" parent="ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ItemDescriptiontLabel" type="RichTextLabel" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -142,26 +225,25 @@ bbcode_enabled = true
 text = "a fancy description of an  [color=#FF0000]item[/color] filled with [shake rate=20.0 level=5 connected=1]DETERMINATION[/shake]"
 scroll_active = false
 
-[node name="UseButton" type="Button" parent="ItemDetailsPanel/VBoxContainer"]
+[node name="UseButton" type="Button" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Use"
 
-[node name="CraftButton" type="Button" parent="ItemDetailsPanel/VBoxContainer"]
+[node name="CraftButton" type="Button" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Craft"
 
-[node name="EquipButton" type="Button" parent="ItemDetailsPanel/VBoxContainer"]
+[node name="EquipButton" type="Button" parent="MarginContainer/MainLayout/ItemDetailsPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Equip"
 
-[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/AllFilterButton" to="." method="_on_all_filter_button_pressed"]
-[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/WeaponFilterButton" to="." method="_on_weapon_filter_button_pressed"]
-[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/ArmorFilterButton" to="." method="_on_ingredients_filter_button_pressed"]
-[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/GemsFilterButton" to="." method="_on_consumables_filter_button_pressed"]
-[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/ConsumablesFilterButton" to="." method="_on_consumables_filter_button_pressed"]
-[connection signal="pressed" from="ItemPanel/VBoxContainer/HBoxContainer/KeyItemsFilterButton" to="." method="_on_consumables_filter_button_pressed"]
+[node name="GoldAmountLabel" type="Label" parent="MarginContainer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "9999"
+horizontal_alignment = 1

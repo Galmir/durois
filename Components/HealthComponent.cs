@@ -2,32 +2,33 @@ using Godot;
 using System;
 
 public partial class HealthComponent : Node {
-    [Export] private int maxHealth;
+    [Export] public int maxHealth { get; private set; }
     [Export] private float healthRegen;
+    [Export] private PhysicsBody3D parent;
+    [Export] private int ticksPerSecond;
     private float _health;
     bool isDead = false;
-    private Timer regenTimer;
+    private Timer HealthRegenTimer;
 
-    private float currenthealth {
+    public float currenthealth {
         get { return _health; }
         set {
             if (isDead) return;
             _health = Mathf.Clamp(value, 0, maxHealth);
-            HealthChanged?.Invoke(_health);
+            Signals.Instance.HealthChanged.Invoke(parent, this);
             if (_health == 0) {
                 isDead = true;
-                HasDied.Invoke();
+                Signals.Instance.HasDied?.Invoke(parent);
             }
         }
     }
-    public Action HasDied;
-    public Action<float> HealthChanged;
 
     public override void _Ready() {
-        regenTimer = new();
-        regenTimer.Autostart = true;
-        regenTimer.Start(1);
-        regenTimer.Timeout += RegenerateHealth;
+        HealthRegenTimer = new();
+        AddChild(HealthRegenTimer);
+        HealthRegenTimer.Start(1 / ticksPerSecond);
+        HealthRegenTimer.Timeout += RegenerateHealth;
+        currenthealth = maxHealth;
     }
     public override void _PhysicsProcess(double delta) {
 
@@ -42,7 +43,7 @@ public partial class HealthComponent : Node {
 
     public void RegenerateHealth() {
         if (isDead) return;
-        Heal(healthRegen);
-        regenTimer.Start(1);
+        Heal(healthRegen / ticksPerSecond);
+        HealthRegenTimer.Start(1 / ticksPerSecond);
     }
 }
