@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://cnp46bxhs5wct"]
+[gd_scene load_steps=23 format=4 uid="uid://cnp46bxhs5wct"]
 
 [ext_resource type="Script" uid="uid://cdes068lq8dfa" path="res://Player/PlayerController.cs" id="1_biqn8"]
 [ext_resource type="PackedScene" uid="uid://5xpeio5jr73l" path="res://Player/Interaction/InteractRay.tscn" id="2_hur7u"]
 [ext_resource type="Script" uid="uid://bpqfoplk286o0" path="res://Finite State Machine/FSM.cs" id="3_hur7u"]
 [ext_resource type="Script" uid="uid://bub7gfn817cff" path="res://Player/Idle.cs" id="4_fdr7o"]
-[ext_resource type="Texture2D" uid="uid://c43utsytx4nmp" path="res://Player/Interaction/crosshair.png" id="4_hur7u"]
 [ext_resource type="PackedScene" uid="uid://b0pbuegqyl43v" path="res://Components/health_component.tscn" id="6_ab3ww"]
 [ext_resource type="PackedScene" uid="uid://bv2eqbhind3ul" path="res://Components/stamina_component.tscn" id="7_x6j2f"]
 
@@ -3950,7 +3949,7 @@ mesh = SubResource("ArrayMesh_lf0xe")
 skin = SubResource("Skin_cusvq")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/mixamo_base/Armature/Skeleton3D"]
-transform = Transform3D(0.679029, -0.653162, 0.33511, 0.733505, 0.622206, -0.273551, -0.0298342, 0.431554, 0.901594, -36.6116, 12.1533, -96.3685)
+transform = Transform3D(0.679029, -0.653162, 0.33511, 0.733505, 0.622206, -0.273551, -0.029834, 0.431554, 0.901594, -36.6116, 12.1533, -96.3685)
 bone_name = "mixamorig_RightHand"
 bone_idx = 10
 
@@ -3997,22 +3996,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.824613, 2.15207, -0.390067)
 light_color = Color(0.72549, 0.670588, 0, 1)
 omni_range = 16.276
 
-[node name="Aiming" type="CanvasLayer" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="Aiming"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -44.0
-offset_right = 45.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_hur7u")
-
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("6_ab3ww")]
 maxHealth = 100
 healthRegen = 1.0
@@ -4021,5 +4004,4 @@ ticksPerSecond = 10
 
 [node name="StaminaComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("7_x6j2f")]
 maxStamina = 100
-staminaRegen = 5.0
 parent = NodePath("..")

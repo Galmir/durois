@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2krkiom1qr6g"]
+[gd_scene load_steps=18 format=3 uid="uid://d2krkiom1qr6g"]
 
 [ext_resource type="Script" uid="uid://db2lx17vbvove" path="res://Game Mechanics/Inventory and Crafting/UI/InventoryUI.cs" id="1_l4f4n"]
 [ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_nhqqc"]
@@ -11,6 +11,7 @@
 [ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/TitleLabelSetting.tres" id="9_08o3d"]
 [ext_resource type="Texture2D" uid="uid://bpj8wweehckx5" path="res://UI/Assets/uiTitleFrameTopHalf.png" id="10_mrmhr"]
 [ext_resource type="Texture2D" uid="uid://d0ggjydcknbrl" path="res://UI/Assets/uiTitleFrameBottomHalf.png" id="11_oxykl"]
+[ext_resource type="PackedScene" uid="uid://d3adli571njcv" path="res://Game Mechanics/Inventory and Crafting/UI/InventorySlotUIButton.tscn" id="12_u7rjj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
 shader = ExtResource("1_u7rjj")
@@ -181,6 +182,51 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 15
+
+[node name="InventorySlotUIButton" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton2" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton3" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton4" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton5" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton6" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton7" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton8" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton9" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton10" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton11" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton12" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton13" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton14" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
+
+[node name="InventorySlotUIButton15" parent="MarginContainer/MainLayout/ScrollInventory/InventoryGrid" instance=ExtResource("12_u7rjj")]
+layout_mode = 2
 
 [node name="ItemDetailsPanel" type="PanelContainer" parent="MarginContainer/MainLayout"]
 layout_mode = 2

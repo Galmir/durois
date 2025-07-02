@@ -1,14 +1,25 @@
-[gd_scene format=3 uid="uid://be7ufq5r45m8p"]
+[gd_scene load_steps=5 format=3 uid="uid://be7ufq5r45m8p"]
 
-[node name="GameHub" type="Control"]
-layout_mode = 3
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_e4ncs"]
+[ext_resource type="Texture2D" uid="uid://b7t87mba5heio" path="res://Assets/First_Floor_29.png" id="2_tj4uw"]
+[ext_resource type="Script" uid="uid://c6s6sn2aj0aj1" path="res://Scenes/GameHub.cs" id="3_tj4uw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oeerm"]
+texture = ExtResource("2_tj4uw")
+
+[node name="GameHub" type="PanelContainer" node_paths=PackedStringArray("embark")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_e4ncs")
+theme_override_styles/panel = SubResource("StyleBoxTexture_oeerm")
+script = ExtResource("3_tj4uw")
+embark = NodePath("VBoxContainer/Embark")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 

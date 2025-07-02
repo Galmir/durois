@@ -1,13 +1,13 @@
 [gd_scene load_steps=20 format=3 uid="uid://8l32gd5y1107"]
 
 [ext_resource type="Script" uid="uid://b3i50hh67ce12" path="res://Scenes/LevelManager.cs" id="1_u7uub"]
-[ext_resource type="AudioStream" uid="uid://bwcfd12gybw0y" path="res://Audio/Music/ExplorationLoop2406.ogg" id="2_6mi8o"]
 [ext_resource type="PackedScene" uid="uid://dxmufnr6iputp" path="res://Dungeon Generation/dungeon_generator.tscn" id="3_mql7d"]
 [ext_resource type="PackedScene" uid="uid://7uqkmprr5qji" path="res://Minimap/Minimap.tscn" id="4_5x8s8"]
 [ext_resource type="Script" uid="uid://d4jshybwfvwnm" path="res://Scenes/HUD.cs" id="4_mql7d"]
 [ext_resource type="Texture2D" uid="uid://capbdej8iqtt5" path="res://Game Mechanics/Inventory and Crafting/itemPlaceholder.png" id="5_6mi8o"]
 [ext_resource type="Texture2D" uid="uid://dxja3c31dahsn" path="res://UI/HealthBarGradient.tres" id="6_w0fld"]
 [ext_resource type="PackedScene" uid="uid://d2krkiom1qr6g" path="res://Game Mechanics/Inventory and Crafting/UI/InventoryUi.tscn" id="7_5x8s8"]
+[ext_resource type="Texture2D" uid="uid://c43utsytx4nmp" path="res://Player/Interaction/crosshair.png" id="7_w0fld"]
 [ext_resource type="PackedScene" uid="uid://bitmakagex1s2" path="res://UI/system_message_ui.tscn" id="8_g3g87"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qsd0w"]
@@ -53,13 +53,13 @@ fill_to = Vector2(0, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w0fld"]
 texture = SubResource("GradientTexture2D_g3g87")
 
-[node name="GameLevel" type="Node3D" node_paths=PackedStringArray("dunGen", "minimap", "inventoryCanvas", "charSheetCanvas")]
+[node name="GameLevel" type="Node3D" node_paths=PackedStringArray("dunGen", "minimap", "inventoryCanvas", "charSheetCanvas", "HUDCanvas")]
 script = ExtResource("1_u7uub")
-BGM = ExtResource("2_6mi8o")
 dunGen = NodePath("DungeonGenerator")
 minimap = NodePath("HUD/Minimap")
 inventoryCanvas = NodePath("InventoryHUD")
 charSheetCanvas = NodePath("CharacterSheetHUD")
+HUDCanvas = NodePath("HUD")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_efyo6")
@@ -68,6 +68,7 @@ environment = SubResource("Environment_efyo6")
 customSeed = "dungeon meshi"
 
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("playerhealthBar", "playerStaminaBar")]
+visible = false
 script = ExtResource("4_mql7d")
 playerhealthBar = NodePath("VBoxContainer/PlayerHealth")
 playerStaminaBar = NodePath("VBoxContainer/PlayerStamina")
@@ -126,6 +127,20 @@ texture = ExtResource("5_6mi8o")
 [node name="TextureRect5" type="TextureRect" parent="HUD/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("5_6mi8o")
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -44.0
+offset_right = 45.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_w0fld")
 
 [node name="InventoryHUD" type="CanvasLayer" parent="."]
 visible = false

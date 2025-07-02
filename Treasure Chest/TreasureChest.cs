@@ -7,6 +7,5 @@ public partial class TreasureChest : Interactable {
     }
 
     public override void _OnInteract(Node3D interacter) {
-        GD.Print("loot");
     }
 }

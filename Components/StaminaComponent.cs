@@ -14,7 +14,6 @@ public partial class StaminaComponent : Node {
         get { return _stamina; }
         set {
             _stamina = Mathf.Clamp(value, 0, maxStamina);
-            GD.Print("parent = " + parent);
             Signals.Instance.StaminaChanged.Invoke(parent, this);
             if (_stamina == 0) {
                 isFatigued = true;
