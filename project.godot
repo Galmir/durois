@@ -21,7 +21,7 @@ AudioManager="*res://Audio/AudioManager.cs"
 Rules="*res://Game Mechanics/Globals/Rules.cs"
 PlayerData="*res://Game Mechanics/Globals/PlayerData.cs"
 Signals="*res://Game Mechanics/Globals/Signals.cs"
-SceneLoader="*res://Scenes/SceneLoader.cs"
+LoadingScreen="*res://Scenes/loading_screen.tscn"
 
 [display]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://clct2ew0mqsyt"]
 
 [ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_0t5xw"]
-[ext_resource type="Script" uid="uid://d2evikgt2kbt6" path="res://Scenes/LoadingScreen.cs" id="1_oobaa"]
 [ext_resource type="StyleBox" uid="uid://dpa3ur75d6jix" path="res://UI/UIPanel.tres" id="2_fayou"]
+[ext_resource type="Script" uid="uid://ccj8281pbjvxc" path="res://Scenes/LoadingScreen.cs" id="3_fayou"]
 [ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/TitleLabelSetting.tres" id="4_1godw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5lxv"]
@@ -11,7 +11,7 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oobaa"]
 bg_color = Color(0.507328, 0.666733, 0, 1)
 
-[node name="LoadingScreen" type="PanelContainer" node_paths=PackedStringArray("continueLabel")]
+[node name="LoadingScreen" type="PanelContainer" node_paths=PackedStringArray("loadingBar", "continueLabel")]
 process_mode = 3
 z_index = 4096
 z_as_relative = false
@@ -24,7 +24,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_0t5xw")
 theme_override_styles/panel = ExtResource("2_fayou")
-script = ExtResource("1_oobaa")
+script = ExtResource("3_fayou")
+loadingBar = NodePath("VBoxContainer/ProgressBar")
 continueLabel = NodePath("VBoxContainer/ContinueLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -40,7 +41,7 @@ mouse_filter = 2
 [node name="LoadingHintsLabel" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
-text = "\"la gente muore quando viene uccisa\""
+text = "\"Wolfs hunt in packs\""
 fit_content = true
 horizontal_alignment = 1
 

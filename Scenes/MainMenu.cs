@@ -13,6 +13,6 @@ public partial class MainMenu : PanelContainer {
 
 
     public void StartNewGame() {
-        SceneLoader.Instance.LoadScene("res://Scenes/game_hub.tscn");
+        LoadingScreen.Instance.LoadScene("res://Scenes/game_hub.tscn");
     }
 }

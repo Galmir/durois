@@ -11,6 +11,6 @@ public partial class GameHub : PanelContainer {
 
 
     public void Embark() {
-        SceneLoader.Instance.LoadScene("res://Scenes/game_level.tscn");
+        LoadingScreen.Instance.LoadScene("res://Scenes/game_level.tscn");
     }
 }
