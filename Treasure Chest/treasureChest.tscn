@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://qx270dvsirlu"]
+[gd_scene load_steps=4 format=3 uid="uid://qx270dvsirlu"]
 
 [ext_resource type="Script" uid="uid://bcxn1sh1n0gxr" path="res://Treasure Chest/TreasureChest.cs" id="1_qjda8"]
-[ext_resource type="PackedScene" uid="uid://ov80elg0gfqd" path="res://Treasure Chest/TreaureChest.glb" id="1_wkhtl"]
-[ext_resource type="Material" uid="uid://bqpod1plcuayt" path="res://Materials/MetalTorch.tres" id="2_3iof2"]
+[ext_resource type="PackedScene" uid="uid://dobut0nwgb0d8" path="res://Treasure Chest/chest.glb" id="2_bqovn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x2d1t"]
+size = Vector3(1.12793, 0.889526, 0.700317)
 
 [node name="TreasureChest" type="StaticBody3D"]
 collision_layer = 2
@@ -13,15 +13,13 @@ script = ExtResource("1_qjda8")
 promptMessage = "Open Chest"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00272369, 0.440705, 0.0029501)
 shape = SubResource("BoxShape3D_x2d1t")
 
-[node name="Mesh" parent="." instance=ExtResource("1_wkhtl")]
+[node name="Final Mesh" parent="." instance=ExtResource("2_bqovn")]
+transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 0, 0.380991, 0)
 
-[node name="Cube" parent="Mesh" index="0"]
-material_overlay = ExtResource("2_3iof2")
+[node name="Lid Low Poly" parent="Final Mesh/Chest Main Low Poly" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.202565, 0)
 
-[node name="Cube_001" parent="Mesh" index="1"]
-surface_material_override/0 = ExtResource("2_3iof2")
-
-[editable path="Mesh"]
+[editable path="Final Mesh"]

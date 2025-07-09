@@ -29,8 +29,7 @@ public partial class DungeonGenerator : Node3D {
     private GridMap enemiesAndLootMap = new();
 
     private PackedScene playerScene = GD.Load<PackedScene>("uid://cnp46bxhs5wct");
-    private PackedScene dungeonCell = GD.Load<PackedScene>("uid://dffqonp6jrc1s");
-    private PackedScene dungeonCell2 = GD.Load<PackedScene>("res://Dungeon Generation/DungeonCell2/DunCellLogic.tscn");
+    private PackedScene dungeonCell = GD.Load<PackedScene>("uid://cbnae22x0pknp");
     private PackedScene enemyScene = GD.Load<PackedScene>("uid://dnub6h4v0xxq0");
     private PackedScene treasureScene = GD.Load<PackedScene>("uid://qx270dvsirlu");
 
@@ -300,7 +299,7 @@ public partial class DungeonGenerator : Node3D {
         // create the floor and walls, position the palyer
         GD.Print("placing " + cellsToConvert.Count + " cells");
         foreach (Vector3I cellPosition in cellsToConvert) {
-            DunCellLogic newCell = dungeonCell2.Instantiate<DunCellLogic>();
+            DunCellLogic newCell = dungeonCell.Instantiate<DunCellLogic>();
             AddChild(newCell);
             newCell.GlobalPosition = cellPosition * gridOffset;
             // position the player in the dungeon

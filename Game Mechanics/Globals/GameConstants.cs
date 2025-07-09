@@ -10,4 +10,12 @@ public static partial class GameConstants {
     public static Color RarityRareColor => new Color("#eff37c");
     public static Color RarityEpicColor => new Color("#c57835");
     public static Color RarityLegendaryColor => new Color("#5c2b34");
+
+    public static Godot.Collections.Array<string> loadingHints = [
+        "Wolfs hunt in packs",
+        "People die when they are killed",
+        "Be careful of the mind goblin",
+        "No there's no harem",
+        "Dungeon Meshi... Oh, Dungeon Meshi!"
+        ];
 }

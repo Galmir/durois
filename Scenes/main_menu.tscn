@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://sotng74kf113"]
 
 [ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_48xlc"]
-[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="2_1ehe0"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="2_1ehe0"]
 [ext_resource type="Script" uid="uid://42hedb01m7vr" path="res://Scenes/MainMenu.cs" id="3_1ehe0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
@@ -21,32 +21,39 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_1ehe0")
 script = ExtResource("3_1ehe0")
-newGame = NodePath("VBoxContainer/NewGame")
-loadGame = NodePath("VBoxContainer/Load Game")
-Settings = NodePath("VBoxContainer/Settings")
-Quit = NodePath("VBoxContainer/Quit")
+newGame = NodePath("VBoxContainer2/VBoxContainer/NewGame")
+loadGame = NodePath("VBoxContainer2/VBoxContainer/Load Game")
+Settings = NodePath("VBoxContainer2/VBoxContainer/Settings")
+Quit = NodePath("VBoxContainer2/VBoxContainer/Quit")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="GameTitle" type="TextureRect" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="NewGame" type="Button" parent="VBoxContainer"]
+[node name="NewGame" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "New Game"
 
-[node name="Load Game" type="Button" parent="VBoxContainer"]
+[node name="Load Game" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Load Game"
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Settings"
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Quit"

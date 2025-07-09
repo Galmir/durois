@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://d3adli571njcv"]
 
-[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_msxtn"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="1_msxtn"]
 [ext_resource type="Texture2D" uid="uid://capbdej8iqtt5" path="res://Game Mechanics/Inventory and Crafting/itemPlaceholder.png" id="2_0cbrl"]
-[ext_resource type="StyleBox" uid="uid://ctfyq3g3cxid4" path="res://UI/RarityCommonBG.tres" id="3_ar6jg"]
+[ext_resource type="StyleBox" uid="uid://ctfyq3g3cxid4" path="res://UI/Theme Settings/RarityCommonBG.tres" id="3_ar6jg"]
 [ext_resource type="Script" uid="uid://dtia8v1dk1uxd" path="res://Game Mechanics/Inventory and Crafting/UI/InventorySlotUIButton.cs" id="3_mtah1"]
-[ext_resource type="LabelSettings" uid="uid://bhy3m7yfstlp6" path="res://UI/itemCounterLabelSetting.tres" id="4_rxrn7"]
+[ext_resource type="LabelSettings" uid="uid://bhy3m7yfstlp6" path="res://UI/Theme Settings/itemCounterLabelSetting.tres" id="4_rxrn7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upe5r"]
 bg_color = Color(0.194349, 0.194349, 0.194349, 1)
@@ -27,7 +27,7 @@ fill_to = Vector2(0.5, 0)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_msxtn"]
 texture = SubResource("GradientTexture2D_0cbrl")
 
-[node name="InventorySlotUIButton" type="Button" node_paths=PackedStringArray("Amount")]
+[node name="InventorySlotUIButton" type="Button" node_paths=PackedStringArray("Amount", "rarityBG", "itemIcon")]
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,6 +47,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6orpj")
 icon_alignment = 1
 script = ExtResource("3_mtah1")
 Amount = NodePath("PanelContainer/MarginContainer/RarityBG/ItemAmountLabel")
+rarityBG = NodePath("PanelContainer/MarginContainer/RarityBG")
+itemIcon = NodePath("PanelContainer/MarginContainer/RarityBG/ItemIcon")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -77,7 +79,7 @@ text = "99"
 label_settings = ExtResource("4_rxrn7")
 horizontal_alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/RarityBG"]
+[node name="ItemIcon" type="TextureRect" parent="PanelContainer/MarginContainer/RarityBG"]
 layout_mode = 2
 texture = ExtResource("2_0cbrl")
 expand_mode = 1

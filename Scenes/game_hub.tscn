@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://be7ufq5r45m8p"]
+[gd_scene load_steps=6 format=3 uid="uid://be7ufq5r45m8p"]
 
-[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_e4ncs"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="1_e4ncs"]
 [ext_resource type="Texture2D" uid="uid://b7t87mba5heio" path="res://Assets/First_Floor_29.png" id="2_tj4uw"]
 [ext_resource type="Script" uid="uid://c6s6sn2aj0aj1" path="res://Scenes/GameHub.cs" id="3_tj4uw"]
+[ext_resource type="PackedScene" uid="uid://bt0jryjgb03ub" path="res://Game Mechanics/Inventory and Crafting/UI/MerchantShopUi.tscn" id="4_oeerm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oeerm"]
 texture = ExtResource("2_tj4uw")
 
-[node name="GameHub" type="PanelContainer" node_paths=PackedStringArray("embark")]
+[node name="GameHub" type="PanelContainer" node_paths=PackedStringArray("embark", "shop", "shopUIscene")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,38 +18,36 @@ theme = ExtResource("1_e4ncs")
 theme_override_styles/panel = SubResource("StyleBoxTexture_oeerm")
 script = ExtResource("3_tj4uw")
 embark = NodePath("VBoxContainer/Embark")
+shop = NodePath("VBoxContainer/Shop")
+shopUIscene = NodePath("ShopCanvas/MerchantShopUI")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="Embark" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Embark"
 
-[node name="NewGame" type="Button" parent="VBoxContainer"]
+[node name="Shop" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Buy / Sell"
 
-[node name="Load Game" type="Button" parent="VBoxContainer"]
+[node name="Craft" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Craft"
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
+[node name="Rest" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Rest"
 
-[node name="Settings2" type="Button" parent="VBoxContainer"]
+[node name="Save and Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "Save"
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Quit to Main Menu"
+[node name="ShopCanvas" type="CanvasLayer" parent="."]
+
+[node name="MerchantShopUI" parent="ShopCanvas" instance=ExtResource("4_oeerm")]
+visible = false

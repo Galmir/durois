@@ -1,16 +1,16 @@
 [gd_scene load_steps=20 format=3 uid="uid://bitmakagex1s2"]
 
 [ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_bffuq"]
-[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="1_h1wpj"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="1_h1wpj"]
 [ext_resource type="Texture2D" uid="uid://wjx6425ooa8i" path="res://UI/Assets/ninePatchCorners.png" id="2_dv1kj"]
 [ext_resource type="Texture2D" uid="uid://cx8tvx748j1g" path="res://UI/Assets/uiTitleCrestTopHalf.png" id="3_2xelh"]
-[ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/TitleGradient.tres" id="3_52lxg"]
+[ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/Theme Settings/TitleGradient.tres" id="3_52lxg"]
 [ext_resource type="Shader" uid="uid://bnywtlqr4e126" path="res://Shaders/UITransparency.gdshader" id="4_2wa0v"]
 [ext_resource type="Texture2D" uid="uid://cuuylbglmuoqw" path="res://UI/Assets/uiTitleCrestBottomHalf.png" id="4_o0okn"]
-[ext_resource type="LabelSettings" uid="uid://dfmyov8bcmrgh" path="res://UI/paragraphLabelSetting.tres" id="5_n6d4a"]
+[ext_resource type="LabelSettings" uid="uid://dfmyov8bcmrgh" path="res://UI/Theme Settings/paragraphLabelSetting.tres" id="5_n6d4a"]
 [ext_resource type="Texture2D" uid="uid://bpj8wweehckx5" path="res://UI/Assets/uiTitleFrameTopHalf.png" id="7_2wa0v"]
 [ext_resource type="Texture2D" uid="uid://d0ggjydcknbrl" path="res://UI/Assets/uiTitleFrameBottomHalf.png" id="8_bffuq"]
-[ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/TitleLabelSetting.tres" id="10_bffuq"]
+[ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/Theme Settings/TitleLabelSetting.tres" id="10_bffuq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
 shader = ExtResource("1_bffuq")

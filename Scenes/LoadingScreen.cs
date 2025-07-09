@@ -4,6 +4,7 @@ public partial class LoadingScreen : Control {
 
     [Export] private ProgressBar loadingBar;
     [Export] private Label continueLabel;
+    [Export] private RichTextLabel gameHintLabel;
 
     private string sceneToLoadPath;
     private bool isLoading = false;
@@ -28,13 +29,13 @@ public partial class LoadingScreen : Control {
 
     public void LoadScene(string path) {
         Node currentScene = GetTree().CurrentScene;
-
         if (ResourceLoader.HasCached(path)) ResourceLoader.LoadThreadedGet(path);
         else ResourceLoader.LoadThreadedRequest(path);
         currentScene.QueueFree();
         sceneToLoadPath = path;
         isLoading = true;
         Visible = true;
+        gameHintLabel.Text = GameConstants.loadingHints.PickRandom();
     }
 
 

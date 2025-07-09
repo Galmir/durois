@@ -27,7 +27,7 @@ LoadingScreen="*res://Scenes/loading_screen.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
+window/size/resizable=false
 
 [dotnet]
 
@@ -37,8 +37,10 @@ project/assembly_name="DuRoIs"
 
 folder_colors={
 "res://Assets/": "red",
+"res://Audio/": "teal",
 "res://Dungeon Generation/": "purple",
 "res://Game Mechanics/": "yellow",
+"res://Items/": "orange",
 "res://UI/": "green"
 }
 

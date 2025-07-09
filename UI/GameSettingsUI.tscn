@@ -1,0 +1,225 @@
+[gd_scene load_steps=15 format=3 uid="uid://cmr833y8jtdf2"]
+
+[ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_vcidt"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="2_k71wo"]
+[ext_resource type="Texture2D" uid="uid://wjx6425ooa8i" path="res://UI/Assets/ninePatchCorners.png" id="3_h77on"]
+[ext_resource type="Texture2D" uid="uid://cx8tvx748j1g" path="res://UI/Assets/uiTitleCrestTopHalf.png" id="4_kbw78"]
+[ext_resource type="Shader" uid="uid://bnywtlqr4e126" path="res://Shaders/UITransparency.gdshader" id="5_ka5wo"]
+[ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/Theme Settings/TitleGradient.tres" id="6_2shfv"]
+[ext_resource type="Texture2D" uid="uid://cuuylbglmuoqw" path="res://UI/Assets/uiTitleCrestBottomHalf.png" id="7_hftci"]
+[ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/Theme Settings/TitleLabelSetting.tres" id="8_upvqe"]
+[ext_resource type="Texture2D" uid="uid://bpj8wweehckx5" path="res://UI/Assets/uiTitleFrameTopHalf.png" id="9_v1v11"]
+[ext_resource type="Texture2D" uid="uid://d0ggjydcknbrl" path="res://UI/Assets/uiTitleFrameBottomHalf.png" id="10_g25qc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
+shader = ExtResource("1_vcidt")
+shader_parameter/mouse_position = Vector2(1.855, 1.765)
+shader_parameter/wave_color = Color(0, 0.180392, 0.745098, 1)
+shader_parameter/wave_transparency = 0.505
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rvugc"]
+shader = ExtResource("5_ka5wo")
+shader_parameter/divide = -0.105
+shader_parameter/blur = 0.55
+shader_parameter/fade_width = 0.92
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_52lxg"]
+gradient = ExtResource("6_2shfv")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52lxg"]
+texture = SubResource("GradientTexture2D_52lxg")
+
+[node name="GameSettings" type="PanelContainer"]
+material = SubResource("ShaderMaterial_pnb10")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -303.5
+offset_right = 370.0
+offset_bottom = 303.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_k71wo")
+
+[node name="CornerFrame" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_h77on")
+patch_margin_left = 150
+patch_margin_top = 150
+patch_margin_right = 150
+patch_margin_bottom = 150
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TitleLayout" type="VBoxContainer" parent="MarginContainer/MainLayout"]
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("4_kbw78")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Title" type="PanelContainer" parent="MarginContainer/MainLayout/TitleLayout"]
+material = SubResource("ShaderMaterial_rvugc")
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_52lxg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/TitleLayout/Title"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("7_hftci")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/MainLayout/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+text = "STATUS"
+label_settings = ExtResource("8_upvqe")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout/Title/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("9_v1v11")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/MainLayout/TitleLayout"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+texture = ExtResource("10_g25qc")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="SettingsTab" type="TabContainer" parent="MarginContainer/MainLayout"]
+layout_mode = 2
+current_tab = 1
+
+[node name="Video Settings" type="MarginContainer" parent="MarginContainer/MainLayout/SettingsTab"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_tab_index = 0
+
+[node name="Video Settings" type="VBoxContainer" parent="MarginContainer/MainLayout/SettingsTab/Video Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Resolution Settings" type="HBoxContainer" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings/Resolution Settings"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="Container" type="Container" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings/Resolution Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResolutionDropdown" type="OptionButton" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings/Resolution Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+toggle_mode = false
+selected = 0
+item_count = 2
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1080x720"
+popup/item_1/id = 1
+
+[node name="Full Screen Settings" type="HBoxContainer" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings/Full Screen Settings"]
+layout_mode = 2
+text = "Full screen"
+
+[node name="Container" type="Container" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings/Full Screen Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/MainLayout/SettingsTab/Video Settings/Video Settings/Full Screen Settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Audio Settings" type="MarginContainer" parent="MarginContainer/MainLayout/SettingsTab"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_tab_index = 1
+
+[node name="Audio Settings" type="VBoxContainer" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Master Channel" type="HBoxContainer" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Master Volume" type="Label" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings/Master Channel"]
+layout_mode = 2
+text = "Master volume"
+
+[node name="Container" type="Container" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings/Master Channel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="masterVolumeSlider" type="HSlider" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings/Master Channel"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 30.0
+
+[node name="SFX Channel" type="HBoxContainer" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings/SFX Channel"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="Container" type="Container" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings/SFX Channel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SFXVolumeSlider" type="HSlider" parent="MarginContainer/MainLayout/SettingsTab/Audio Settings/Audio Settings/SFX Channel"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 30.0

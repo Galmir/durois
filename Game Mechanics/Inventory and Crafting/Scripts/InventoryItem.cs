@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 
 [GlobalClass]
-public partial class InventoryItem : Resource {
+public abstract partial class InventoryItem : Resource {
     [Export] public string Name;
     [Export(PropertyHint.MultilineText)] public string LoreDescription;
     [Export] public Texture2D Icon;

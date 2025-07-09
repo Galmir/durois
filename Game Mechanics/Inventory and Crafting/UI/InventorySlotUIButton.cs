@@ -26,8 +26,7 @@ public partial class InventorySlotUIButton : Button {
 
 
     public override void _Ready() {
-        Amount = GetNode<Label>("ItemAmountLabel");
-        this.Pressed += _Pressed;
+        Pressed += _Pressed;
     }
 
 

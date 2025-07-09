@@ -1,13 +1,13 @@
 [gd_scene load_steps=15 format=3 uid="uid://turmw12texio"]
 
 [ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_q82l7"]
-[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/UITheme.tres" id="2_127ij"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="2_127ij"]
 [ext_resource type="Texture2D" uid="uid://wjx6425ooa8i" path="res://UI/Assets/ninePatchCorners.png" id="3_4cvas"]
 [ext_resource type="Texture2D" uid="uid://cx8tvx748j1g" path="res://UI/Assets/uiTitleCrestTopHalf.png" id="4_6vofk"]
 [ext_resource type="Shader" uid="uid://bnywtlqr4e126" path="res://Shaders/UITransparency.gdshader" id="5_lpy6w"]
-[ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/TitleGradient.tres" id="6_w2nix"]
+[ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/Theme Settings/TitleGradient.tres" id="6_w2nix"]
 [ext_resource type="Texture2D" uid="uid://cuuylbglmuoqw" path="res://UI/Assets/uiTitleCrestBottomHalf.png" id="7_sd15e"]
-[ext_resource type="LabelSettings" uid="uid://760f876cftxu" path="res://UI/TitleWarningSetting.tres" id="8_127ij"]
+[ext_resource type="LabelSettings" uid="uid://760f876cftxu" path="res://UI/Theme Settings/TitleWarningSetting.tres" id="8_127ij"]
 [ext_resource type="Texture2D" uid="uid://bpj8wweehckx5" path="res://UI/Assets/uiTitleFrameTopHalf.png" id="9_g6mn5"]
 [ext_resource type="Texture2D" uid="uid://d0ggjydcknbrl" path="res://UI/Assets/uiTitleFrameBottomHalf.png" id="10_jh8cc"]
 
