@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://be7ufq5r45m8p"]
+[gd_scene load_steps=7 format=3 uid="uid://be7ufq5r45m8p"]
 
 [ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="1_e4ncs"]
 [ext_resource type="Texture2D" uid="uid://b7t87mba5heio" path="res://Assets/First_Floor_29.png" id="2_tj4uw"]
 [ext_resource type="Script" uid="uid://c6s6sn2aj0aj1" path="res://Scenes/GameHub.cs" id="3_tj4uw"]
+[ext_resource type="AudioStream" uid="uid://cjspw0ylp6w53" path="res://Audio/Soundtracks/1007_DuRois_HubTheme.ogg" id="4_5ee80"]
 [ext_resource type="PackedScene" uid="uid://bt0jryjgb03ub" path="res://Game Mechanics/Inventory and Crafting/UI/MerchantShopUi.tscn" id="4_oeerm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oeerm"]
 texture = ExtResource("2_tj4uw")
 
-[node name="GameHub" type="PanelContainer" node_paths=PackedStringArray("embark", "shop", "shopUIscene")]
+[node name="GameHub" type="PanelContainer" node_paths=PackedStringArray("embark", "shop", "saveAndExit", "shopUIscene")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,7 +20,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_oeerm")
 script = ExtResource("3_tj4uw")
 embark = NodePath("VBoxContainer/Embark")
 shop = NodePath("VBoxContainer/Shop")
+saveAndExit = NodePath("VBoxContainer/Save and Quit")
 shopUIscene = NodePath("ShopCanvas/MerchantShopUI")
+BGM = ExtResource("4_5ee80")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(200, 0)
@@ -36,16 +39,18 @@ layout_mode = 2
 text = "Buy / Sell"
 
 [node name="Craft" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Craft"
 
 [node name="Rest" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Rest"
 
 [node name="Save and Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Save"
+text = "Save and quit"
 
 [node name="ShopCanvas" type="CanvasLayer" parent="."]
 

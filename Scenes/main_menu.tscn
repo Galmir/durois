@@ -10,7 +10,7 @@ shader_parameter/mouse_position = Vector2(1.855, 1.765)
 shader_parameter/wave_color = Color(0, 0.180392, 0.745098, 1)
 shader_parameter/wave_transparency = 0.505
 
-[node name="MainMenu" type="PanelContainer" node_paths=PackedStringArray("newGame", "loadGame", "Settings", "Quit")]
+[node name="MainMenu" type="PanelContainer" node_paths=PackedStringArray("newGame", "continueGame", "loadGame", "Settings", "Quit")]
 material = SubResource("ShaderMaterial_pnb10")
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +22,7 @@ size_flags_vertical = 3
 theme = ExtResource("2_1ehe0")
 script = ExtResource("3_1ehe0")
 newGame = NodePath("VBoxContainer2/VBoxContainer/NewGame")
+continueGame = NodePath("VBoxContainer2/VBoxContainer/Continue")
 loadGame = NodePath("VBoxContainer2/VBoxContainer/Load Game")
 Settings = NodePath("VBoxContainer2/VBoxContainer/Settings")
 Quit = NodePath("VBoxContainer2/VBoxContainer/Quit")
@@ -37,6 +38,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Continue" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Continue"
 
 [node name="NewGame" type="Button" parent="VBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)

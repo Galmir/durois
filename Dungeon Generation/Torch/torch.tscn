@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://3vwjlx6f6jhc"]
 
 [ext_resource type="Script" uid="uid://cmyhi5fbd310c" path="res://Dungeon Generation/Torch/Torch.cs" id="1_dkom6"]
-[ext_resource type="Material" uid="uid://bqpod1plcuayt" path="res://Materials/MetalTorch.tres" id="1_pa17o"]
+[ext_resource type="Material" uid="uid://bqpod1plcuayt" path="res://Assets/Materials/MetalTorch.tres" id="1_pa17o"]
 [ext_resource type="AudioStream" uid="uid://be5vvtny6pnxy" path="res://Audio/SFX/torch01.ogg" id="3_y12rt"]
 [ext_resource type="Shader" uid="uid://b7rx0crdxp5eh" path="res://Dungeon Generation/Torch/torch.gdshader" id="4_fo6f4"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdes068lq8dfa" path="res://Player/PlayerController.cs" id="1_biqn8"]
 [ext_resource type="PackedScene" uid="uid://5xpeio5jr73l" path="res://Player/Interaction/InteractRay.tscn" id="2_hur7u"]
-[ext_resource type="Script" uid="uid://bpqfoplk286o0" path="res://Finite State Machine/FSM.cs" id="3_hur7u"]
+[ext_resource type="Script" uid="uid://bpqfoplk286o0" path="res://Game Mechanics/Finite State Machine/FSM.cs" id="3_hur7u"]
 [ext_resource type="Script" uid="uid://bub7gfn817cff" path="res://Player/Idle.cs" id="4_fdr7o"]
 [ext_resource type="PackedScene" uid="uid://b0pbuegqyl43v" path="res://Components/health_component.tscn" id="6_ab3ww"]
 [ext_resource type="PackedScene" uid="uid://bv2eqbhind3ul" path="res://Components/stamina_component.tscn" id="7_x6j2f"]

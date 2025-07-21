@@ -71,7 +71,7 @@ public partial class MerchantShopUi : PanelContainer {
 
     private void FillInventory(GridContainer grid, Inventory inventoryToLoad, float priceModifier) {
         foreach (InventorySlot slot in inventoryToLoad.InventorySlots) {
-            ShopItemSlotUi newSlot = shopSlotUIscene.Instantiate<ShopItemSlotUi>();
+            ShopSlotUIButton newSlot = shopSlotUIscene.Instantiate<ShopSlotUIButton>();
             newSlot.PriceModifier = priceModifier;
             newSlot.SlotToShow = slot;
             grid.AddChild(newSlot);
@@ -80,7 +80,7 @@ public partial class MerchantShopUi : PanelContainer {
         }
     }
 
-    private void AddOrRemoveFromTrading(ShopItemSlotUi slot) {
+    private void AddOrRemoveFromTrading(ShopSlotUIButton slot) {
         if (slot.GetParent<GridContainer>() != tradingInventoryGrid) {
             if (slot.StartingGrid == merchantInventoryGrid) {
                 slot.Reparent(tradingInventoryGrid);
@@ -127,7 +127,7 @@ public partial class MerchantShopUi : PanelContainer {
 
 
     private void SendItemsToInventories() {
-        foreach (ShopItemSlotUi slot in tradingInventoryGrid.GetChildren()) {
+        foreach (ShopSlotUIButton slot in tradingInventoryGrid.GetChildren()) {
             if (slot.StartingGrid == merchantInventoryGrid) {
                 slot.Reparent(playerInventoryGrid);
                 slot.StartingGrid = playerInventoryGrid;
@@ -145,7 +145,7 @@ public partial class MerchantShopUi : PanelContainer {
     private void UpdateInventoryFromGrid(Inventory inventory, int goldFrom, GridContainer from) {
         inventory.ClearInventory();
         inventory.Gold = goldFrom;
-        foreach (ShopItemSlotUi slot in from.GetChildren()) {
+        foreach (ShopSlotUIButton slot in from.GetChildren()) {
             inventory.AddItem(slot.SlotToShow.Item, slot.SlotToShow.Amount);
         }
     }

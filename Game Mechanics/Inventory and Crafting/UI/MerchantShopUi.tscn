@@ -3,15 +3,13 @@
 [ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_6powd"]
 [ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="2_00bvk"]
 [ext_resource type="Script" uid="uid://c4uj20vxt43qv" path="res://Game Mechanics/Inventory and Crafting/UI/MerchantShopUi.cs" id="2_56aas"]
-[ext_resource type="PackedScene" uid="uid://cabfgsct1yvec" path="res://Game Mechanics/Inventory and Crafting/UI/ShopItemSlotUI.tscn" id="3_cdvx6"]
+[ext_resource type="PackedScene" uid="uid://uvn3d22m6m0r" path="res://Game Mechanics/Inventory and Crafting/UI/ShopSlotUIButton.tscn" id="4_gupax"]
 [ext_resource type="Resource" uid="uid://bfeksfif5sfk7" path="res://Items/Consumables/HealthPotion.tres" id="5_70hl1"]
-[ext_resource type="AudioStream" uid="uid://biqrvdmx37f6m" path="res://Audio/SFX/inventory_open02.ogg" id="5_as80c"]
 [ext_resource type="StyleBox" uid="uid://dpa3ur75d6jix" path="res://UI/Theme Settings/UIPanel.tres" id="5_kbftw"]
 [ext_resource type="Texture2D" uid="uid://wjx6425ooa8i" path="res://UI/Assets/ninePatchCorners.png" id="5_xw11q"]
 [ext_resource type="Texture2D" uid="uid://bx43he6cj201" path="res://Assets/Icons/coin.png" id="6_00bvk"]
 [ext_resource type="Script" uid="uid://cxykjklmrvbja" path="res://Game Mechanics/Inventory and Crafting/Scripts/InventorySlot.cs" id="6_7kkqv"]
 [ext_resource type="Texture2D" uid="uid://cx8tvx748j1g" path="res://UI/Assets/uiTitleCrestTopHalf.png" id="6_d7tu0"]
-[ext_resource type="AudioStream" uid="uid://cx7jxqefspj6v" path="res://Audio/SFX/inventory_close02.ogg" id="6_gupax"]
 [ext_resource type="Shader" uid="uid://bnywtlqr4e126" path="res://Shaders/UITransparency.gdshader" id="7_as80c"]
 [ext_resource type="Script" uid="uid://derxtsuqo0aul" path="res://Game Mechanics/Inventory and Crafting/Scripts/Inventory.cs" id="7_glk77"]
 [ext_resource type="Gradient" uid="uid://d23ydohyqn1he" path="res://UI/Theme Settings/TitleGradient.tres" id="8_gupax"]
@@ -19,6 +17,8 @@
 [ext_resource type="LabelSettings" uid="uid://brgputey4ltt6" path="res://UI/Theme Settings/TitleLabelSetting.tres" id="10_70hl1"]
 [ext_resource type="Texture2D" uid="uid://bpj8wweehckx5" path="res://UI/Assets/uiTitleFrameTopHalf.png" id="11_7kkqv"]
 [ext_resource type="Texture2D" uid="uid://d0ggjydcknbrl" path="res://UI/Assets/uiTitleFrameBottomHalf.png" id="12_glk77"]
+[ext_resource type="AudioStream" uid="uid://do7eqgowsey5y" path="res://Audio/SFX/inventory_open02.ogg" id="18_70hl1"]
+[ext_resource type="AudioStream" uid="uid://1dnc41di7j8s" path="res://Audio/SFX/inventory_close02.ogg" id="19_7kkqv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rp11c"]
 shader = ExtResource("1_6powd")
@@ -81,7 +81,7 @@ tradingGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/V
 playerGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/HBoxContainer/PlayerGoldLabel")
 acceptButton = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/HBoxContainer/AcceptButton")
 exitButton = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/HBoxContainer/ExitButton")
-shopSlotUIscene = ExtResource("3_cdvx6")
+shopSlotUIscene = ExtResource("4_gupax")
 openScreenSound = NodePath("audioOpen")
 closeScreenSound = NodePath("AudioClosed")
 merchantInventory = SubResource("Resource_qpqj8")
@@ -213,7 +213,22 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 3
+columns = 4
+
+[node name="ShopSlotUIButton" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
+
+[node name="ShopSlotUIButton2" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
+
+[node name="ShopSlotUIButton3" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
+
+[node name="ShopSlotUIButton4" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
+
+[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory"]
 layout_mode = 2
@@ -262,7 +277,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 3
+columns = 4
+
+[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory/Scrolltainer/TradingInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory"]
 layout_mode = 2
@@ -309,9 +327,14 @@ size_flags_vertical = 3
 [node name="PlayerInventoryGrid" type="GridContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/Scrolltainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 3
+columns = 4
+
+[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
+
+[node name="ShopSlotUIButton6" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid" instance=ExtResource("4_gupax")]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory"]
 layout_mode = 2
@@ -344,9 +367,9 @@ layout_mode = 2
 text = "Exit"
 
 [node name="audioOpen" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_as80c")
+stream = ExtResource("18_70hl1")
 volume_db = 24.0
 
 [node name="AudioClosed" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_gupax")
+stream = ExtResource("19_7kkqv")
 volume_db = 24.0

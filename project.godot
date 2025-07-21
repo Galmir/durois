@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DuRoIs"
-run/main_scene="uid://8l32gd5y1107"
+run/main_scene="uid://be7ufq5r45m8p"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,12 +22,15 @@ Rules="*res://Game Mechanics/Globals/Rules.cs"
 PlayerData="*res://Game Mechanics/Globals/PlayerData.cs"
 Signals="*res://Game Mechanics/Globals/Signals.cs"
 LoadingScreen="*res://Scenes/loading_screen.tscn"
+SaveLoad="*res://Game Mechanics/Save and Load Game/SaveLoad.cs"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/resizable=false
+window/stretch/mode="viewport"
 
 [dotnet]
 

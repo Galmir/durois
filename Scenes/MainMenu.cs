@@ -2,6 +2,7 @@ using Godot;
 
 public partial class MainMenu : PanelContainer {
     [Export] private Button newGame;
+    [Export] private Button continueGame;
     [Export] private Button loadGame;
     [Export] private Button Settings;
     [Export] private Button Quit;
@@ -9,10 +10,18 @@ public partial class MainMenu : PanelContainer {
 
     public override void _Ready() {
         newGame.Pressed += StartNewGame;
+        continueGame.Visible = SaveLoad.Instance.isSaveSlotPresent();
+        loadGame.Pressed += LoadGame;
     }
 
 
     public void StartNewGame() {
+        LoadingScreen.Instance.LoadScene("res://Scenes/game_hub.tscn");
+    }
+
+
+    public void LoadGame() {
+        SaveLoad.Instance.LoadGame();
         LoadingScreen.Instance.LoadScene("res://Scenes/game_hub.tscn");
     }
 }

@@ -67,6 +67,7 @@ HUDCanvas = NodePath("HUD")
 environment = SubResource("Environment_efyo6")
 
 [node name="DungeonGenerator" parent="." instance=ExtResource("3_mql7d")]
+customSeed = "dungeon meshi"
 floorHeight = 0
 roomsNumber = 15
 roomMargin = 1

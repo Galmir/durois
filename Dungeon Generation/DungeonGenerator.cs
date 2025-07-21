@@ -356,7 +356,7 @@ public partial class DungeonGenerator : Node3D {
             if (enemiesAndLootMap.GetCellItem(cellPosition) == Rules.Instance.TileDict[Rules.Tiles.Loot]) {
                 StaticBody3D newChest = treasureScene.Instantiate<StaticBody3D>();
                 AddChild(newChest);
-                newChest.GlobalPosition = cellPosition * gridOffset + Vector3.Up;
+                newChest.GlobalPosition = cellPosition * gridOffset;
             }
         }
     }
