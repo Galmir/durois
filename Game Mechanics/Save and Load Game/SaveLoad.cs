@@ -3,6 +3,7 @@ using System;
 using System.IO;
 
 public partial class SaveLoad : Node {
+
     private static SaveLoad _instance;
     public static SaveLoad Instance => _instance;
     public override void _Ready() {

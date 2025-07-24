@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dnub6h4v0xxq0"]
+[gd_scene load_steps=29 format=4 uid="uid://dnub6h4v0xxq0"]
 
 [ext_resource type="Script" uid="uid://cu72ux8qu1jqx" path="res://Enemies/EnemyIdle.cs" id="1_j4e7m"]
 [ext_resource type="Script" uid="uid://dclhv26mm5ljp" path="res://Enemies/EnemyController.cs" id="1_lk78i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://blakg283k18d1" path="res://Enemies/FSMAI.cs" id="3_cvkei"]
 [ext_resource type="Script" uid="uid://dqb8t6keu3i7h" path="res://Enemies/EnemyFollow.cs" id="4_pyih7"]
 [ext_resource type="Script" uid="uid://b21fb458u4o6r" path="res://Enemies/EnemyAttack.cs" id="6_cvkei"]
+[ext_resource type="PackedScene" uid="uid://v6lxt13hkaob" path="res://Components/EffectReceiver.tscn" id="7_a0lud"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a1q1g"]
 height = 1.8
@@ -3477,6 +3478,9 @@ _data = {
 &"walking": SubResource("Animation_3ej3o")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_cvkei"]
+size = Vector3(0.3, 1.52832, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2liy"]
 shading_mode = 0
 albedo_color = Color(0.331428, 0, 0.0354299, 1)
@@ -3491,17 +3495,16 @@ radius = 10.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pyih7"]
 radius = 1.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cvkei"]
-size = Vector3(0.3, 1.52832, 1)
-
-[node name="EnemyController" type="CharacterBody3D" node_paths=PackedStringArray("ChaseTimer", "StateMachine", "animator", "visualAnchor")]
+[node name="EnemyController" type="CharacterBody3D" node_paths=PackedStringArray("ChaseTimer", "StateMachine", "healthLabel", "animator", "visualAnchor", "effectReceiver")]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_lk78i")
 ChaseTimer = NodePath("ChaseTimer")
 StateMachine = NodePath("FSM")
+healthLabel = NodePath("HealthLabel")
 animator = NodePath("Visuals/mixamo_base/animPlayer")
 visualAnchor = NodePath("Visuals")
+effectReceiver = NodePath("EffectReceiver")
 hasGravity = true
 
 [node name="HitBox" type="CollisionShape3D" parent="."]
@@ -3989,6 +3992,12 @@ libraries = {
 }
 playback_default_blend_time = 0.2
 
+[node name="HitBox" type="Area3D" parent="Visuals"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Visuals/HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.761353, -1.06765)
+shape = SubResource("BoxShape3D_cvkei")
+
 [node name="MinimapIcon" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.3282, 0, 0, 0, -1.20112e-07, 0.999999, 0, -2.74785, -4.37114e-08, 0, -0.0924823, 0)
 layers = 524288
@@ -4002,6 +4011,7 @@ skeleton = NodePath("../..")
 
 [node name="DetectionArea" type="Area3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.866823, 0)
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
@@ -4009,6 +4019,7 @@ shape = SubResource("CylinderShape3D_l8bca")
 
 [node name="AttackRangeArea" type="Area3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.866823, 0)
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRangeArea"]
@@ -4032,11 +4043,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.9
 billboard = 1
 text = "TEST"
 
+[node name="HealthLabel" type="Label3D" parent="." groups=["Enemy"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.79918, 0)
+billboard = 1
+text = "100/100"
+
 [node name="ChaseTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
-[node name="HurtBox" type="Area3D" parent="."]
-
-[node name="CollisionShape" type="CollisionShape3D" parent="HurtBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.761353, -1.06765)
-shape = SubResource("BoxShape3D_cvkei")
+[node name="EffectReceiver" parent="." instance=ExtResource("7_a0lud")]

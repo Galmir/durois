@@ -1,10 +1,14 @@
+using System;
 using Godot;
+using Godot.Collections;
 
 public partial class PlayerController : EntityController {
     [ExportCategory("AssetDependencies")]
     [Export] private Node3D cameraMount;
     [Export] private StaminaComponent stamina;
     [Export] private int runningCost = 5;
+    [Export] private Area3D hitBox;
+    [Export] private Array<Effect> effects;
 
 
     [ExportCategory("Camera Settings")]
@@ -14,6 +18,7 @@ public partial class PlayerController : EntityController {
 
     public override void _Ready() {
         Input.MouseMode = Input.MouseModeEnum.Captured;
+        hitBox.BodyEntered += OnBodyEnteredHitBox;
     }
 
     public override void _Input(InputEvent @event) {
@@ -77,5 +82,7 @@ public partial class PlayerController : EntityController {
         }
     }
 
-
+    private void OnBodyEnteredHitBox(Node3D body) {
+        if (body.HasMethod("ReceiveHit")) body.Call("ReceiveHit", effects, (Node3D)Owner);
+    }
 }

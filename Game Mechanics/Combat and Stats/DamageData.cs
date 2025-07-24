@@ -8,9 +8,6 @@ public partial class DamageData : Resource {
     [Export(PropertyHint.Range, "0,100,1,suffix:%")]
     public float Variance { get; private set; }
 
-    [Export] public Rules.AilmentTypes AilmentType { get; private set; }
-    [Export] public int AilmentAmount { get; set; }
-
     /// roll the damage instance. Returns a random number between the minimum damage and maximum given the coefficient
     public int RollDamage() {
         float minDamage = Amount - (Amount / 100 * Variance);

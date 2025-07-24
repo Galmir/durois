@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://v6lxt13hkaob"]
+
+[ext_resource type="Script" uid="uid://c053t15ljo8sr" path="res://Components/EffectReceiver.cs" id="1_7pnab"]
+
+[node name="EffectReceiver" type="Node3D"]
+script = ExtResource("1_7pnab")

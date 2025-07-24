@@ -73,12 +73,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_00bvk")
 script = ExtResource("2_56aas")
-merchantInventoryGrid = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid")
-tradingInventoryGrid = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory/Scrolltainer/TradingInventoryGrid")
-playerInventoryGrid = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid")
-merchantGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/HBoxContainer/MerchantGoldLabel")
-tradingGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory/HBoxContainer/TradingGoldLabel")
-playerGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/HBoxContainer/PlayerGoldLabel")
+merchantInventoryGrid = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid")
+tradingInventoryGrid = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory/Scrolltainer/TradingInventoryGrid")
+playerInventoryGrid = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid")
+merchantGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/HBoxContainer/MerchantGoldLabel")
+tradingGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory/HBoxContainer/TradingGoldLabel")
+playerGoldLabel = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory/HBoxContainer/PlayerGoldLabel")
 acceptButton = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/HBoxContainer/AcceptButton")
 exitButton = NodePath("BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/HBoxContainer/ExitButton")
 shopSlotUIscene = ExtResource("4_gupax")
@@ -181,171 +181,174 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop"]
+[node name="merchantArea" type="PanelContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("5_kbftw")
 
-[node name="MarginContainer" type="MarginContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="MerchantsInventory" type="VBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer"]
+[node name="MerchantsInventory" type="VBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MerchantNameLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory"]
+[node name="MerchantNameLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Potion Seller"
 horizontal_alignment = 1
 
-[node name="Scrolltainer" type="ScrollContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory"]
+[node name="Scrolltainer" type="ScrollContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MerchantInventoryGrid" type="GridContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer"]
+[node name="MerchantInventoryGrid" type="GridContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/Scrolltainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 4
+columns = 5
 
-[node name="ShopSlotUIButton" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="ShopSlotUIButton2" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton2" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="ShopSlotUIButton3" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton3" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="ShopSlotUIButton4" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton4" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/Scrolltainer/MerchantInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="MerchantGoldLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/HBoxContainer"]
+[node name="MerchantGoldLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "9999"
 
-[node name="GoldIcon" type="TextureRect" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer/MarginContainer/MerchantsInventory/HBoxContainer"]
+[node name="GoldIcon" type="TextureRect" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/merchantArea/MarginContainer/MerchantsInventory/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("6_00bvk")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="PanelContainer2" type="PanelContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop"]
+[node name="tradingArea" type="PanelContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("5_kbftw")
 
-[node name="MarginContainer" type="MarginContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TradingInventory" type="VBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer"]
+[node name="TradingInventory" type="VBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Trading" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory"]
+[node name="Trading" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory"]
 layout_mode = 2
 text = "Trading"
 horizontal_alignment = 1
 
-[node name="Scrolltainer" type="ScrollContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory"]
+[node name="Scrolltainer" type="ScrollContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TradingInventoryGrid" type="GridContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory/Scrolltainer"]
+[node name="TradingInventoryGrid" type="GridContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory/Scrolltainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 4
 
-[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory/Scrolltainer/TradingInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory/Scrolltainer/TradingInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="TradingGoldLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory/HBoxContainer"]
+[node name="TradingGoldLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "9999"
 
-[node name="GoldIcon" type="TextureRect" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer2/MarginContainer/TradingInventory/HBoxContainer"]
+[node name="GoldIcon" type="TextureRect" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/tradingArea/MarginContainer/TradingInventory/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("6_00bvk")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="PanelContainer3" type="PanelContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop"]
+[node name="PlayerArea" type="PanelContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("5_kbftw")
 
-[node name="MarginContainer" type="MarginContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="PlayerInventory" type="VBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer"]
+[node name="PlayerInventory" type="VBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PlayerInventoryLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory"]
+[node name="PlayerInventoryLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Your Items"
 horizontal_alignment = 1
 
-[node name="Scrolltainer" type="ScrollContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory"]
+[node name="Scrolltainer" type="ScrollContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PlayerInventoryGrid" type="GridContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/Scrolltainer"]
+[node name="PlayerInventoryGrid" type="GridContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory/Scrolltainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 columns = 4
 
-[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton5" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="ShopSlotUIButton6" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid" instance=ExtResource("4_gupax")]
+[node name="ShopSlotUIButton6" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory/Scrolltainer/PlayerInventoryGrid" instance=ExtResource("4_gupax")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="PlayerGoldLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/HBoxContainer"]
+[node name="PlayerGoldLabel" type="Label" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "9999"
 
-[node name="GoldIcon" type="TextureRect" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PanelContainer3/MarginContainer/PlayerInventory/HBoxContainer"]
+[node name="GoldIcon" type="TextureRect" parent="BaseUI/MarginContainer/MainLayout/MarginContainer/VBoxContainer/Shop/PlayerArea/MarginContainer/PlayerInventory/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("6_00bvk")
