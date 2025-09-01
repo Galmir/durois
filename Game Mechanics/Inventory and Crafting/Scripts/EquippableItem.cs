@@ -7,9 +7,6 @@ using Godot.Collections;
 public partial class EquippableItem : InventoryItem {
     [Export] private int sockets;
     [Export] public Array<GemItem> SocketedGems { get; private set; }
-    [Export] public Array<StatBonus> GearStats { get; private set; }
-    [Export] public int BonusHealth { get; private set; }
-    [Export] public float BonusHealthRegen { get; private set; }
 
     public bool HasFreeSockets() {
         return SocketedGems.Count < sockets;

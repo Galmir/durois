@@ -14,7 +14,7 @@
 [sub_resource type="Resource" id="Resource_1pi3q"]
 script = ExtResource("2_c8ifb")
 DamageType = 2
-Amount = 100.0
+Amount = 1.0
 Variance = 0.0
 metadata/_custom_type_script = "uid://u0oesdofemoe"
 
@@ -34,8 +34,8 @@ type = 2
 behavior = 2
 damage = SubResource("Resource_1pi3q")
 statModifier = SubResource("Resource_77roj")
-duration = 5.0
-tickInterval = 1.0
+duration = 2.0
+tickInterval = 0.1
 knockbackStrength = 0.0
 metadata/_custom_type_script = "uid://hi2p50ghuvgr"
 

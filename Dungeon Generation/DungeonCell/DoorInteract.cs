@@ -6,6 +6,6 @@ public partial class DoorInteract : Interactable {
     }
 
     public override void _OnInteract(Node3D interacter) {
-        GetParent().GetParent<DoorWall>().OpenDoors();
+        GetParent().Call("OpenDoors");
     }
 }

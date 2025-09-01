@@ -211,38 +211,37 @@ albedo_color = Color(0.172021, 0.716766, 0, 1)
 material = SubResource("StandardMaterial3D_8htla")
 size = Vector2(6, 6)
 
-[node name="DoorWall" type="Node3D" node_paths=PackedStringArray("doorLeft", "doorRight", "doorCollision")]
-script = ExtResource("3_susmm")
-doorLeft = NodePath("DoorLeft")
-doorRight = NodePath("DoorRight")
-doorCollision = NodePath("DoorFrame/StaticBody3D/DoorCollision")
-
-[node name="DoorFrame" type="MeshInstance3D" parent="."]
+[node name="DoorFrame" type="MeshInstance3D" node_paths=PackedStringArray("doorLeft", "doorRight", "doorCollision")]
 transform = Transform3D(1, 0, 0, 0, -2.12232e-08, -1, 0, 0.485531, -4.37114e-08, 0, 0, -3)
 layers = 2
 mesh = SubResource("ArrayMesh_v1eqb")
 skeleton = NodePath("")
+script = ExtResource("3_susmm")
+doorLeft = NodePath("DoorLeft")
+doorRight = NodePath("DoorRight")
+doorCollision = NodePath("StaticBody3D/DoorCollision")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="DoorFrame"]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_layer = 10
 collision_mask = 0
 script = ExtResource("4_s6cm3")
 promptMessage = "Open Door"
 
-[node name="DoorCollision" type="CollisionShape3D" parent="DoorFrame/StaticBody3D"]
+[node name="DoorCollision" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_nu8jj")
 
 [node name="DoorLeft" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 1.50996e-07, -6.60024e-15, 0, -4.37114e-08, -1, -1.50996e-07, -1, 4.37114e-08, -1.94424, 0, -3)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2.11758e-22, 0, 1, -1.95896, 0, 0)
 mesh = SubResource("ArrayMesh_l3m78")
 skeleton = NodePath("")
 
 [node name="DoorRight" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.93616, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94934, 0, 0)
 mesh = SubResource("ArrayMesh_fiw58")
 skeleton = NodePath("")
 
 [node name="MinimapTile" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.457107, -0.457107, -3.09086e-08, 0, -2.82571e-08, 1, -0.457107, -0.457107, -3.09086e-08, 0, -1.63992, -2.89538)
+transform = Transform3D(0.457107, -0.457107, -3.09086e-08, 3.55271e-15, -2.82571e-08, 1, -0.457107, -0.457107, -3.09086e-08, 0, -1.63992, -2.89538)
 layers = 524288
 mesh = SubResource("QuadMesh_s6cm3")
+skeleton = NodePath("")

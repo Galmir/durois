@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.IO;
 
 public partial class SaveLoad : Node {
@@ -25,7 +24,8 @@ public partial class SaveLoad : Node {
 
 
     public void LoadGame() {
-        SaveData saveSlot = GD.Load<SaveData>(savePath);
+        if (!isSaveSlotPresent()) return;
+        SaveData saveSlot = ResourceLoader.Load(savePath).Duplicate(true) as SaveData;
         PlayerData.Instance.PlayerInventory = saveSlot.PlayerInventory;
         PlayerData.Instance.CombatData = saveSlot.CombatData;
     }
