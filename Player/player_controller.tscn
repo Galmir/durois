@@ -15,7 +15,7 @@
 script = ExtResource("2_c8ifb")
 DamageType = 2
 Amount = 1.0
-Variance = 0.0
+DamageRange = 0
 metadata/_custom_type_script = "uid://u0oesdofemoe"
 
 [sub_resource type="Resource" id="Resource_77roj"]
@@ -43,7 +43,7 @@ metadata/_custom_type_script = "uid://hi2p50ghuvgr"
 script = ExtResource("2_c8ifb")
 DamageType = 1
 Amount = 50.0
-Variance = 0.0
+DamageRange = 0
 metadata/_custom_type_script = "uid://u0oesdofemoe"
 
 [sub_resource type="Resource" id="Resource_4dsou"]

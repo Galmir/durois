@@ -78,7 +78,7 @@ public abstract partial class CombatData : Resource {
         }
     }
 
-    private void ReceiveSingleDamage(int amount, Rules.DamageTypes type, float damageMultiplier = 1) {
+    private void ReceiveSingleDamage(float amount, Rules.DamageTypes type, float damageMultiplier = 1) {
         /*
         Stats defensiveStats = GetDefensiveData(type);
         amount = (int)(amount * damageMultiplier);

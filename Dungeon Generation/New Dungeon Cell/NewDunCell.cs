@@ -2,10 +2,10 @@ using Godot;
 
 
 public partial class NewDunCell : Node3D {
-    [Export] MeshInstance3D wallN;
-    [Export] MeshInstance3D wallS;
-    [Export] MeshInstance3D wallW;
-    [Export] MeshInstance3D wallE;
+    [Export] StaticBody3D wallN;
+    [Export] StaticBody3D wallS;
+    [Export] StaticBody3D wallW;
+    [Export] StaticBody3D wallE;
 
     [Export] Node3D doorWall;
     [Export] private int chanceToKeepTorches;
