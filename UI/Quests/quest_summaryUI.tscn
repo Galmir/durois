@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://crcrjagnjosds"]
+
+[ext_resource type="PackedScene" uid="uid://bsuh2y6ncvrfj" path="res://UI/Quests/QuestDetailsUI.tscn" id="1_qkl6p"]
+
+[node name="QuestContainer" type="VBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Active quests:"
+
+[node name="ActiveQuestsList" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="QuestSummary" parent="ActiveQuestsList" instance=ExtResource("1_qkl6p")]
+layout_mode = 2
+
+[node name="QuestSummary2" parent="ActiveQuestsList" instance=ExtResource("1_qkl6p")]
+layout_mode = 2

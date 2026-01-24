@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsuh2y6ncvrfj"]
+
+[ext_resource type="Script" uid="uid://7jmafhq60vd2" path="res://UI/Quests/QuestDetailsUi.cs" id="1_g1uge"]
+[ext_resource type="FontFile" uid="uid://c3ekgp8yoy3pn" path="res://UI/Fonts/FiraSansCondensed-Regular.ttf" id="1_y2hoo"]
+[ext_resource type="PackedScene" uid="uid://qg0b3wu40jab" path="res://UI/Quests/quest_stepUI.tscn" id="2_g1uge"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rn1up"]
+font = ExtResource("1_y2hoo")
+font_size = 22
+
+[node name="QuestDetails" type="VBoxContainer"]
+script = ExtResource("1_g1uge")
+
+[node name="QuestTitleLabel" type="Label" parent="."]
+layout_mode = 2
+text = "quest title"
+label_settings = SubResource("LabelSettings_rn1up")
+
+[node name="QuestStepsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="QuestStep" parent="QuestStepsContainer" instance=ExtResource("2_g1uge")]
+layout_mode = 2
+
+[node name="QuestStep2" parent="QuestStepsContainer" instance=ExtResource("2_g1uge")]
+layout_mode = 2
+
+[node name="QuestStep3" parent="QuestStepsContainer" instance=ExtResource("2_g1uge")]
+layout_mode = 2

@@ -23,6 +23,7 @@ PlayerData="*res://Game Mechanics/Globals/PlayerData.cs"
 Signals="*res://Game Mechanics/Globals/Signals.cs"
 LoadingScreen="*res://Scenes/loading_screen.tscn"
 SaveLoad="*res://Game Mechanics/Save and Load Game/SaveLoad.cs"
+QuestManager="*res://Game Mechanics/Quests/QuestManager.tscn"
 
 [display]
 

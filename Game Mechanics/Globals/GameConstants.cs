@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public static partial class GameConstants {
     // UI Colors
@@ -18,4 +17,8 @@ public static partial class GameConstants {
         "No there's no harem",
         "Dungeon Meshi... Oh, Dungeon Meshi!"
         ];
+
+    public enum EnemyIDs {
+        TRAINING_DUMMY
+    }
 }

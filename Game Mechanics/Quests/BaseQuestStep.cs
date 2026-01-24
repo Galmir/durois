@@ -17,9 +17,16 @@ public abstract partial class BaseQuestStep : Node {
     public void ProgressQuest() {
         if (!IsActive) return;
         Counter += 1;
+        GD.Print(GetProgress());
         if (Counter >= TargetAmount) {
+            IsActive = false;
             IsCompleted = true;
             StepCompleted.Invoke();
+            GD.Print("killed all required enemies!");
         }
+    }
+
+    public string GetProgress() {
+        return "enemies killed: " + Counter + "/" + TargetAmount;
     }
 }

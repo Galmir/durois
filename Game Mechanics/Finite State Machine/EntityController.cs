@@ -5,7 +5,7 @@ public partial class EntityController : CharacterBody3D {
     [ExportCategory("AssetDependencies")]
     [Export] public AnimationPlayer animator;
     [Export] public Node3D visualAnchor;
-    [Export] public EffectReceiver effectReceiver;
+    [Export] public CombatHandler CombatHandler;
 
     [ExportCategory("Movement Settings")]
     [Export] public float walkingSpeed = 2;
@@ -24,8 +24,8 @@ public partial class EntityController : CharacterBody3D {
     public Tween tween;
 
     public override void _Ready() {
-        effectReceiver.Died += OnDied;
-        effectReceiver.Damaged += DamageAmount;
+        CombatHandler.Died += OnDied;
+        CombatHandler.Damaged += DamageAmount;
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -36,19 +36,18 @@ public partial class EntityController : CharacterBody3D {
         MoveAndSlide();
     }
 
-    protected void OnDied() {
-        QueueFree();
+    public virtual void OnDied() {
     }
 
 
-    protected void DamageAmount(float amount) {
-        GD.Print(effectReceiver.currentHealth + "/" + effectReceiver.MaxHealth);
+    public void DamageAmount(float amount) {
+        GD.Print(CombatHandler.currentHealth + "/" + CombatHandler.MaxHealth);
     }
 
 
     public void ReceiveHit(Array<Effect> effects, Node3D source) {
         foreach (Effect e in effects) {
-            effectReceiver.ApplyEffect(e, source);
+            CombatHandler.ApplyEffect(e, source);
         }
     }
 }

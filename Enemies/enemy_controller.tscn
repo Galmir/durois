@@ -1,12 +1,13 @@
-[gd_scene load_steps=29 format=4 uid="uid://dnub6h4v0xxq0"]
+[gd_scene load_steps=30 format=4 uid="uid://dnub6h4v0xxq0"]
 
 [ext_resource type="Script" uid="uid://cu72ux8qu1jqx" path="res://Enemies/EnemyIdle.cs" id="1_j4e7m"]
 [ext_resource type="Script" uid="uid://dclhv26mm5ljp" path="res://Enemies/EnemyController.cs" id="1_lk78i"]
 [ext_resource type="Shader" uid="uid://bi853riqh3pxp" path="res://Enemies/enemy_controller.gdshader" id="2_cvkei"]
+[ext_resource type="Resource" uid="uid://banycuokoypk0" path="res://Enemies/TRAINING_DUMMY/TRAINING_DUMMY.tres" id="2_ihb6b"]
 [ext_resource type="Script" uid="uid://blakg283k18d1" path="res://Enemies/FSMAI.cs" id="3_cvkei"]
 [ext_resource type="Script" uid="uid://dqb8t6keu3i7h" path="res://Enemies/EnemyFollow.cs" id="4_pyih7"]
 [ext_resource type="Script" uid="uid://b21fb458u4o6r" path="res://Enemies/EnemyAttack.cs" id="6_cvkei"]
-[ext_resource type="PackedScene" uid="uid://v6lxt13hkaob" path="res://Components/EffectReceiver.tscn" id="7_a0lud"]
+[ext_resource type="PackedScene" uid="uid://v6lxt13hkaob" path="res://Components/Combat Handler/CombatHandler.tscn" id="7_a0lud"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a1q1g"]
 height = 1.8
@@ -3495,16 +3496,17 @@ radius = 10.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pyih7"]
 radius = 1.5
 
-[node name="EnemyController" type="CharacterBody3D" node_paths=PackedStringArray("ChaseTimer", "StateMachine", "healthLabel", "animator", "visualAnchor", "effectReceiver")]
+[node name="EnemyController" type="CharacterBody3D" node_paths=PackedStringArray("ChaseTimer", "StateMachine", "healthLabel", "animator", "visualAnchor", "CombatHandler")]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_lk78i")
+EnemyData = ExtResource("2_ihb6b")
 ChaseTimer = NodePath("ChaseTimer")
 StateMachine = NodePath("FSM")
 healthLabel = NodePath("HealthLabel")
 animator = NodePath("Visuals/mixamo_base/animPlayer")
 visualAnchor = NodePath("Visuals")
-effectReceiver = NodePath("EffectReceiver")
+CombatHandler = NodePath("CombatHandler")
 hasGravity = true
 
 [node name="HitBox" type="CollisionShape3D" parent="."]
@@ -4051,4 +4053,4 @@ text = "100/100"
 [node name="ChaseTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
-[node name="EffectReceiver" parent="." instance=ExtResource("7_a0lud")]
+[node name="CombatHandler" parent="." instance=ExtResource("7_a0lud")]

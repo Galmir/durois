@@ -1,9 +1,8 @@
 using Godot;
 using System;
 using Godot.Collections;
-using System.Dynamic;
 
-public partial class EffectReceiver : Node3D {
+public partial class CombatHandler : Node3D {
     public Action<Rules.EffectTypes> EffectStarted;
     public Action<Rules.EffectTypes> EffectEnded;
     public Action<float, float> HealthChanged;
