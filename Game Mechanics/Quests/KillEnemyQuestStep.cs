@@ -1,16 +1,16 @@
 using Godot;
 
 public partial class KillEnemyQuestStep : BaseQuestStep {
-    [Export] public CombatData targetEnemy;
+    [Export] public EnemyData targetEnemy;
 
-    private int counter = 0;
 
     public override void ActivateQuestStep() {
         base.ActivateQuestStep();
-        QuestManager.Instance.OnEnemyKilled += CheckProgress;
+        QuestManager.Instance.OnEnemyDied += CheckProgress;
     }
 
-    public void CheckProgress(CombatData enemy) {
+
+    public void CheckProgress(EnemyData enemy) {
         if (enemy == targetEnemy) ProgressQuest();
     }
 

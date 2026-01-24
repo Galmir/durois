@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bfrl1p1r50j44"]
+
+[ext_resource type="FontFile" uid="uid://c3ekgp8yoy3pn" path="res://UI/Fonts/FiraSansCondensed-Regular.ttf" id="1_cnlh1"]
+[ext_resource type="StyleBox" uid="uid://dpa3ur75d6jix" path="res://UI/Theme Settings/UIPanel.tres" id="1_mudyb"]
+
+[resource]
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/align_to_largest_stylebox = 1
+Button/constants/outline_size = 5
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_cnlh1")
+CheckBox/font_sizes/font_size = 20
+Label/colors/font_outline_color = Color(0, 0, 0, 0.509804)
+Label/colors/font_shadow_color = Color(1, 1, 1, 0.376471)
+Label/constants/outline_size = 5
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 10
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_cnlh1")
+OptionButton/font_sizes/font_size = 20
+OptionButton/fonts/font = ExtResource("1_cnlh1")
+PanelContainer/styles/panel = ExtResource("1_mudyb")
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 0.509804)
+RichTextLabel/colors/font_shadow_color = Color(1, 1, 1, 0.376471)
+RichTextLabel/constants/outline_size = 5
+RichTextLabel/constants/shadow_offset_x = 0
+RichTextLabel/constants/shadow_offset_y = 2
+RichTextLabel/constants/shadow_outline_size = 10
+RichTextLabel/font_sizes/bold_font_size = 20
+RichTextLabel/font_sizes/bold_italics_font_size = 20
+RichTextLabel/font_sizes/italics_font_size = 20
+RichTextLabel/font_sizes/mono_font_size = 20
+RichTextLabel/font_sizes/normal_font_size = 20
+RichTextLabel/fonts/normal_font = ExtResource("1_cnlh1")

@@ -4,8 +4,8 @@ public partial class PlayerData : Node {
     private static PlayerData _instance;
     public static PlayerData Instance => _instance;
 
-    public Inventory PlayerInventory { get; set; } //= (Inventory)GD.Load("uid://cr7nogtueu8aj"); // temporary ID of the inventory
-    public PlayerData CombatData { get; private set; }// = GD.Load<PlayerData>("uid://yryau8tiehx6");
+    public Inventory PlayerInventory { get; set; } = (Inventory)GD.Load("uid://1qd00mmnbmaj"); // temporary ID of the inventory
+    public PlayerData CombatData { get; set; }// = GD.Load<PlayerData>("uid://yryau8tiehx6");
 
 
     public override void _Ready() {

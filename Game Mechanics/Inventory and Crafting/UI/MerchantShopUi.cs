@@ -2,25 +2,26 @@
 using Godot;
 
 public partial class MerchantShopUi : PanelContainer {
-    [Export]
-    public PackedScene shopSlotUIscene;
-    [Export]
-    public Inventory merchantInventory;
-    [Export]
-    public Inventory PlayerInventory;
-    [Export]
-    public float sellRate = 1.0f;
-    [Export]
-    public float buyRate = 0.1f;
+    [ExportCategory("Nodes Dependencies")]
+    [Export] private GridContainer merchantInventoryGrid;
+    [Export] private GridContainer tradingInventoryGrid;
+    [Export] private GridContainer playerInventoryGrid;
+    [Export] private Label merchantGoldLabel;
+    [Export] private Label tradingGoldLabel;
+    [Export] private Label playerGoldLabel;
+    [Export] private Button acceptButton;
+    [Export] private Button exitButton;
 
-    private GridContainer merchantInventoryGrid;
-    private GridContainer tradingInventoryGrid;
-    private GridContainer playerInventoryGrid;
-    private Label merchantGoldLabel;
-    private Label tradingGoldLabel;
-    private Label playerGoldLabel;
-    private Button acceptButton;
-    private Button exitButton;
+    [ExportCategory("Assets Dependencies")]
+    [Export] public PackedScene shopSlotUIscene;
+    [Export] private AudioStreamPlayer openScreenSound;
+    [Export] private AudioStreamPlayer closeScreenSound;
+
+    [ExportCategory("Settings")]
+    [Export] public Inventory merchantInventory;
+    private Inventory PlayerInventory;
+    [Export] public float sellRate = 1.0f;
+    [Export] public float buyRate = 0.1f;
 
     private int _merchantGold;
     private int _tradingGold;
@@ -55,16 +56,9 @@ public partial class MerchantShopUi : PanelContainer {
 
 
     public override void _Ready() {
-        merchantInventoryGrid = GetNode<GridContainer>("%MerchantInventoryGrid");
-        tradingInventoryGrid = GetNode<GridContainer>("%TradingInventoryGrid");
-        playerInventoryGrid = GetNode<GridContainer>("%PlayerInventoryGrid");
-        merchantGoldLabel = GetNode<Label>("%MerchantGoldLabel");
-        tradingGoldLabel = GetNode<Label>("%TradingGoldLabel");
-        playerGoldLabel = GetNode<Label>("%PlayerGoldLabel");
-        acceptButton = GetNode<Button>("%AcceptButton");
         acceptButton.Pressed += AcceptTransaction;
-        exitButton = GetNode<Button>("%ExitButton");
         exitButton.Pressed += QueueFree;
+        PlayerInventory = PlayerData.Instance.PlayerInventory;
 
         FillInventory(merchantInventoryGrid, merchantInventory, sellRate);
         FillInventory(playerInventoryGrid, PlayerInventory, buyRate);
@@ -72,12 +66,12 @@ public partial class MerchantShopUi : PanelContainer {
         MerchantGold = merchantInventory.Gold;
         TradingGold = 0;
         PlayerGold = PlayerInventory.Gold;
-
+        VisibilityChanged += _OnVisibilityChanged;
     }
 
     private void FillInventory(GridContainer grid, Inventory inventoryToLoad, float priceModifier) {
         foreach (InventorySlot slot in inventoryToLoad.InventorySlots) {
-            ShopItemSlotUi newSlot = shopSlotUIscene.Instantiate<ShopItemSlotUi>();
+            ShopSlotUIButton newSlot = shopSlotUIscene.Instantiate<ShopSlotUIButton>();
             newSlot.PriceModifier = priceModifier;
             newSlot.SlotToShow = slot;
             grid.AddChild(newSlot);
@@ -86,7 +80,7 @@ public partial class MerchantShopUi : PanelContainer {
         }
     }
 
-    private void AddOrRemoveFromTrading(ShopItemSlotUi slot) {
+    private void AddOrRemoveFromTrading(ShopSlotUIButton slot) {
         if (slot.GetParent<GridContainer>() != tradingInventoryGrid) {
             if (slot.StartingGrid == merchantInventoryGrid) {
                 slot.Reparent(tradingInventoryGrid);
@@ -133,7 +127,7 @@ public partial class MerchantShopUi : PanelContainer {
 
 
     private void SendItemsToInventories() {
-        foreach (ShopItemSlotUi slot in tradingInventoryGrid.GetChildren()) {
+        foreach (ShopSlotUIButton slot in tradingInventoryGrid.GetChildren()) {
             if (slot.StartingGrid == merchantInventoryGrid) {
                 slot.Reparent(playerInventoryGrid);
                 slot.StartingGrid = playerInventoryGrid;
@@ -151,8 +145,14 @@ public partial class MerchantShopUi : PanelContainer {
     private void UpdateInventoryFromGrid(Inventory inventory, int goldFrom, GridContainer from) {
         inventory.ClearInventory();
         inventory.Gold = goldFrom;
-        foreach (ShopItemSlotUi slot in from.GetChildren()) {
+        foreach (ShopSlotUIButton slot in from.GetChildren()) {
             inventory.AddItem(slot.SlotToShow.Item, slot.SlotToShow.Amount);
         }
+    }
+
+
+    private void _OnVisibilityChanged() {
+        if (Visible) openScreenSound.Play();
+        else closeScreenSound.Play();
     }
 }

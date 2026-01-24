@@ -19,4 +19,8 @@ public partial class Signals : Node {
     //Stamina
     public Action<PhysicsBody3D, StaminaComponent> StaminaChanged;
     public Action<PhysicsBody3D> IsFatigued;
+
+    //Loading Scenes
+    public Action FinishedLoadingScene;
+    public Action EnteringNewScene;
 }

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ConsumableItem" load_steps=3 format=3 uid="uid://bfeksfif5sfk7"]
+
+[ext_resource type="Script" uid="uid://xwklu0dtsav" path="res://Game Mechanics/Inventory and Crafting/Scripts/ConsumableItem.cs" id="1_1c54b"]
+[ext_resource type="Texture2D" uid="uid://csovxy3wpes1b" path="res://Assets/Icons/44.png" id="1_oapha"]
+
+[resource]
+script = ExtResource("1_1c54b")
+Name = "Health Potion"
+LoreDescription = "Contains a life essence that closes wounds and restore blood."
+Icon = ExtResource("1_oapha")
+GoldValue = 50
+IsStackable = true
+FilterTags = Array[int]([1])
+ItemRarity = 0
+metadata/_custom_type_script = "uid://xwklu0dtsav"

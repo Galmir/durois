@@ -6,17 +6,20 @@ public partial class LevelManager : Node3D {
     [Export] Minimap minimap;
     [Export] CanvasLayer inventoryCanvas;
     [Export] CanvasLayer charSheetCanvas;
+    [Export] CanvasLayer HUDCanvas;
 
     public override void _Ready() {
         dunGen.PlayerPlaced += MinimapCamera;
         dunGen.GenerateDungeon();
         GetTree().CreateTimer(1).Timeout += () => AudioManager.Instance.Play(AudioType.Music, BGM);
-
+        Signals.Instance.EnteringNewScene += TurnOnHUD;
     }
+
 
     public void MinimapCamera(PlayerController player) {
         minimap.AssignCameraTarget(player);
     }
+
 
     public override void _Input(InputEvent @event) {
         if (@event.IsActionReleased("toggle_inventory")) {
@@ -33,5 +36,9 @@ public partial class LevelManager : Node3D {
             }
             else charSheetCanvas.Visible = false;
         }
+    }
+
+    public void TurnOnHUD() {
+        HUDCanvas.Visible = true;
     }
 }

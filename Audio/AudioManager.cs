@@ -53,7 +53,7 @@ public partial class AudioManager : Node {
         if (audio != null) player.Play();
     }
 
-    private void Stop() {
+    public void Stop() {
         foreach (AudioStreamPlayer child in children) child.Stop();
     }
 }

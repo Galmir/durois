@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://sotng74kf113"]
+
+[ext_resource type="Shader" uid="uid://pekp37ei88ux" path="res://Shaders/UIAnimatedBackground.gdshader" id="1_48xlc"]
+[ext_resource type="Theme" uid="uid://bfrl1p1r50j44" path="res://UI/Theme Settings/UITheme.tres" id="2_1ehe0"]
+[ext_resource type="Script" uid="uid://42hedb01m7vr" path="res://Scenes/MainMenu.cs" id="3_1ehe0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnb10"]
+shader = ExtResource("1_48xlc")
+shader_parameter/mouse_position = Vector2(1.855, 1.765)
+shader_parameter/wave_color = Color(0, 0.180392, 0.745098, 1)
+shader_parameter/wave_transparency = 0.505
+
+[node name="MainMenu" type="PanelContainer" node_paths=PackedStringArray("newGame", "continueGame", "loadGame", "Settings", "Quit")]
+material = SubResource("ShaderMaterial_pnb10")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_1ehe0")
+script = ExtResource("3_1ehe0")
+newGame = NodePath("VBoxContainer2/VBoxContainer/NewGame")
+continueGame = NodePath("VBoxContainer2/VBoxContainer/Continue")
+loadGame = NodePath("VBoxContainer2/VBoxContainer/Load Game")
+Settings = NodePath("VBoxContainer2/VBoxContainer/Settings")
+Quit = NodePath("VBoxContainer2/VBoxContainer/Quit")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="GameTitle" type="TextureRect" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Continue" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGame" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "New Game"
+
+[node name="Load Game" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Load Game"
+
+[node name="Settings" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Quit"

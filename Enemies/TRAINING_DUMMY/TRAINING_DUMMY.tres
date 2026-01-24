@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://banycuokoypk0"]
+
+[ext_resource type="Script" uid="uid://pguva2mtacfv" path="res://Enemies/EnemyData.cs" id="1_dmkq7"]
+[ext_resource type="Resource" uid="uid://bfeksfif5sfk7" path="res://Items/Consumables/HealthPotion.tres" id="1_vrpop"]
+[ext_resource type="Script" uid="uid://cxykjklmrvbja" path="res://Game Mechanics/Inventory and Crafting/Scripts/InventorySlot.cs" id="2_tsevw"]
+[ext_resource type="Script" uid="uid://derxtsuqo0aul" path="res://Game Mechanics/Inventory and Crafting/Scripts/Inventory.cs" id="3_1puqe"]
+
+[sub_resource type="Resource" id="Resource_oe48o"]
+script = ExtResource("2_tsevw")
+Item = ExtResource("1_vrpop")
+Amount = 1
+metadata/_custom_type_script = "uid://cxykjklmrvbja"
+
+[sub_resource type="Resource" id="Resource_0ljrn"]
+script = ExtResource("3_1puqe")
+InventorySlots = Array[Object]([SubResource("Resource_oe48o")])
+Gold = 5
+KnownRecipes = null
+metadata/_custom_type_script = "uid://derxtsuqo0aul"
+
+[resource]
+script = ExtResource("1_dmkq7")
+EnemyID = 0
+Name = "Training"
+Rewards = SubResource("Resource_0ljrn")
+metadata/_custom_type_script = "uid://pguva2mtacfv"

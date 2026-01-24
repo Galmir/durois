@@ -33,6 +33,7 @@ public partial class Rules : Node {
     };
 
     public enum DamageTypes {
+        ALL,
         Physical,
         Fire,
         Ice,
@@ -41,14 +42,34 @@ public partial class Rules : Node {
         Light
     }
 
-    public enum AilmentTypes {
+    public enum EffectTypes {
+        NONE,
         Bleed,
         Burn,
         Freeze,
         Shock,
         Poison,
         Blind,
-        Slow
+        Slow,
+        Curse,
+        Knockback,
+        Stun,
+        AttackBoost,
+        DefenseBoost,
+        CooldownReduction,
+        Thorns,
+        ExpGain
+    }
+
+    public enum EffectBehaviors {
+        NONE,
+        Instant,
+        DoT,
+        Buff,
+        Debuff,
+        CrowdControl,
+        Movement,
+        Aura
     }
 
     public enum ItemTags {
