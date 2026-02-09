@@ -1,3 +1,6 @@
-public partial class DoorInteract : Interactable {
+using Godot;
 
+public partial class DoorInteract : Interactable {
+    public override void _OnInteract(Node3D interacter) {
+    }
 }

@@ -3576,16 +3576,16 @@ albedo_color = Color(0.197085, 0.156534, 0.066784, 1)
 material = SubResource("StandardMaterial3D_qd61d")
 size = Vector3(1, 1, 0.14)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cameraMount", "stamina", "hitBox", "animator", "visualAnchor", "effectReceiver") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cameraMountY", "cameraMountX", "stamina", "hitBox", "animator", "visualAnchor") groups=["Player"]]
 collision_mask = 6
 script = ExtResource("1_biqn8")
-cameraMount = NodePath("CameraMount")
+cameraMountY = NodePath("CameraMountY")
+cameraMountX = NodePath("CameraMountY/CameraMountX")
 stamina = NodePath("StaminaComponent")
 hitBox = NodePath("Visuals/Hitbox")
 effects = Array[Object]([SubResource("Resource_32vmp"), SubResource("Resource_hij2f")])
 animator = NodePath("Visuals/mixamo_base/AnimationPlayer")
 visualAnchor = NodePath("Visuals")
-effectReceiver = NodePath("EffectReceiver")
 hasGravity = true
 
 [node name="HurtBox" type="CollisionShape3D" parent="."]
@@ -4092,21 +4092,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 shape = SubResource("SphereShape3D_5vckc")
 disabled = true
 
-[node name="CameraMount" type="Node3D" parent="."]
+[node name="CameraMountY" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraMount"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.665, 0.526, 0)
+[node name="CameraMountX" type="Node3D" parent="CameraMountY"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraMountY/CameraMountX"]
 collision_mask = 3
-spring_length = 4.0
+spring_length = 6.0
 margin = 0.5
 
-[node name="Camera3D" type="Camera3D" parent="CameraMount/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 0.999984, 0.0056374, 0, -0.0056374, 0.999984, 0.665161, 0.526294, 4.2652)
+[node name="Camera3D" type="Camera3D" parent="CameraMountY/CameraMountX/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.999984, 0.0056374, 0, -0.0056374, 0.999984, 0, 0, 6)
 cull_mask = 524287
 fov = 37.8493
 
-[node name="InteractRay" parent="CameraMount" instance=ExtResource("2_hur7u")]
+[node name="InteractRay" parent="CameraMountY" instance=ExtResource("2_hur7u")]
 
 [node name="MinimapIcon" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.3282, 0, 0, 0, -1.20112e-07, 0.999999, 0, -2.74785, -4.37114e-08, 0, -0.0924823, 0)

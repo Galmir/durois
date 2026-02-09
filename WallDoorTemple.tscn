@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=4 uid="uid://b2qwf7ir05ijc"]
 
-[ext_resource type="Texture2D" uid="uid://1fk017rpkigf" path="res://Dungeon Generation/New Dungeon Cell/New TileSet 1K_Rock Door_1K_Color.png" id="1_myfjm"]
-[ext_resource type="Texture2D" uid="uid://cfqwkfetmk5hg" path="res://Dungeon Generation/New Dungeon Cell/New TileSet 1K_Rock Door_1K_Roughness.png" id="2_l0071"]
-[ext_resource type="Texture2D" uid="uid://3g5vv2gs3qyh" path="res://Dungeon Generation/New Dungeon Cell/New TileSet 1K_Rock Door_1K_NormalGL.png" id="3_pqkq4"]
-[ext_resource type="Texture2D" uid="uid://muwj7qvjuwpp" path="res://Dungeon Generation/New Dungeon Cell/New TileSet 1K_Wall_1K_Color.png" id="4_dxnwb"]
+[ext_resource type="Texture2D" uid="uid://1fk017rpkigf" path="res://Dungeon Generation/Tilesets/Classic Dungeon/New TileSet 1K_Rock Door_1K_Color.png" id="1_myfjm"]
+[ext_resource type="Texture2D" uid="uid://cfqwkfetmk5hg" path="res://Dungeon Generation/Tilesets/Classic Dungeon/New TileSet 1K_Rock Door_1K_Roughness.png" id="2_l0071"]
+[ext_resource type="Texture2D" uid="uid://3g5vv2gs3qyh" path="res://Dungeon Generation/Tilesets/Classic Dungeon/New TileSet 1K_Rock Door_1K_NormalGL.png" id="3_pqkq4"]
+[ext_resource type="Texture2D" uid="uid://muwj7qvjuwpp" path="res://Dungeon Generation/Tilesets/Classic Dungeon/New TileSet 1K_Wall_1K_Color.png" id="4_dxnwb"]
 [ext_resource type="Script" uid="uid://bcdqsfeudcwj0" path="res://WallDoorTemple.cs" id="4_pqkq4"]
-[ext_resource type="Texture2D" uid="uid://df5mvo6u20fgu" path="res://Dungeon Generation/New Dungeon Cell/New TileSet 1K_Wall_1K_Roughness.png" id="5_oacus"]
+[ext_resource type="Texture2D" uid="uid://df5mvo6u20fgu" path="res://Dungeon Generation/Tilesets/Classic Dungeon/New TileSet 1K_Wall_1K_Roughness.png" id="5_oacus"]
 [ext_resource type="Script" uid="uid://tl5evb21nlxi" path="res://DoorInteract.cs" id="5_pqkq4"]
-[ext_resource type="Texture2D" uid="uid://dpyeak3j2of6" path="res://Dungeon Generation/New Dungeon Cell/New TileSet 1K_Wall_1K_NormalGL.png" id="6_gcoob"]
-[ext_resource type="PackedScene" uid="uid://3vwjlx6f6jhc" path="res://Dungeon Generation/Torch/torch.tscn" id="7_fv7lk"]
+[ext_resource type="Texture2D" uid="uid://dpyeak3j2of6" path="res://Dungeon Generation/Tilesets/Classic Dungeon/New TileSet 1K_Wall_1K_NormalGL.png" id="6_gcoob"]
+[ext_resource type="PackedScene" uid="uid://3vwjlx6f6jhc" path="res://Dungeon Generation/Tilesets/Classic Dungeon/Torch/torch.tscn" id="7_fv7lk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dxnwb"]
 size = Vector3(3, 5, 1.59961)

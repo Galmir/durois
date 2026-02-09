@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://8l32gd5y1107"]
+[gd_scene load_steps=23 format=3 uid="uid://8l32gd5y1107"]
 
 [ext_resource type="Script" uid="uid://b3i50hh67ce12" path="res://Scenes/LevelManager.cs" id="1_u7uub"]
 [ext_resource type="AudioStream" uid="uid://bwcfd12gybw0y" path="res://Audio/Soundtracks/ExplorationLoop2406.ogg" id="2_e38tf"]
 [ext_resource type="PackedScene" uid="uid://dxmufnr6iputp" path="res://Dungeon Generation/dungeon_generator.tscn" id="3_mql7d"]
 [ext_resource type="PackedScene" uid="uid://7uqkmprr5qji" path="res://Minimap/Minimap.tscn" id="4_5x8s8"]
+[ext_resource type="PackedScene" uid="uid://c6cpwbmgqllwl" path="res://Dungeon Generation/Tilesets/Classic Dungeon/DungeonCell3.tscn" id="4_fwnm2"]
 [ext_resource type="Script" uid="uid://d4jshybwfvwnm" path="res://Scenes/HUD.cs" id="4_mql7d"]
 [ext_resource type="Texture2D" uid="uid://capbdej8iqtt5" path="res://Game Mechanics/Inventory and Crafting/itemPlaceholder.png" id="5_6mi8o"]
 [ext_resource type="PackedScene" uid="uid://crcrjagnjosds" path="res://UI/Quests/quest_summaryUI.tscn" id="6_mxr21"]
@@ -71,6 +72,7 @@ environment = SubResource("Environment_efyo6")
 customSeed = "dungeon meshi"
 floorHeight = 0
 roomsNumber = 5
+tileSet = ExtResource("4_fwnm2")
 roomMargin = 1
 maxMonstersPerRoom = 6
 chanceToKeepTorches = 20

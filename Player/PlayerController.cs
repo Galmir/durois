@@ -4,7 +4,8 @@ using Godot.Collections;
 
 public partial class PlayerController : EntityController {
     [ExportCategory("AssetDependencies")]
-    [Export] private Node3D cameraMount;
+    [Export] private Node3D cameraMountY;
+    [Export] private Node3D cameraMountX;
     [Export] private StaminaComponent stamina;
     [Export] private int runningCost = 5;
     [Export] private Area3D hitBox;
@@ -13,25 +14,28 @@ public partial class PlayerController : EntityController {
 
     [ExportCategory("Camera Settings")]
     [Export] private float LookAroundSpeed = 0.01f;
-    [Export] private float mouseSensitivityH = 0.1f;
-    [Export] private float mouseSensitivityV = 0.1f;
+    [Export] private float cameraSensitivity = 1.5f;
 
     public override void _Ready() {
         Input.MouseMode = Input.MouseModeEnum.Captured;
         hitBox.BodyEntered += OnBodyEnteredHitBox;
     }
 
-    public override void _Input(InputEvent @event) {
-        // look around
-        if (@event is InputEventMouseMotion ev) {
-            float rotateY = Mathf.DegToRad(-ev.Relative.X * mouseSensitivityH);
-            RotateY(rotateY);
-            visualAnchor.RotateY(-rotateY);
-            cameraMount.RotateX(Mathf.DegToRad(-ev.Relative.Y * mouseSensitivityV));
-        }
-    }
-
     public override void _PhysicsProcess(double delta) {
+        //camera handling
+        Vector2 cameraVector = Input.GetVector("camera_left", "camera_right", "camera_up", "camera_down");
+        if (cameraVector.Length() >= 0.2) {
+            cameraMountX.RotateX(Mathf.DegToRad(-cameraVector.Y * cameraSensitivity));
+            cameraMountY.RotateY(
+                Mathf.Clamp(
+                    Mathf.DegToRad(-cameraVector.X * cameraSensitivity),
+                    Mathf.DegToRad(-80),
+                    Mathf.DegToRad(30)
+                )
+            );
+        }
+
+
         if (!animator.IsPlaying()) isLocked = false;
 
         if (Input.IsActionJustPressed("attack")) {
@@ -39,21 +43,15 @@ public partial class PlayerController : EntityController {
             isLocked = true;
         }
 
-
         if (!IsOnFloor() && hasGravity) _targetVelocity.Y -= FallAcceleration * (float)delta;
 
         if (Input.IsActionJustPressed("toggle_run")) {
-            isRunning = true;
-            stamina.isSpendingStamina = true;
+            isRunning = !isRunning;
+            stamina.isSpendingStamina = !stamina.isSpendingStamina;
         }
-        if (Input.IsActionJustReleased("toggle_run")) {
-            isRunning = false;
-            stamina.isSpendingStamina = false;
-        }
-
 
         Vector2 inputVector = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
-        Vector3 direction = (Transform.Basis * new Vector3(inputVector.X, 0, inputVector.Y)).Normalized();
+        Vector3 direction = (cameraMountY.Transform.Basis * new Vector3(inputVector.X, 0, inputVector.Y)).Normalized();
         if (!isLocked) {
             if (direction != Vector3.Zero) {
                 if (isRunning && !stamina.isFatigued) {
@@ -76,6 +74,8 @@ public partial class PlayerController : EntityController {
                 if (animator.CurrentAnimation != "idle") animator.Play("idle");
                 _targetVelocity.X = Mathf.MoveToward(Velocity.X, 0, speed);
                 _targetVelocity.Z = Mathf.MoveToward(Velocity.Z, 0, speed);
+                isRunning = false;
+                stamina.isSpendingStamina = false;
             }
             Velocity = _targetVelocity;
             MoveAndSlide();
